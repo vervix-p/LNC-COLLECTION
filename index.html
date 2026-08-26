@@ -1519,46 +1519,65 @@ function placeOrder(){
        Telegram WebApp sendData.
        This works when the Mini App is launched
        in a context where Telegram supports sendData().
+   /*
+       Send order to Cloudflare Worker.
+       Telegram Bot Token stays safely on the server.
     */
 
-    if(
-        tg &&
-        typeof tg.sendData === "function"
-    ){
+    const WORKER_URL =
+        "https://Inc-telegram-bot.vervixproducer.workers.dev/";
 
-        try{
+    try {
 
-            tg.sendData(orderData);
+        const response = await fetch(
+            WORKER_URL,
+            {
+                method: "POST",
 
-            showSuccessScreen();
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            return;
+                body: orderData
+            }
+        );
 
-        }catch(error){
+        const result =
+            await response.json();
+
+        if(!response.ok || !result.success){
 
             console.error(
-                "Telegram sendData error:",
-                error
+                "Worker error:",
+                result
             );
 
+            showCheckoutError(
+                "Order could not be sent. Please try again."
+            );
+
+            return;
         }
 
+        console.log(
+            "Order successfully sent:",
+            result
+        );
+
+        showSuccessScreen();
+
+    } catch(error){
+
+        console.error(
+            "Order request error:",
+            error
+        );
+
+        showCheckoutError(
+            "Connection error. Please try again."
+        );
+
     }
-
-
-    /*
-       If sendData is unavailable, keep the order
-       prepared locally and show a clear message.
-    */
-
-    window.lastLncOrder = order;
-
-    showCheckoutError(
-        "Telegram order transfer is not available in this launch mode yet. The checkout form is working, but the bot connection needs to be completed."
-    );
-
-}
-
 
 /* =========================
    SUCCESS
