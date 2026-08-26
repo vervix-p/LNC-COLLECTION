@@ -2331,74 +2331,88 @@ async function placeOrder(){
 
     try{
 
-        const response =
-            await fetch(
-                WORKER_URL,
-                {
+       const response = await fetch(
+    WORKER_URL,
+    {
+        method: "POST",
 
-                    method:
-                        "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
 
-                    headers: {
-
-                        "Content-Type":
-                            "application/json"
-
-                    },
-
-                    body:
-                        orderData
-
-                }
-            );
+        body: orderData
+    }
+);
 
 
-        const result =
-            await response.json();
+const responseText =
+    await response.text();
 
 
-        console.log(
-            "Cloudflare response:",
-            result
-        );
+let result;
 
 
-        if(
-            !response.ok ||
-            !result.success
-        ){
+try {
 
-            console.error(
-                "Worker error:",
-                result
-            );
+    result =
+        JSON.parse(responseText);
 
+} catch {
 
-            showCheckoutError(
-                "Не удалось отправить заказ. Попробуйте ещё раз."
-            );
+    console.error(
+        "Cloudflare returned non-JSON:",
+        responseText
+    );
 
+    throw new Error(
+        "Cloudflare returned invalid response"
+    );
 
-            if(button){
-
-                button.disabled =
-                    false;
-
-                button.innerText =
-                    "ПОДТВЕРДИТЬ ЗАКАЗ";
-
-            }
+}
 
 
-            return;
+console.log(
+    "Cloudflare response:",
+    result
+);
 
-        }
+
+if(
+    !response.ok ||
+    !result.success
+){
+
+    console.error(
+        "Worker error:",
+        result
+    );
 
 
-        showSuccessScreen(
-            orderId
-        );
+    showCheckoutError(
+        result.error ||
+        "Не удалось отправить заказ. Попробуйте ещё раз."
+    );
 
+
+    if(button){
+
+        button.disabled =
+            false;
+
+        button.innerText =
+            "ПОДТВЕРДИТЬ ЗАКАЗ";
+
+    }
+
+
+    return;
+
+}
+
+
+showSuccessScreen(
+    orderId
+);
 
     }catch(error){
 
