@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>LNC COLLECTION</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif;min-height:100vh}
+button{font-family:inherit}
+.app{max-width:600px;margin:0 auto;padding-bottom:110px}
+.header{padding:22px 18px 10px;text-align:center}
+.logo{width:180px;max-width:70%;height:auto;display:block;margin:0 auto 20px}
+.subtitle{color:#999;font-size:12px;letter-spacing:3px;text-transform:uppercase}
+.hero{margin:20px 16px 30px;padding:28px 20px;border:1px solid #222;background:radial-gradient(circle at 50% 0%,#242424 0%,#080808 55%);text-align:center}
+.hero h1{font-size:30px;letter-spacing:2px;margin-bottom:8px}
+.hero p{color:#999;font-size:13px;line-height:1.5}
+.drop{padding:0 16px;margin-bottom:38px}
+.drop-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
+.drop-title h2{font-size:20px;letter-spacing:1px}
+.drop-title span{color:#777;font-size:11px;letter-spacing:2px}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.product{background:#0d0d0d;border:1px solid #202020;overflow:hidden;cursor:pointer;transition:.2s}
+.product:active{transform:scale(.98)}
+.product-image{width:100%;aspect-ratio:1/1.15;background:linear-gradient(135deg,#181818,#050505);display:flex;align-items:center;justify-content:center;color:#555;font-size:11px;text-align:center;padding:15px}
+.product-info{padding:12px}
+.product-name{font-size:14px;margin-bottom:6px;line-height:1.3}
+.product-price{color:#aaa;font-size:13px}
+.cart-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:600px;padding:12px 16px 18px;background:rgba(5,5,5,.95);border-top:1px solid #222;backdrop-filter:blur(10px);z-index:10}
+.cart-button{width:100%;padding:16px;background:#fff;color:#000;border:none;font-size:14px;font-weight:bold;letter-spacing:1px;cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:flex-end;justify-content:center;z-index:100}
+.modal.active{display:flex}
+.modal-content{width:100%;max-width:600px;max-height:90vh;overflow-y:auto;background:#0b0b0b;border-top:1px solid #333;padding:22px}
+.modal-close{text-align:right;color:#777;font-size:25px;cursor:pointer;margin-bottom:10px}
+.modal h2{font-size:22px;margin-bottom:8px}
+.modal-price{color:#aaa;margin-bottom:25px}
+.option-title{color:#888;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;margin-top:20px}
+.options{display:flex;flex-wrap:wrap;gap:8px}
+.option{padding:11px 16px;background:#111;color:#fff;border:1px solid #333;cursor:pointer}
+.option.selected{background:#fff;color:#000;border-color:#fff}
+.quantity{display:flex;align-items:center;gap:20px}
+.quantity button{width:42px;height:42px;background:#111;border:1px solid #333;color:#fff;font-size:20px;cursor:pointer}
+.quantity span{font-size:18px}
+.add-button,.checkout{width:100%;margin-top:28px;padding:16px;background:#fff;color:#000;border:none;font-weight:bold;cursor:pointer;letter-spacing:1px}
+.cart-item{padding:15px 0;border-bottom:1px solid #222}
+.cart-item-name{font-size:15px;margin-bottom:6px}
+.cart-item-details{color:#888;font-size:12px;line-height:1.7}
+.total{display:flex;justify-content:space-between;margin-top:20px;font-size:18px}
+.empty{color:#777;text-align:center;padding:30px 0}
+@media(max-width:380px){.products{gap:8px}.product-info{padding:10px}.product-name{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="header">
+<img src="logo.jpg" class="logo" alt="LNC COLLECTION">
+<div class="subtitle">Official Store</div>
+</header>
+
+<section class="hero">
+<h1>LNC COLLECTION</h1>
+<p>Official clothing store.<br>Limited drops.</p>
+</section>
+
+<section class="drop">
+<div class="drop-title"><h2>DROP 01</h2><span>03 ITEMS</span></div>
+<div class="products">
+<div class="product" onclick="openProduct('Black T-Shirt',40,['Black'],['S','M','L','XL'])">
+<div class="product-image">PRODUCT PHOTO</div>
+<div class="product-info"><div class="product-name">Black T-Shirt</div><div class="product-price">€40</div></div>
+</div>
+<div class="product" onclick="openProduct('White T-Shirt / Black Print',40,['White'],['S','M','L','XL'])">
+<div class="product-image">PRODUCT PHOTO</div>
+<div class="product-info"><div class="product-name">White T-Shirt</div><div class="product-price">€40</div></div>
+</div>
+<div class="product" onclick="openProduct('White T-Shirt / Blue Print',40,['White'],['S','M','L','XL'])">
+<div class="product-image">PRODUCT PHOTO</div>
+<div class="product-info"><div class="product-name">White T-Shirt / Blue Print</div><div class="product-price">€40</div></div>
+</div>
+</div>
+</section>
+
+<section class="drop">
+<div class="drop-title"><h2>DROP 02</h2><span>02 ITEMS</span></div>
+<div class="products">
+<div class="product" onclick="openProduct('Black T-Shirt / White Print',40,['Black'],['S','M','L','XL'])">
+<div class="product-image">PRODUCT PHOTO</div>
+<div class="product-info"><div class="product-name">Black T-Shirt</div><div class="product-price">€40</div></div>
+</div>
+<div class="product" onclick="openProduct('Black Zip Hoodie / White Print',70,['Black'],['S','M','L','XL'])">
+<div class="product-image">PRODUCT PHOTO</div>
+<div class="product-info"><div class="product-name">Black Zip Hoodie</div><div class="product-price">€70</div></div>
+</div>
+</div>
+</section>
+</div>
+
+<div class="cart-bar"><button class="cart-button" onclick="openCart()">🛍 CART (<span id="cartCount">0</span>)</button></div>
+
+<div class="modal" id="productModal"><div class="modal-content">
+<div class="modal-close" onclick="closeModal()">×</div>
+<h2 id="modalName"></h2><div class="modal-price">€<span id="modalPrice"></span></div>
+<div class="option-title">Color</div><div class="options" id="colors"></div>
+<div class="option-title">Size</div><div class="options" id="sizes"></div>
+<div class="option-title">Quantity</div>
+<div class="quantity"><button onclick="changeQuantity(-1)">−</button><span id="quantity">1</span><button onclick="changeQuantity(1)">+</button></div>
+<button class="add-button" onclick="addToCart()">ADD TO CART</button>
+</div></div>
+
+<div class="modal" id="cartModal"><div class="modal-content">
+<div class="modal-close" onclick="closeCart()">×</div>
+<h2>Your Cart</h2><div id="cartItems"></div>
+<div class="total"><span>Total</span><strong>€<span id="cartTotal">0</span></strong></div>
+<button class="checkout" onclick="checkout()">CHECKOUT</button>
+</div></div>
+
+<script>
+const tg=window.Telegram?.WebApp;
+if(tg){tg.ready();tg.expand();}
+let cart=[],currentProduct=null,selectedColor=null,selectedSize=null,currentQuantity=1;
+
+function openProduct(name,price,colors,sizes){
+currentProduct={name,price,colors,sizes};currentQuantity=1;
+document.getElementById("modalName").innerText=name;
+document.getElementById("modalPrice").innerText=price;
+document.getElementById("quantity").innerText=1;
+selectedColor=colors[0];selectedSize=sizes[0];
+renderOptions("colors",colors,selectedColor);renderOptions("sizes",sizes,selectedSize);
+document.getElementById("productModal").classList.add("active");
+}
+function renderOptions(id,options,selected){
+const c=document.getElementById(id);c.innerHTML="";
+options.forEach(option=>{const b=document.createElement("button");b.className="option"+(option===selected?" selected":"");b.innerText=option;b.onclick=()=>{if(id==="colors")selectedColor=option;else selectedSize=option;renderOptions(id,options,option)};c.appendChild(b);});
+}
+function changeQuantity(v){currentQuantity=Math.max(1,currentQuantity+v);document.getElementById("quantity").innerText=currentQuantity}
+function addToCart(){cart.push({name:currentProduct.name,price:currentProduct.price,color:selectedColor,size:selectedSize,quantity:currentQuantity});updateCartCount();closeModal();if(tg)tg.HapticFeedback.impactOccurred("light")}
+function updateCartCount(){document.getElementById("cartCount").innerText=cart.reduce((s,i)=>s+i.quantity,0)}
+function openCart(){renderCart();document.getElementById("cartModal").classList.add("active")}
+function closeCart(){document.getElementById("cartModal").classList.remove("active")}
+function closeModal(){document.getElementById("productModal").classList.remove("active")}
+function renderCart(){
+const c=document.getElementById("cartItems");c.innerHTML="";
+if(!cart.length){c.innerHTML='<div class="empty">Your cart is empty.</div>';document.getElementById("cartTotal").innerText="0";return}
+let total=0;
+cart.forEach(i=>{total+=i.price*i.quantity;const e=document.createElement("div");e.className="cart-item";e.innerHTML=`<div class="cart-item-name">${i.name}</div><div class="cart-item-details">Color: ${i.color}<br>Size: ${i.size}<br>Quantity: ${i.quantity}<br>€${i.price*i.quantity}</div>`;c.appendChild(e)});
+document.getElementById("cartTotal").innerText=total;
+}
+function checkout(){if(!cart.length){alert("Your cart is empty.");return}alert("Checkout will be connected in the next step.")}
+</script>
+</body>
+</html>
