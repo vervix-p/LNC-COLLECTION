@@ -2090,6 +2090,10 @@ async function placeOrder(){
     clearCheckoutError();
 
 
+    // =========================
+    // CHECK CART
+    // =========================
+
     if(!cart.length){
 
         showCheckoutError(
@@ -2100,6 +2104,10 @@ async function placeOrder(){
 
     }
 
+
+    // =========================
+    // GET FORM DATA
+    // =========================
 
     const name =
         document.getElementById(
@@ -2136,6 +2144,10 @@ async function placeOrder(){
             "customerComment"
         ).value.trim();
 
+
+    // =========================
+    // VALIDATION
+    // =========================
 
     if(!name){
 
@@ -2181,26 +2193,42 @@ async function placeOrder(){
     }
 
 
+    // =========================
+    // TOTAL
+    // =========================
+
     let total = 0;
 
 
     cart.forEach(item => {
 
         total +=
-            item.price *
-            item.quantity;
+            Number(item.price || 0) *
+            Number(item.quantity || 1);
 
     });
 
+
+    // =========================
+    // TELEGRAM USER
+    // =========================
 
     const telegramUser =
         tg?.initDataUnsafe?.user ||
         null;
 
 
+    // =========================
+    // ORDER ID
+    // =========================
+
     const orderId =
         generateOrderId();
 
+
+    // =========================
+    // ORDER
+    // =========================
 
     const order = {
 
@@ -2268,7 +2296,7 @@ async function placeOrder(){
                     item.name,
 
                 price:
-                    item.price,
+                    Number(item.price || 0),
 
                 color:
                     item.color ||
@@ -2279,11 +2307,11 @@ async function placeOrder(){
                     null,
 
                 quantity:
-                    item.quantity,
+                    Number(item.quantity || 1),
 
                 subtotal:
-                    item.price *
-                    item.quantity
+                    Number(item.price || 0) *
+                    Number(item.quantity || 1)
 
             })),
 
@@ -2297,9 +2325,29 @@ async function placeOrder(){
     };
 
 
+    // =========================
+    // JSON
+    // =========================
+
     const orderData =
         JSON.stringify(order);
 
+
+    console.log(
+        "LNC ORDER:",
+        order
+    );
+
+
+    console.log(
+        "WORKER URL:",
+        WORKER_URL
+    );
+
+
+    // =========================
+    // TELEGRAM LIMIT
+    // =========================
 
     if(orderData.length > 4096){
 
@@ -2311,6 +2359,10 @@ async function placeOrder(){
 
     }
 
+
+    // =========================
+    // BUTTON
+    // =========================
 
     const button =
         document.querySelector(
@@ -2329,101 +2381,182 @@ async function placeOrder(){
     }
 
 
+    // =========================
+    // SEND TO WORKER
+    // =========================
+
     try{
 
-       const response = await fetch(
-    WORKER_URL,
-    {
-        method: "POST",
-
-        headers: {
-            "Content-Type": "application/json"
-        },
-
-        body: orderData
-    }
-);
+        console.log(
+            "STEP 1: отправляем заказ в Cloudflare..."
+        );
 
 
-const responseText =
-    await response.text();
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        orderData
+
+                }
+            );
 
 
-let result;
+        console.log(
+            "STEP 2: Cloudflare ответил",
+            response.status,
+            response.statusText
+        );
 
 
-try {
+        // =========================
+        // READ RESPONSE AS TEXT
+        // =========================
 
-    result =
-        JSON.parse(responseText);
-
-} catch {
-
-    console.error(
-        "Cloudflare returned non-JSON:",
-        responseText
-    );
-
-    throw new Error(
-        "Cloudflare returned invalid response"
-    );
-
-}
+        const responseText =
+            await response.text();
 
 
-console.log(
-    "Cloudflare response:",
-    result
-);
+        console.log(
+            "STEP 3: ответ Cloudflare:",
+            responseText
+        );
 
 
-if(
-    !response.ok ||
-    !result.success
-){
+        // =========================
+        // EMPTY RESPONSE
+        // =========================
 
-    console.error(
-        "Worker error:",
-        result
-    );
+        if(!responseText){
 
+            throw new Error(
+                `Cloudflare вернул пустой ответ. HTTP ${response.status}`
+            );
 
-    showCheckoutError(
-        result.error ||
-        "Не удалось отправить заказ. Попробуйте ещё раз."
-    );
+        }
 
 
-    if(button){
+        // =========================
+        // PARSE JSON
+        // =========================
 
-        button.disabled =
-            false;
-
-        button.innerText =
-            "ПОДТВЕРДИТЬ ЗАКАЗ";
-
-    }
+        let result;
 
 
-    return;
+        try{
 
-}
+            result =
+                JSON.parse(
+                    responseText
+                );
+
+        }catch(parseError){
+
+            console.error(
+                "JSON PARSE ERROR:",
+                parseError
+            );
 
 
-showSuccessScreen(
-    orderId
-);
+            throw new Error(
+                `Cloudflare вернул не JSON. HTTP ${response.status}. Ответ: ${responseText.slice(0,300)}`
+            );
+
+        }
+
+
+        console.log(
+            "STEP 4: JSON Cloudflare:",
+            result
+        );
+
+
+        // =========================
+        // HTTP ERROR
+        // =========================
+
+        if(!response.ok){
+
+            throw new Error(
+                result.error ||
+                result.message ||
+                `Cloudflare HTTP ${response.status}`
+            );
+
+        }
+
+
+        // =========================
+        // WORKER ERROR
+        // =========================
+
+        if(!result.success){
+
+            throw new Error(
+                result.error ||
+                "Worker сообщил об ошибке."
+            );
+
+        }
+
+
+        // =========================
+        // SUCCESS
+        // =========================
+
+        console.log(
+            "STEP 5: заказ успешно отправлен!"
+        );
+
+
+        showSuccessScreen(
+            orderId
+        );
+
 
     }catch(error){
 
         console.error(
-            "Order request error:",
+            "FINAL ORDER ERROR:",
             error
         );
 
 
+        // =========================
+        // SHOW REAL ERROR
+        // =========================
+
+        let message =
+            error?.message ||
+            String(error);
+
+
+        if(
+            message ===
+            "Failed to fetch"
+        ){
+
+            message =
+                "Failed to fetch — Mini App не смог подключиться к Cloudflare Worker. Возможная причина: CORS, блокировка Cloudflare или неправильный URL Worker.";
+
+        }
+
+
         showCheckoutError(
-            "Ошибка соединения. Попробуйте ещё раз."
+            "Ошибка отправки:\n\n" +
+            message
         );
 
 
