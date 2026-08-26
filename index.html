@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>LNC COLLECTION</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -11,36 +12,36 @@
 *{
     box-sizing:border-box;
     margin:0;
-    padding:0
+    padding:0;
 }
 
 body{
     background:#050505;
     color:#fff;
     font-family:Arial,Helvetica,sans-serif;
-    min-height:100vh
+    min-height:100vh;
 }
 
 button,
 input,
 select,
 textarea{
-    font-family:inherit
+    font-family:inherit;
 }
 
 button{
-    -webkit-tap-highlight-color:transparent
+    -webkit-tap-highlight-color:transparent;
 }
 
 .app{
     max-width:600px;
     margin:0 auto;
-    padding-bottom:110px
+    padding-bottom:110px;
 }
 
 .header{
     padding:22px 18px 10px;
-    text-align:center
+    text-align:center;
 }
 
 .logo{
@@ -48,63 +49,67 @@ button{
     max-width:70%;
     height:auto;
     display:block;
-    margin:0 auto 20px
+    margin:0 auto 20px;
 }
 
 .subtitle{
     color:#999;
     font-size:12px;
     letter-spacing:3px;
-    text-transform:uppercase
+    text-transform:uppercase;
 }
 
 .hero{
     margin:20px 16px 30px;
     padding:28px 20px;
     border:1px solid #222;
-    background:radial-gradient(circle at 50% 0%,#242424 0%,#080808 55%);
-    text-align:center
+    background:radial-gradient(
+        circle at 50% 0%,
+        #242424 0%,
+        #080808 55%
+    );
+    text-align:center;
 }
 
 .hero h1{
     font-size:30px;
     letter-spacing:2px;
-    margin-bottom:8px
+    margin-bottom:8px;
 }
 
 .hero p{
     color:#999;
     font-size:13px;
-    line-height:1.5
+    line-height:1.5;
 }
 
 .drop{
     padding:0 16px;
-    margin-bottom:38px
+    margin-bottom:38px;
 }
 
 .drop-title{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin-bottom:15px
+    margin-bottom:15px;
 }
 
 .drop-title h2{
     font-size:20px;
-    letter-spacing:1px
+    letter-spacing:1px;
 }
 
 .drop-title span{
     color:#777;
     font-size:11px;
-    letter-spacing:2px
+    letter-spacing:2px;
 }
 
 .products{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:12px
+    gap:12px;
 }
 
 .product{
@@ -112,39 +117,59 @@ button{
     border:1px solid #202020;
     overflow:hidden;
     cursor:pointer;
-    transition:.2s
+    transition:.2s;
 }
 
 .product:active{
-    transform:scale(.98)
+    transform:scale(.98);
 }
 
 .product-image{
     width:100%;
     aspect-ratio:1/1.15;
-    background:linear-gradient(135deg,#181818,#050505);
+    background:linear-gradient(
+        135deg,
+        #181818,
+        #050505
+    );
     display:flex;
     align-items:center;
     justify-content:center;
     color:#555;
     font-size:11px;
     text-align:center;
-    padding:15px
+    padding:15px;
 }
 
 .product-info{
-    padding:12px
+    padding:12px;
 }
 
 .product-name{
     font-size:14px;
     margin-bottom:6px;
-    line-height:1.3
+    line-height:1.3;
 }
 
 .product-price{
     color:#aaa;
-    font-size:13px
+    font-size:13px;
+}
+
+.book-section{
+    padding:0 16px;
+    margin-bottom:38px;
+}
+
+.book-title{
+    font-size:20px;
+    letter-spacing:1px;
+    margin-bottom:15px;
+}
+
+.book-products{
+    display:grid;
+    grid-template-columns:1fr;
 }
 
 .cart-bar{
@@ -158,7 +183,7 @@ button{
     background:rgba(5,5,5,.95);
     border-top:1px solid #222;
     backdrop-filter:blur(10px);
-    z-index:10
+    z-index:10;
 }
 
 .cart-button{
@@ -170,7 +195,7 @@ button{
     font-size:14px;
     font-weight:bold;
     letter-spacing:1px;
-    cursor:pointer
+    cursor:pointer;
 }
 
 .modal{
@@ -180,11 +205,11 @@ button{
     display:none;
     align-items:flex-end;
     justify-content:center;
-    z-index:100
+    z-index:100;
 }
 
 .modal.active{
-    display:flex
+    display:flex;
 }
 
 .modal-content{
@@ -194,7 +219,7 @@ button{
     overflow-y:auto;
     background:#0b0b0b;
     border-top:1px solid #333;
-    padding:22px
+    padding:22px;
 }
 
 .modal-close{
@@ -202,17 +227,17 @@ button{
     color:#777;
     font-size:25px;
     cursor:pointer;
-    margin-bottom:10px
+    margin-bottom:10px;
 }
 
 .modal h2{
     font-size:22px;
-    margin-bottom:8px
+    margin-bottom:8px;
 }
 
 .modal-price{
     color:#aaa;
-    margin-bottom:25px
+    margin-bottom:25px;
 }
 
 .option-title{
@@ -221,13 +246,13 @@ button{
     text-transform:uppercase;
     letter-spacing:2px;
     margin-bottom:10px;
-    margin-top:20px
+    margin-top:20px;
 }
 
 .options{
     display:flex;
     flex-wrap:wrap;
-    gap:8px
+    gap:8px;
 }
 
 .option{
@@ -235,19 +260,19 @@ button{
     background:#111;
     color:#fff;
     border:1px solid #333;
-    cursor:pointer
+    cursor:pointer;
 }
 
 .option.selected{
     background:#fff;
     color:#000;
-    border-color:#fff
+    border-color:#fff;
 }
 
 .quantity{
     display:flex;
     align-items:center;
-    gap:20px
+    gap:20px;
 }
 
 .quantity button{
@@ -257,13 +282,13 @@ button{
     border:1px solid #333;
     color:#fff;
     font-size:20px;
-    cursor:pointer
+    cursor:pointer;
 }
 
 .quantity span{
     font-size:18px;
     min-width:20px;
-    text-align:center
+    text-align:center;
 }
 
 .add-button,
@@ -277,49 +302,49 @@ button{
     border:none;
     font-weight:bold;
     cursor:pointer;
-    letter-spacing:1px
+    letter-spacing:1px;
 }
 
 .cart-item{
     padding:16px 0;
-    border-bottom:1px solid #222
+    border-bottom:1px solid #222;
 }
 
 .cart-item-head{
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    gap:10px
+    gap:10px;
 }
 
 .cart-item-name{
     font-size:15px;
-    margin-bottom:6px
+    margin-bottom:6px;
 }
 
 .cart-item-price{
     font-size:14px;
     color:#fff;
-    white-space:nowrap
+    white-space:nowrap;
 }
 
 .cart-item-details{
     color:#888;
     font-size:12px;
-    line-height:1.7
+    line-height:1.7;
 }
 
 .cart-controls{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin-top:12px
+    margin-top:12px;
 }
 
 .cart-quantity{
     display:flex;
     align-items:center;
-    gap:10px
+    gap:10px;
 }
 
 .cart-quantity button{
@@ -329,13 +354,13 @@ button{
     color:#fff;
     border:1px solid #333;
     cursor:pointer;
-    font-size:16px
+    font-size:16px;
 }
 
 .cart-quantity span{
     min-width:20px;
     text-align:center;
-    font-size:13px
+    font-size:13px;
 }
 
 .remove-button{
@@ -345,26 +370,24 @@ button{
     font-size:11px;
     text-transform:uppercase;
     letter-spacing:1px;
-    cursor:pointer
+    cursor:pointer;
 }
 
 .total{
     display:flex;
     justify-content:space-between;
     margin-top:20px;
-    font-size:18px
+    font-size:18px;
 }
 
 .empty{
     color:#777;
     text-align:center;
-    padding:30px 0
+    padding:30px 0;
 }
 
-/* CHECKOUT */
-
 .checkout-section{
-    margin-top:24px
+    margin-top:24px;
 }
 
 .checkout-label{
@@ -373,7 +396,7 @@ button{
     font-size:11px;
     text-transform:uppercase;
     letter-spacing:2px;
-    margin-bottom:8px
+    margin-bottom:8px;
 }
 
 .checkout-input,
@@ -386,73 +409,73 @@ button{
     padding:14px;
     font-size:14px;
     outline:none;
-    border-radius:0
+    border-radius:0;
 }
 
 .checkout-input:focus,
 .checkout-select:focus,
 .checkout-textarea:focus{
-    border-color:#777
+    border-color:#777;
 }
 
 .checkout-input::placeholder,
 .checkout-textarea::placeholder{
-    color:#555
+    color:#555;
 }
 
 .checkout-textarea{
     min-height:90px;
-    resize:vertical
+    resize:vertical;
 }
 
 .form-group{
-    margin-bottom:18px
+    margin-bottom:18px;
 }
 
 .checkout-title{
     font-size:22px;
-    margin-bottom:6px
+    margin-bottom:6px;
 }
 
 .checkout-subtitle{
     color:#777;
     font-size:12px;
     line-height:1.5;
-    margin-bottom:22px
+    margin-bottom:22px;
 }
 
 .checkout-summary{
     background:#101010;
     border:1px solid #222;
     padding:15px;
-    margin-top:10px
+    margin-top:10px;
 }
 
 .summary-item{
     padding:10px 0;
     border-bottom:1px solid #222;
     font-size:13px;
-    line-height:1.6
+    line-height:1.6;
 }
 
 .summary-item:last-child{
-    border-bottom:none
+    border-bottom:none;
 }
 
 .summary-name{
     color:#fff;
     font-size:14px;
-    margin-bottom:3px
+    margin-bottom:3px;
 }
 
 .summary-details{
     color:#777;
-    font-size:11px
+    font-size:11px;
 }
 
 .summary-price{
     color:#aaa;
-    margin-top:3px
+    margin-top:3px;
 }
 
 .checkout-total{
@@ -461,11 +484,11 @@ button{
     margin-top:15px;
     padding-top:15px;
     border-top:1px solid #333;
-    font-size:17px
+    font-size:17px;
 }
 
 .required{
-    color:#777
+    color:#777;
 }
 
 .error-message{
@@ -476,37 +499,37 @@ button{
     background:#151515;
     color:#aaa;
     font-size:12px;
-    line-height:1.5
+    line-height:1.5;
 }
 
 .error-message.active{
-    display:block
+    display:block;
 }
 
 .success-screen{
     display:none;
     text-align:center;
-    padding:40px 10px 25px
+    padding:40px 10px 25px;
 }
 
 .success-screen.active{
-    display:block
+    display:block;
 }
 
 .success-icon{
     font-size:42px;
-    margin-bottom:18px
+    margin-bottom:18px;
 }
 
 .success-screen h2{
     font-size:24px;
-    margin-bottom:10px
+    margin-bottom:12px;
 }
 
 .success-screen p{
     color:#888;
     font-size:13px;
-    line-height:1.6
+    line-height:1.6;
 }
 
 .back-button{
@@ -518,20 +541,28 @@ button{
     color:#fff;
     cursor:pointer;
     letter-spacing:1px;
-    font-weight:bold
+    font-weight:bold;
+}
+
+.order-number{
+    margin-top:15px;
+    color:#666;
+    font-size:11px;
+    letter-spacing:1px;
 }
 
 @media(max-width:380px){
+
     .products{
-        gap:8px
+        gap:8px;
     }
 
     .product-info{
-        padding:10px
+        padding:10px;
     }
 
     .product-name{
-        font-size:13px
+        font-size:13px;
     }
 }
 </style>
@@ -542,291 +573,702 @@ button{
 <div class="app">
 
 <header class="header">
-    <img src="logo.jpg" class="logo" alt="LNC COLLECTION">
-    <div class="subtitle">Official Store</div>
+
+    <img
+        src="logo.jpg"
+        class="logo"
+        alt="LNC COLLECTION">
+
+    <div class="subtitle">
+        Официальный магазин
+    </div>
+
 </header>
 
+
 <section class="hero">
+
     <h1>LNC COLLECTION</h1>
-    <p>Official clothing store.<br>Limited drops.</p>
+
+    <p>
+        Официальный магазин.<br>
+        Лимитированные дропы.
+    </p>
+
 </section>
 
-<section class="drop">
-    <div class="drop-title">
-        <h2>DROP 01</h2>
-        <span>03 ITEMS</span>
-    </div>
 
-    <div class="products">
-
-        <div class="product"
-             onclick="openProduct('Black T-Shirt',40,['Black'],['S','M','L','XL'])">
-            <div class="product-image">PRODUCT PHOTO</div>
-            <div class="product-info">
-                <div class="product-name">Black T-Shirt</div>
-                <div class="product-price">€40</div>
-            </div>
-        </div>
-
-        <div class="product"
-             onclick="openProduct('White T-Shirt / Black Print',40,['White'],['S','M','L','XL'])">
-            <div class="product-image">PRODUCT PHOTO</div>
-            <div class="product-info">
-                <div class="product-name">White T-Shirt</div>
-                <div class="product-price">€40</div>
-            </div>
-        </div>
-
-        <div class="product"
-             onclick="openProduct('White T-Shirt / Blue Print',40,['White'],['S','M','L','XL'])">
-            <div class="product-image">PRODUCT PHOTO</div>
-            <div class="product-info">
-                <div class="product-name">White T-Shirt / Blue Print</div>
-                <div class="product-price">€40</div>
-            </div>
-        </div>
-
-    </div>
-</section>
+<!-- =========================
+     DROP 02
+========================= -->
 
 <section class="drop">
 
     <div class="drop-title">
+
         <h2>DROP 02</h2>
-        <span>02 ITEMS</span>
+
+        <span>NEW · 02 ITEMS</span>
+
     </div>
+
 
     <div class="products">
 
-        <div class="product"
-             onclick="openProduct('Black T-Shirt / White Print',40,['Black'],['S','M','L','XL'])">
-            <div class="product-image">PRODUCT PHOTO</div>
-            <div class="product-info">
-                <div class="product-name">Black T-Shirt</div>
-                <div class="product-price">€40</div>
+
+        <!-- BLACK T-SHIRT -->
+
+        <div
+            class="product"
+            onclick="openProduct(
+                'Black T-Shirt — Create your Legacy',
+                3700,
+                ['Black'],
+                ['XS','S','M','L','XL','2XL','3XL']
+            )">
+
+            <div class="product-image">
+                ФОТО ТОВАРА
             </div>
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    Black T-Shirt<br>
+                    <span style="color:#777">
+                        Create your Legacy
+                    </span>
+                </div>
+
+                <div class="product-price">
+                    3 700 ₽
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="product"
-             onclick="openProduct('Black Zip Hoodie / White Print',70,['Black'],['S','M','L','XL'])">
-            <div class="product-image">PRODUCT PHOTO</div>
-            <div class="product-info">
-                <div class="product-name">Black Zip Hoodie</div>
-                <div class="product-price">€70</div>
+
+        <!-- BLACK ZIP HOODIE -->
+
+        <div
+            class="product"
+            onclick="openProduct(
+                'Black Zip Hoodie — Create your Legacy',
+                4000,
+                ['Black'],
+                ['XS','S','M','L','XL','2XL']
+            )">
+
+            <div class="product-image">
+                ФОТО ТОВАРА
             </div>
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    Black Zip Hoodie<br>
+                    <span style="color:#777">
+                        Create your Legacy
+                    </span>
+                </div>
+
+                <div class="product-price">
+                    4 000 ₽
+                </div>
+
+            </div>
+
         </div>
 
     </div>
+
+</section>
+
+
+<!-- =========================
+     DROP 01
+========================= -->
+
+<section class="drop">
+
+    <div class="drop-title">
+
+        <h2>DROP 01</h2>
+
+        <span>03 ITEMS</span>
+
+    </div>
+
+
+    <div class="products">
+
+
+        <!-- ASH WHITE -->
+
+        <div
+            class="product"
+            onclick="openProduct(
+                'Ash White',
+                3400,
+                ['Ash White'],
+                ['XS','S','M','L','XL','2XL','3XL']
+            )">
+
+            <div class="product-image">
+                ФОТО ТОВАРА
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    Ash White
+                </div>
+
+                <div class="product-price">
+                    3 400 ₽
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ROYAL BLUE -->
+
+        <div
+            class="product"
+            onclick="openProduct(
+                'Royal Blue — Iconic',
+                3400,
+                ['Royal Blue'],
+                ['XS','S','M','L','XL','2XL','3XL']
+            )">
+
+            <div class="product-image">
+                ФОТО ТОВАРА
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    Royal Blue<br>
+                    <span style="color:#777">
+                        Iconic
+                    </span>
+                </div>
+
+                <div class="product-price">
+                    3 400 ₽
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MIDNIGHT MONOCHROME -->
+
+        <div
+            class="product"
+            onclick="openProduct(
+                'Midnight Monochrome',
+                3400,
+                ['Midnight'],
+                ['XS','S','M','L','XL','2XL','3XL']
+            )">
+
+            <div class="product-image">
+                ФОТО ТОВАРА
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    Midnight Monochrome
+                </div>
+
+                <div class="product-price">
+                    3 400 ₽
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     BOOK
+========================= -->
+
+<section class="book-section">
+
+    <div class="book-title">
+        BOOK
+    </div>
+
+
+    <div class="book-products">
+
+
+        <div
+            class="product"
+            onclick="openProduct(
+                'Book Love Never',
+                9999,
+                [],
+                []
+            )">
+
+            <div class="product-image">
+                ФОТО КНИГИ
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    Book Love Never
+                </div>
+
+                <div class="product-price">
+                    9 999 ₽
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
 </div>
 
 
-<!-- CART BAR -->
+<!-- =========================
+     CART BAR
+========================= -->
 
 <div class="cart-bar">
-    <button class="cart-button" onclick="openCart()">
-        🛍 CART (<span id="cartCount">0</span>)
+
+    <button
+        class="cart-button"
+        onclick="openCart()">
+
+        🛍 КОРЗИНА
+        (<span id="cartCount">0</span>)
+
     </button>
+
 </div>
 
 
-<!-- PRODUCT MODAL -->
+<!-- =========================
+     PRODUCT MODAL
+========================= -->
 
-<div class="modal" id="productModal">
+<div
+    class="modal"
+    id="productModal">
 
     <div class="modal-content">
 
-        <div class="modal-close" onclick="closeModal()">×</div>
+        <div
+            class="modal-close"
+            onclick="closeModal()">
+
+            ×
+
+        </div>
+
 
         <h2 id="modalName"></h2>
 
+
         <div class="modal-price">
-            €<span id="modalPrice"></span>
+
+            <span id="modalPrice"></span> ₽
+
         </div>
 
-        <div class="option-title">Color</div>
-        <div class="options" id="colors"></div>
 
-        <div class="option-title">Size</div>
-        <div class="options" id="sizes"></div>
+        <div
+            class="option-title"
+            id="colorTitle">
 
-        <div class="option-title">Quantity</div>
+            Цвет
+
+        </div>
+
+        <div
+            class="options"
+            id="colors">
+        </div>
+
+
+        <div
+            class="option-title"
+            id="sizeTitle">
+
+            Размер
+
+        </div>
+
+        <div
+            class="options"
+            id="sizes">
+        </div>
+
+
+        <div class="option-title">
+
+            Количество
+
+        </div>
+
 
         <div class="quantity">
-            <button onclick="changeQuantity(-1)">−</button>
-            <span id="quantity">1</span>
-            <button onclick="changeQuantity(1)">+</button>
-        </div>
 
-        <button class="add-button" onclick="addToCart()">
-            ADD TO CART
-        </button>
+            <button onclick="changeQuantity(-1)">
+                −
+            </button>
 
-    </div>
+            <span id="quantity">
+                1
+            </span>
 
-</div>
-
-
-<!-- CART MODAL -->
-
-<div class="modal" id="cartModal">
-
-    <div class="modal-content">
-
-        <div class="modal-close" onclick="closeCart()">×</div>
-
-        <h2>Your Cart</h2>
-
-        <div id="cartItems"></div>
-
-        <div class="total">
-            <span>Total</span>
-            <strong>€<span id="cartTotal">0</span></strong>
-        </div>
-
-        <button class="checkout" onclick="checkout()">
-            CHECKOUT
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- CHECKOUT MODAL -->
-
-<div class="modal" id="checkoutModal">
-
-    <div class="modal-content">
-
-        <div class="modal-close" onclick="closeCheckout()">×</div>
-
-        <div id="checkoutFormContainer">
-
-            <h2 class="checkout-title">Checkout</h2>
-
-            <div class="checkout-subtitle">
-                Please enter your contact and delivery information.
-            </div>
-
-            <div class="checkout-section">
-
-                <div class="form-group">
-                    <label class="checkout-label">
-                        Name <span class="required">*</span>
-                    </label>
-
-                    <input
-                        id="customerName"
-                        class="checkout-input"
-                        type="text"
-                        placeholder="Your name"
-                        autocomplete="name">
-                </div>
-
-                <div class="form-group">
-                    <label class="checkout-label">
-                        Telegram
-                    </label>
-
-                    <input
-                        id="customerTelegram"
-                        class="checkout-input"
-                        type="text"
-                        placeholder="@username">
-                </div>
-
-                <div class="form-group">
-                    <label class="checkout-label">
-                        Phone <span class="required">*</span>
-                    </label>
-
-                    <input
-                        id="customerPhone"
-                        class="checkout-input"
-                        type="tel"
-                        placeholder="+49 ...">
-                </div>
-
-                <div class="form-group">
-                    <label class="checkout-label">
-                        City <span class="required">*</span>
-                    </label>
-
-                    <input
-                        id="customerCity"
-                        class="checkout-input"
-                        type="text"
-                        placeholder="Your city"
-                        autocomplete="address-level2">
-                </div>
-
-                <div class="form-group">
-                    <label class="checkout-label">
-                        Delivery <span class="required">*</span>
-                    </label>
-
-                    <select id="deliveryMethod" class="checkout-select">
-                        <option value="">Select delivery method</option>
-                        <option value="DHL">DHL</option>
-                        <option value="DPD">DPD</option>
-                        <option value="Pickup">Pickup</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="checkout-label">
-                        Comment
-                    </label>
-
-                    <textarea
-                        id="customerComment"
-                        class="checkout-textarea"
-                        placeholder="Additional information..."></textarea>
-                </div>
-
-            </div>
-
-
-            <div class="checkout-section">
-
-                <div class="option-title">
-                    Order Summary
-                </div>
-
-                <div class="checkout-summary" id="checkoutSummary"></div>
-
-                <div class="checkout-total">
-                    <span>Total</span>
-                    <strong>€<span id="checkoutTotal">0</span></strong>
-                </div>
-
-            </div>
-
-
-            <div id="checkoutError" class="error-message"></div>
-
-            <button class="place-order" onclick="placeOrder()">
-                PLACE ORDER
+            <button onclick="changeQuantity(1)">
+                +
             </button>
 
         </div>
 
 
-        <div id="successScreen" class="success-screen">
+        <button
+            class="add-button"
+            onclick="addToCart()">
 
-            <div class="success-icon">✓</div>
+            ДОБАВИТЬ В КОРЗИНУ
 
-            <h2>Order Ready</h2>
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CART MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="cartModal">
+
+    <div class="modal-content">
+
+        <div
+            class="modal-close"
+            onclick="closeCart()">
+
+            ×
+
+        </div>
+
+
+        <h2>
+            Корзина
+        </h2>
+
+
+        <div id="cartItems"></div>
+
+
+        <div class="total">
+
+            <span>
+                Итого
+            </span>
+
+            <strong>
+                <span id="cartTotal">0</span> ₽
+            </strong>
+
+        </div>
+
+
+        <button
+            class="checkout"
+            onclick="checkout()">
+
+            ОФОРМИТЬ ЗАКАЗ
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CHECKOUT MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="checkoutModal">
+
+    <div class="modal-content">
+
+        <div
+            class="modal-close"
+            onclick="closeCheckout()">
+
+            ×
+
+        </div>
+
+
+        <div id="checkoutFormContainer">
+
+            <h2 class="checkout-title">
+                Оформление заказа
+            </h2>
+
+
+            <div class="checkout-subtitle">
+
+                Заполните данные для оформления
+                и доставки заказа.
+
+            </div>
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+                <label class="checkout-label">
+
+                    Имя <span class="required">*</span>
+
+                </label>
+
+                <input
+                    id="customerName"
+                    class="checkout-input"
+                    type="text"
+                    placeholder="Ваше имя"
+                    autocomplete="name">
+
+            </div>
+
+
+            <!-- TELEGRAM -->
+
+            <div class="form-group">
+
+                <label class="checkout-label">
+
+                    Telegram
+
+                </label>
+
+                <input
+                    id="customerTelegram"
+                    class="checkout-input"
+                    type="text"
+                    placeholder="@username">
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+                <label class="checkout-label">
+
+                    Телефон
+                    <span class="required">*</span>
+
+                </label>
+
+                <input
+                    id="customerPhone"
+                    class="checkout-input"
+                    type="tel"
+                    placeholder="+7 ...">
+
+            </div>
+
+
+            <!-- CITY -->
+
+            <div class="form-group">
+
+                <label class="checkout-label">
+
+                    Город
+                    <span class="required">*</span>
+
+                </label>
+
+                <input
+                    id="customerCity"
+                    class="checkout-input"
+                    type="text"
+                    placeholder="Ваш город"
+                    autocomplete="address-level2">
+
+            </div>
+
+
+            <!-- DELIVERY -->
+
+            <div class="form-group">
+
+                <label class="checkout-label">
+
+                    Способ доставки
+                    <span class="required">*</span>
+
+                </label>
+
+                <select
+                    id="deliveryMethod"
+                    class="checkout-select">
+
+                    <option value="">
+                        Выберите способ доставки
+                    </option>
+
+                    <option value="Доставка в пункт">
+                        Доставка в пункт
+                    </option>
+
+                    <option value="Самовывоз">
+                        Самовывоз
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- COMMENT -->
+
+            <div class="form-group">
+
+                <label class="checkout-label">
+
+                    Комментарий
+
+                </label>
+
+                <textarea
+                    id="customerComment"
+                    class="checkout-textarea"
+                    placeholder="Дополнительная информация...">
+                </textarea>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="checkout-section">
+
+                <div class="option-title">
+
+                    Ваш заказ
+
+                </div>
+
+
+                <div
+                    class="checkout-summary"
+                    id="checkoutSummary">
+                </div>
+
+
+                <div class="checkout-total">
+
+                    <span>
+                        Итого
+                    </span>
+
+                    <strong>
+
+                        <span id="checkoutTotal">
+                            0
+                        </span>
+
+                        ₽
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="checkoutError"
+                class="error-message">
+            </div>
+
+
+            <button
+                class="place-order"
+                onclick="placeOrder()">
+
+                ПОДТВЕРДИТЬ ЗАКАЗ
+
+            </button>
+
+        </div>
+
+
+        <!-- SUCCESS -->
+
+        <div
+            id="successScreen"
+            class="success-screen">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <h2>
+                Заказ принят
+            </h2>
+
 
             <p>
-                Your order has been prepared successfully.
-                Please wait for confirmation.
+                Спасибо за заказ! Мы получили ваши
+                данные и свяжемся с вами для
+                подтверждения.
             </p>
 
-            <button class="back-button" onclick="finishCheckout()">
-                CLOSE
+
+            <div
+                class="order-number"
+                id="successOrderNumber">
+            </div>
+
+
+            <button
+                class="back-button"
+                onclick="finishCheckout()">
+
+                ЗАКРЫТЬ
+
             </button>
 
         </div>
@@ -838,12 +1280,34 @@ button{
 
 <script>
 
-const tg = window.Telegram?.WebApp;
+/* =========================
+   TELEGRAM
+========================= */
+
+const tg =
+    window.Telegram?.WebApp || null;
+
 
 if(tg){
+
     tg.ready();
+
     tg.expand();
+
 }
+
+
+/* =========================
+   WORKER
+========================= */
+
+const WORKER_URL =
+    "https://Inc-telegram-bot.vervixproducer.workers.dev/";
+
+
+/* =========================
+   STATE
+========================= */
 
 let cart = [];
 
@@ -872,11 +1336,44 @@ function escapeHtml(value){
 }
 
 
+function formatPrice(value){
+
+    return Number(value || 0)
+        .toLocaleString("ru-RU");
+
+}
+
+
+function generateOrderId(){
+
+    const now =
+        new Date();
+
+    const date =
+        now.getFullYear() +
+        String(now.getMonth() + 1).padStart(2,"0") +
+        String(now.getDate()).padStart(2,"0");
+
+    const random =
+        Math.floor(
+            1000 + Math.random() * 9000
+        );
+
+    return `LNC-${date}-${random}`;
+
+}
+
+
 /* =========================
    PRODUCT
 ========================= */
 
-function openProduct(name,price,colors,sizes){
+function openProduct(
+    name,
+    price,
+    colors,
+    sizes
+){
 
     currentProduct = {
         name,
@@ -885,29 +1382,97 @@ function openProduct(name,price,colors,sizes){
         sizes
     };
 
+
     currentQuantity = 1;
 
-    document.getElementById("modalName").innerText = name;
 
-    document.getElementById("modalPrice").innerText = price;
+    document.getElementById("modalName")
+        .innerText = name;
 
-    document.getElementById("quantity").innerText = 1;
 
-    selectedColor = colors[0];
+    document.getElementById("modalPrice")
+        .innerText = formatPrice(price);
 
-    selectedSize = sizes[0];
 
-    renderOptions(
-        "colors",
-        colors,
-        selectedColor
-    );
+    document.getElementById("quantity")
+        .innerText = "1";
 
-    renderOptions(
-        "sizes",
-        sizes,
-        selectedSize
-    );
+
+    selectedColor =
+        colors.length
+            ? colors[0]
+            : null;
+
+
+    selectedSize =
+        sizes.length
+            ? sizes[0]
+            : null;
+
+
+    const colorTitle =
+        document.getElementById("colorTitle");
+
+    const colorsContainer =
+        document.getElementById("colors");
+
+
+    if(colors.length){
+
+        colorTitle.style.display =
+            "block";
+
+        colorsContainer.style.display =
+            "flex";
+
+        renderOptions(
+            "colors",
+            colors,
+            selectedColor
+        );
+
+    }else{
+
+        colorTitle.style.display =
+            "none";
+
+        colorsContainer.style.display =
+            "none";
+
+    }
+
+
+    const sizeTitle =
+        document.getElementById("sizeTitle");
+
+    const sizesContainer =
+        document.getElementById("sizes");
+
+
+    if(sizes.length){
+
+        sizeTitle.style.display =
+            "block";
+
+        sizesContainer.style.display =
+            "flex";
+
+        renderOptions(
+            "sizes",
+            sizes,
+            selectedSize
+        );
+
+    }else{
+
+        sizeTitle.style.display =
+            "none";
+
+        sizesContainer.style.display =
+            "none";
+
+    }
+
 
     document
         .getElementById("productModal")
@@ -920,31 +1485,52 @@ function openProduct(name,price,colors,sizes){
    OPTIONS
 ========================= */
 
-function renderOptions(id,options,selected){
+function renderOptions(
+    id,
+    options,
+    selected
+){
 
     const container =
         document.getElementById(id);
 
+
     container.innerHTML = "";
+
 
     options.forEach(option => {
 
         const button =
             document.createElement("button");
 
+
         button.className =
             "option" +
-            (option === selected ? " selected" : "");
+            (
+                option === selected
+                    ? " selected"
+                    : ""
+            );
 
-        button.innerText = option;
+
+        button.innerText =
+            option;
+
 
         button.onclick = () => {
 
             if(id === "colors"){
-                selectedColor = option;
+
+                selectedColor =
+                    option;
+
             }else{
-                selectedSize = option;
+
+                selectedSize =
+                    option;
+
             }
+
 
             renderOptions(
                 id,
@@ -953,6 +1539,7 @@ function renderOptions(id,options,selected){
             );
 
         };
+
 
         container.appendChild(button);
 
@@ -973,8 +1560,10 @@ function changeQuantity(value){
             currentQuantity + value
         );
 
+
     document.getElementById("quantity")
-        .innerText = currentQuantity;
+        .innerText =
+        currentQuantity;
 
 }
 
@@ -989,20 +1578,40 @@ function addToCart(){
         return;
     }
 
+
     cart.push({
-        name: currentProduct.name,
-        price: currentProduct.price,
-        color: selectedColor,
-        size: selectedSize,
-        quantity: currentQuantity
+
+        name:
+            currentProduct.name,
+
+        price:
+            currentProduct.price,
+
+        color:
+            selectedColor,
+
+        size:
+            selectedSize,
+
+        quantity:
+            currentQuantity
+
     });
+
 
     updateCartCount();
 
     closeModal();
 
-    if(tg && tg.HapticFeedback){
-        tg.HapticFeedback.impactOccurred("light");
+
+    if(
+        tg &&
+        tg.HapticFeedback
+    ){
+
+        tg.HapticFeedback
+            .impactOccurred("light");
+
     }
 
 }
@@ -1016,12 +1625,15 @@ function updateCartCount(){
 
     const count =
         cart.reduce(
-            (sum,item) => sum + item.quantity,
+            (sum,item) =>
+                sum + item.quantity,
             0
         );
 
+
     document.getElementById("cartCount")
-        .innerText = count;
+        .innerText =
+        count;
 
 }
 
@@ -1033,6 +1645,7 @@ function updateCartCount(){
 function openCart(){
 
     renderCart();
+
 
     document
         .getElementById("cartModal")
@@ -1055,88 +1668,131 @@ function renderCart(){
     const container =
         document.getElementById("cartItems");
 
+
     container.innerHTML = "";
+
 
     if(!cart.length){
 
         container.innerHTML =
-            '<div class="empty">Your cart is empty.</div>';
+            '<div class="empty">Корзина пуста.</div>';
+
 
         document.getElementById("cartTotal")
-            .innerText = "0";
+            .innerText =
+            "0";
+
 
         return;
+
     }
+
 
     let total = 0;
 
-    cart.forEach((item,index) => {
 
-        total +=
-            item.price * item.quantity;
+    cart.forEach(
+        (item,index) => {
 
-        const element =
-            document.createElement("div");
+            total +=
+                item.price *
+                item.quantity;
 
-        element.className = "cart-item";
 
-        element.innerHTML = `
+            const element =
+                document.createElement("div");
 
-            <div class="cart-item-head">
 
-                <div>
+            element.className =
+                "cart-item";
 
-                    <div class="cart-item-name">
-                        ${escapeHtml(item.name)}
+
+            element.innerHTML = `
+
+                <div class="cart-item-head">
+
+                    <div>
+
+                        <div class="cart-item-name">
+                            ${escapeHtml(item.name)}
+                        </div>
+
+                        <div class="cart-item-details">
+
+                            ${
+                                item.color
+                                    ? `Цвет: ${escapeHtml(item.color)}<br>`
+                                    : ""
+                            }
+
+                            ${
+                                item.size
+                                    ? `Размер: ${escapeHtml(item.size)}<br>`
+                                    : ""
+                            }
+
+                            Количество: ${item.quantity}
+
+                        </div>
+
                     </div>
 
-                    <div class="cart-item-details">
-                        Color: ${escapeHtml(item.color)}<br>
-                        Size: ${escapeHtml(item.size)}
+
+                    <div class="cart-item-price">
+
+                        ${formatPrice(
+                            item.price *
+                            item.quantity
+                        )} ₽
+
                     </div>
 
                 </div>
 
-                <div class="cart-item-price">
-                    €${item.price * item.quantity}
-                </div>
 
-            </div>
+                <div class="cart-controls">
 
-            <div class="cart-controls">
+                    <div class="cart-quantity">
 
-                <div class="cart-quantity">
+                        <button
+                            onclick="changeCartQuantity(${index},-1)">
+                            −
+                        </button>
 
-                    <button onclick="changeCartQuantity(${index},-1)">
-                        −
+                        <span>
+                            ${item.quantity}
+                        </span>
+
+                        <button
+                            onclick="changeCartQuantity(${index},1)">
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="remove-button"
+                        onclick="removeFromCart(${index})">
+
+                        Удалить
+
                     </button>
 
-                    <span>
-                        ${item.quantity}
-                    </span>
-
-                    <button onclick="changeCartQuantity(${index},1)">
-                        +
-                    </button>
-
                 </div>
 
-                <button
-                    class="remove-button"
-                    onclick="removeFromCart(${index})">
-                    Remove
-                </button>
+            `;
 
-            </div>
 
-        `;
+            container.appendChild(element);
 
-        container.appendChild(element);
+        }
+    );
 
-    });
 
     document.getElementById("cartTotal")
-        .innerText = total;
+        .innerText =
+        formatPrice(total);
 
 }
 
@@ -1145,17 +1801,26 @@ function renderCart(){
    CART QUANTITY
 ========================= */
 
-function changeCartQuantity(index,value){
+function changeCartQuantity(
+    index,
+    value
+){
 
     if(!cart[index]){
         return;
     }
 
-    cart[index].quantity += value;
+
+    cart[index].quantity +=
+        value;
+
 
     if(cart[index].quantity <= 0){
+
         cart.splice(index,1);
+
     }
+
 
     updateCartCount();
 
@@ -1174,7 +1839,9 @@ function removeFromCart(index){
         return;
     }
 
+
     cart.splice(index,1);
+
 
     updateCartCount();
 
@@ -1191,18 +1858,26 @@ function checkout(){
 
     if(!cart.length){
 
-        alert("Your cart is empty.");
+        alert(
+            "Корзина пуста."
+        );
 
         return;
+
     }
+
 
     closeCart();
 
     renderCheckout();
 
+
     document
         .getElementById("checkoutModal")
         .classList.add("active");
+
+
+    fillTelegramUser();
 
 }
 
@@ -1214,48 +1889,80 @@ function checkout(){
 function renderCheckout(){
 
     const summary =
-        document.getElementById("checkoutSummary");
+        document.getElementById(
+            "checkoutSummary"
+        );
+
 
     summary.innerHTML = "";
 
+
     let total = 0;
+
 
     cart.forEach(item => {
 
         const itemTotal =
-            item.price * item.quantity;
+            item.price *
+            item.quantity;
+
 
         total += itemTotal;
+
 
         const element =
             document.createElement("div");
 
-        element.className = "summary-item";
+
+        element.className =
+            "summary-item";
+
 
         element.innerHTML = `
 
             <div class="summary-name">
+
                 ${escapeHtml(item.name)}
+
             </div>
+
 
             <div class="summary-details">
-                Color: ${escapeHtml(item.color)}<br>
-                Size: ${escapeHtml(item.size)}<br>
-                Quantity: ${item.quantity}
+
+                ${
+                    item.color
+                        ? `Цвет: ${escapeHtml(item.color)}<br>`
+                        : ""
+                }
+
+                ${
+                    item.size
+                        ? `Размер: ${escapeHtml(item.size)}<br>`
+                        : ""
+                }
+
+                Количество: ${item.quantity}
+
             </div>
 
+
             <div class="summary-price">
-                €${itemTotal}
+
+                ${formatPrice(itemTotal)} ₽
+
             </div>
 
         `;
+
 
         summary.appendChild(element);
 
     });
 
+
     document.getElementById("checkoutTotal")
-        .innerText = total;
+        .innerText =
+        formatPrice(total);
 
 }
 
@@ -1266,19 +1973,30 @@ function renderCheckout(){
 
 function fillTelegramUser(){
 
-    if(!tg || !tg.initDataUnsafe){
+    if(
+        !tg ||
+        !tg.initDataUnsafe
+    ){
+
         return;
+
     }
+
 
     const user =
         tg.initDataUnsafe.user;
+
 
     if(!user){
         return;
     }
 
+
     const telegramInput =
-        document.getElementById("customerTelegram");
+        document.getElementById(
+            "customerTelegram"
+        );
+
 
     if(
         user.username &&
@@ -1286,16 +2004,24 @@ function fillTelegramUser(){
     ){
 
         telegramInput.value =
-            "@" + user.username;
+            "@" +
+            user.username;
 
     }
 
+
     const nameInput =
-        document.getElementById("customerName");
+        document.getElementById(
+            "customerName"
+        );
+
 
     if(
         !nameInput.value &&
-        (user.first_name || user.last_name)
+        (
+            user.first_name ||
+            user.last_name
+        )
     ){
 
         nameInput.value =
@@ -1315,14 +2041,23 @@ function fillTelegramUser(){
    VALIDATION
 ========================= */
 
-function showCheckoutError(message){
+function showCheckoutError(
+    message
+){
 
     const error =
-        document.getElementById("checkoutError");
+        document.getElementById(
+            "checkoutError"
+        );
 
-    error.innerText = message;
 
-    error.classList.add("active");
+    error.innerText =
+        message;
+
+
+    error.classList.add(
+        "active"
+    );
 
 }
 
@@ -1330,11 +2065,18 @@ function showCheckoutError(message){
 function clearCheckoutError(){
 
     const error =
-        document.getElementById("checkoutError");
+        document.getElementById(
+            "checkoutError"
+        );
 
-    error.innerText = "";
 
-    error.classList.remove("active");
+    error.innerText =
+        "";
+
+
+    error.classList.remove(
+        "active"
+    );
 
 }
 
@@ -1347,151 +2089,210 @@ async function placeOrder(){
 
     clearCheckoutError();
 
+
     if(!cart.length){
 
         showCheckoutError(
-            "Your cart is empty."
+            "Корзина пуста."
         );
 
         return;
+
     }
 
+
     const name =
-        document.getElementById("customerName")
-            .value.trim();
+        document.getElementById(
+            "customerName"
+        ).value.trim();
+
 
     const telegram =
-        document.getElementById("customerTelegram")
-            .value.trim();
+        document.getElementById(
+            "customerTelegram"
+        ).value.trim();
+
 
     const phone =
-        document.getElementById("customerPhone")
-            .value.trim();
+        document.getElementById(
+            "customerPhone"
+        ).value.trim();
+
 
     const city =
-        document.getElementById("customerCity")
-            .value.trim();
+        document.getElementById(
+            "customerCity"
+        ).value.trim();
+
 
     const delivery =
-        document.getElementById("deliveryMethod")
-            .value;
+        document.getElementById(
+            "deliveryMethod"
+        ).value;
+
 
     const comment =
-        document.getElementById("customerComment")
-            .value.trim();
+        document.getElementById(
+            "customerComment"
+        ).value.trim();
 
 
     if(!name){
 
         showCheckoutError(
-            "Please enter your name."
+            "Введите имя."
         );
 
         return;
+
     }
+
 
     if(!phone){
 
         showCheckoutError(
-            "Please enter your phone number."
+            "Введите номер телефона."
         );
 
         return;
+
     }
+
 
     if(!city){
 
         showCheckoutError(
-            "Please enter your city."
+            "Введите город."
         );
 
         return;
+
     }
+
 
     if(!delivery){
 
         showCheckoutError(
-            "Please select a delivery method."
+            "Выберите способ доставки."
         );
 
         return;
+
     }
 
 
     let total = 0;
 
+
     cart.forEach(item => {
 
         total +=
-            item.price * item.quantity;
+            item.price *
+            item.quantity;
 
     });
 
 
     const telegramUser =
-        tg?.initDataUnsafe?.user || null;
+        tg?.initDataUnsafe?.user ||
+        null;
+
+
+    const orderId =
+        generateOrderId();
 
 
     const order = {
 
-        type: "LNC_COLLECTION_ORDER",
+        type:
+            "LNC_COLLECTION_ORDER",
+
+        orderId:
+            orderId,
 
         created_at:
             new Date().toISOString(),
 
         customer: {
 
-            name: name,
+            name:
+                name,
 
             telegram:
-                telegram || null,
+                telegram ||
+                null,
 
-            phone: phone,
+            phone:
+                phone,
 
-            city: city,
+            city:
+                city,
 
-            delivery: delivery,
+            delivery:
+                delivery,
 
             comment:
-                comment || null
+                comment ||
+                null
 
         },
 
-        telegram_user: telegramUser ? {
 
-            id: telegramUser.id,
+        telegram_user:
+            telegramUser
+                ? {
 
-            username:
-                telegramUser.username || null,
+                    id:
+                        telegramUser.id,
 
-            first_name:
-                telegramUser.first_name || null,
+                    username:
+                        telegramUser.username ||
+                        null,
 
-            last_name:
-                telegramUser.last_name || null
+                    first_name:
+                        telegramUser.first_name ||
+                        null,
 
-        } : null,
+                    last_name:
+                        telegramUser.last_name ||
+                        null
 
-        items: cart.map(item => ({
+                }
+                : null,
 
-            name: item.name,
 
-            price: item.price,
+        items:
+            cart.map(item => ({
 
-            color: item.color,
+                name:
+                    item.name,
 
-            size: item.size,
+                price:
+                    item.price,
 
-            quantity: item.quantity,
+                color:
+                    item.color ||
+                    null,
 
-            subtotal:
-                item.price * item.quantity
+                size:
+                    item.size ||
+                    null,
 
-        })),
+                quantity:
+                    item.quantity,
 
-        total: total,
+                subtotal:
+                    item.price *
+                    item.quantity
 
-        currency: "EUR"
+            })),
+
+
+        total:
+            total,
+
+        currency:
+            "RUB"
 
     };
 
@@ -1500,98 +2301,165 @@ async function placeOrder(){
         JSON.stringify(order);
 
 
-    /*
-       Telegram sendData has a size limit.
-       We keep the payload compact.
-    */
-
     if(orderData.length > 4096){
 
         showCheckoutError(
-            "The order is too large. Please reduce the number of items."
+            "Заказ слишком большой. Уменьшите количество товаров."
         );
 
         return;
+
     }
 
 
-    /*
-       Telegram WebApp sendData.
-       This works when the Mini App is launched
-       in a context where Telegram supports sendData().
-   /*
-       Send order to Cloudflare Worker.
-       Telegram Bot Token stays safely on the server.
-    */
-
-    const WORKER_URL =
-        "https://Inc-telegram-bot.vervixproducer.workers.dev/";
-
-    try {
-
-        const response = await fetch(
-            WORKER_URL,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: orderData
-            }
+    const button =
+        document.querySelector(
+            ".place-order"
         );
+
+
+    if(button){
+
+        button.disabled =
+            true;
+
+        button.innerText =
+            "ОТПРАВКА...";
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        orderData
+
+                }
+            );
+
 
         const result =
             await response.json();
 
-        if(!response.ok || !result.success){
+
+        console.log(
+            "Cloudflare response:",
+            result
+        );
+
+
+        if(
+            !response.ok ||
+            !result.success
+        ){
 
             console.error(
                 "Worker error:",
                 result
             );
 
+
             showCheckoutError(
-                "Order could not be sent. Please try again."
+                "Не удалось отправить заказ. Попробуйте ещё раз."
             );
 
+
+            if(button){
+
+                button.disabled =
+                    false;
+
+                button.innerText =
+                    "ПОДТВЕРДИТЬ ЗАКАЗ";
+
+            }
+
+
             return;
+
         }
 
-        console.log(
-            "Order successfully sent:",
-            result
+
+        showSuccessScreen(
+            orderId
         );
 
-        showSuccessScreen();
 
-    } catch(error){
+    }catch(error){
 
         console.error(
             "Order request error:",
             error
         );
 
+
         showCheckoutError(
-            "Connection error. Please try again."
+            "Ошибка соединения. Попробуйте ещё раз."
         );
 
+
+        if(button){
+
+            button.disabled =
+                false;
+
+            button.innerText =
+                "ПОДТВЕРДИТЬ ЗАКАЗ";
+
+        }
+
     }
+
+}
+
 
 /* =========================
    SUCCESS
 ========================= */
 
-function showSuccessScreen(){
+function showSuccessScreen(
+    orderId
+){
 
     document
-        .getElementById("checkoutFormContainer")
-        .style.display = "none";
+        .getElementById(
+            "checkoutFormContainer"
+        )
+        .style.display =
+        "none";
+
 
     document
-        .getElementById("successScreen")
-        .classList.add("active");
+        .getElementById(
+            "successScreen"
+        )
+        .classList.add(
+            "active"
+        );
+
+
+    document
+        .getElementById(
+            "successOrderNumber"
+        )
+        .innerText =
+        "Номер заказа: " +
+        orderId;
 
 }
 
@@ -1603,33 +2471,76 @@ function showSuccessScreen(){
 function finishCheckout(){
 
     document
-        .getElementById("checkoutModal")
-        .classList.remove("active");
+        .getElementById(
+            "checkoutModal"
+        )
+        .classList.remove(
+            "active"
+        );
+
 
     document
-        .getElementById("checkoutFormContainer")
-        .style.display = "block";
+        .getElementById(
+            "checkoutFormContainer"
+        )
+        .style.display =
+        "block";
+
 
     document
-        .getElementById("successScreen")
-        .classList.remove("active");
+        .getElementById(
+            "successScreen"
+        )
+        .classList.remove(
+            "active"
+        );
+
 
     document
-        .getElementById("checkoutError")
-        .classList.remove("active");
+        .getElementById(
+            "checkoutError"
+        )
+        .classList.remove(
+            "active"
+        );
+
+
+    const button =
+        document.querySelector(
+            ".place-order"
+        );
+
+
+    if(button){
+
+        button.disabled =
+            false;
+
+        button.innerText =
+            "ПОДТВЕРДИТЬ ЗАКАЗ";
+
+    }
+
 
     cart = [];
 
+
     updateCartCount();
 
-    document.getElementById("customerPhone")
-        .value = "";
 
-    document.getElementById("customerCity")
-        .value = "";
+    document.getElementById(
+        "customerPhone"
+    ).value = "";
 
-    document.getElementById("customerComment")
-        .value = "";
+
+    document.getElementById(
+        "customerCity"
+    ).value = "";
+
+
+    document.getElementById(
+        "customerComment"
+    ).value = "";
 
 }
 
@@ -1641,50 +2552,62 @@ function finishCheckout(){
 function closeCheckout(){
 
     document
-        .getElementById("checkoutModal")
-        .classList.remove("active");
+        .getElementById(
+            "checkoutModal"
+        )
+        .classList.remove(
+            "active"
+        );
 
 }
 
 
 /* =========================
-   CLOSE MODALS
+   CLOSE PRODUCT
 ========================= */
 
 function closeModal(){
 
     document
-        .getElementById("productModal")
-        .classList.remove("active");
+        .getElementById(
+            "productModal"
+        )
+        .classList.remove(
+            "active"
+        );
 
 }
 
 
 /* =========================
-   AUTO TELEGRAM DATA
-========================= */
-
-fillTelegramUser();
-
-
-/* =========================
-   ESC KEY
+   ESC
 ========================= */
 
 document.addEventListener(
     "keydown",
     function(event){
 
-        if(event.key !== "Escape"){
-            return;
-        }
+        if(
+            event.key === "Escape"
+        ){
 
-        closeModal();
-        closeCart();
-        closeCheckout();
+            closeModal();
+
+            closeCart();
+
+            closeCheckout();
+
+        }
 
     }
 );
+
+
+/* =========================
+   INIT
+========================= */
+
+fillTelegramUser();
 
 </script>
 
