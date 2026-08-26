@@ -4,149 +4,1670 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>LNC COLLECTION</title>
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif;min-height:100vh}
-button{font-family:inherit}
-.app{max-width:600px;margin:0 auto;padding-bottom:110px}
-.header{padding:22px 18px 10px;text-align:center}
-.logo{width:180px;max-width:70%;height:auto;display:block;margin:0 auto 20px}
-.subtitle{color:#999;font-size:12px;letter-spacing:3px;text-transform:uppercase}
-.hero{margin:20px 16px 30px;padding:28px 20px;border:1px solid #222;background:radial-gradient(circle at 50% 0%,#242424 0%,#080808 55%);text-align:center}
-.hero h1{font-size:30px;letter-spacing:2px;margin-bottom:8px}
-.hero p{color:#999;font-size:13px;line-height:1.5}
-.drop{padding:0 16px;margin-bottom:38px}
-.drop-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
-.drop-title h2{font-size:20px;letter-spacing:1px}
-.drop-title span{color:#777;font-size:11px;letter-spacing:2px}
-.products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.product{background:#0d0d0d;border:1px solid #202020;overflow:hidden;cursor:pointer;transition:.2s}
-.product:active{transform:scale(.98)}
-.product-image{width:100%;aspect-ratio:1/1.15;background:linear-gradient(135deg,#181818,#050505);display:flex;align-items:center;justify-content:center;color:#555;font-size:11px;text-align:center;padding:15px}
-.product-info{padding:12px}
-.product-name{font-size:14px;margin-bottom:6px;line-height:1.3}
-.product-price{color:#aaa;font-size:13px}
-.cart-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:600px;padding:12px 16px 18px;background:rgba(5,5,5,.95);border-top:1px solid #222;backdrop-filter:blur(10px);z-index:10}
-.cart-button{width:100%;padding:16px;background:#fff;color:#000;border:none;font-size:14px;font-weight:bold;letter-spacing:1px;cursor:pointer}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:flex-end;justify-content:center;z-index:100}
-.modal.active{display:flex}
-.modal-content{width:100%;max-width:600px;max-height:90vh;overflow-y:auto;background:#0b0b0b;border-top:1px solid #333;padding:22px}
-.modal-close{text-align:right;color:#777;font-size:25px;cursor:pointer;margin-bottom:10px}
-.modal h2{font-size:22px;margin-bottom:8px}
-.modal-price{color:#aaa;margin-bottom:25px}
-.option-title{color:#888;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;margin-top:20px}
-.options{display:flex;flex-wrap:wrap;gap:8px}
-.option{padding:11px 16px;background:#111;color:#fff;border:1px solid #333;cursor:pointer}
-.option.selected{background:#fff;color:#000;border-color:#fff}
-.quantity{display:flex;align-items:center;gap:20px}
-.quantity button{width:42px;height:42px;background:#111;border:1px solid #333;color:#fff;font-size:20px;cursor:pointer}
-.quantity span{font-size:18px}
-.add-button,.checkout{width:100%;margin-top:28px;padding:16px;background:#fff;color:#000;border:none;font-weight:bold;cursor:pointer;letter-spacing:1px}
-.cart-item{padding:15px 0;border-bottom:1px solid #222}
-.cart-item-name{font-size:15px;margin-bottom:6px}
-.cart-item-details{color:#888;font-size:12px;line-height:1.7}
-.total{display:flex;justify-content:space-between;margin-top:20px;font-size:18px}
-.empty{color:#777;text-align:center;padding:30px 0}
-@media(max-width:380px){.products{gap:8px}.product-info{padding:10px}.product-name{font-size:13px}}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0
+}
+
+body{
+    background:#050505;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit
+}
+
+button{
+    -webkit-tap-highlight-color:transparent
+}
+
+.app{
+    max-width:600px;
+    margin:0 auto;
+    padding-bottom:110px
+}
+
+.header{
+    padding:22px 18px 10px;
+    text-align:center
+}
+
+.logo{
+    width:180px;
+    max-width:70%;
+    height:auto;
+    display:block;
+    margin:0 auto 20px
+}
+
+.subtitle{
+    color:#999;
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase
+}
+
+.hero{
+    margin:20px 16px 30px;
+    padding:28px 20px;
+    border:1px solid #222;
+    background:radial-gradient(circle at 50% 0%,#242424 0%,#080808 55%);
+    text-align:center
+}
+
+.hero h1{
+    font-size:30px;
+    letter-spacing:2px;
+    margin-bottom:8px
+}
+
+.hero p{
+    color:#999;
+    font-size:13px;
+    line-height:1.5
+}
+
+.drop{
+    padding:0 16px;
+    margin-bottom:38px
+}
+
+.drop-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:15px
+}
+
+.drop-title h2{
+    font-size:20px;
+    letter-spacing:1px
+}
+
+.drop-title span{
+    color:#777;
+    font-size:11px;
+    letter-spacing:2px
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px
+}
+
+.product{
+    background:#0d0d0d;
+    border:1px solid #202020;
+    overflow:hidden;
+    cursor:pointer;
+    transition:.2s
+}
+
+.product:active{
+    transform:scale(.98)
+}
+
+.product-image{
+    width:100%;
+    aspect-ratio:1/1.15;
+    background:linear-gradient(135deg,#181818,#050505);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#555;
+    font-size:11px;
+    text-align:center;
+    padding:15px
+}
+
+.product-info{
+    padding:12px
+}
+
+.product-name{
+    font-size:14px;
+    margin-bottom:6px;
+    line-height:1.3
+}
+
+.product-price{
+    color:#aaa;
+    font-size:13px
+}
+
+.cart-bar{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    padding:12px 16px 18px;
+    background:rgba(5,5,5,.95);
+    border-top:1px solid #222;
+    backdrop-filter:blur(10px);
+    z-index:10
+}
+
+.cart-button{
+    width:100%;
+    padding:16px;
+    background:#fff;
+    color:#000;
+    border:none;
+    font-size:14px;
+    font-weight:bold;
+    letter-spacing:1px;
+    cursor:pointer
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.8);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:100
+}
+
+.modal.active{
+    display:flex
+}
+
+.modal-content{
+    width:100%;
+    max-width:600px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#0b0b0b;
+    border-top:1px solid #333;
+    padding:22px
+}
+
+.modal-close{
+    text-align:right;
+    color:#777;
+    font-size:25px;
+    cursor:pointer;
+    margin-bottom:10px
+}
+
+.modal h2{
+    font-size:22px;
+    margin-bottom:8px
+}
+
+.modal-price{
+    color:#aaa;
+    margin-bottom:25px
+}
+
+.option-title{
+    color:#888;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:10px;
+    margin-top:20px
+}
+
+.options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px
+}
+
+.option{
+    padding:11px 16px;
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+    cursor:pointer
+}
+
+.option.selected{
+    background:#fff;
+    color:#000;
+    border-color:#fff
+}
+
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:20px
+}
+
+.quantity button{
+    width:42px;
+    height:42px;
+    background:#111;
+    border:1px solid #333;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer
+}
+
+.quantity span{
+    font-size:18px;
+    min-width:20px;
+    text-align:center
+}
+
+.add-button,
+.checkout,
+.place-order{
+    width:100%;
+    margin-top:28px;
+    padding:16px;
+    background:#fff;
+    color:#000;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+    letter-spacing:1px
+}
+
+.cart-item{
+    padding:16px 0;
+    border-bottom:1px solid #222
+}
+
+.cart-item-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px
+}
+
+.cart-item-name{
+    font-size:15px;
+    margin-bottom:6px
+}
+
+.cart-item-price{
+    font-size:14px;
+    color:#fff;
+    white-space:nowrap
+}
+
+.cart-item-details{
+    color:#888;
+    font-size:12px;
+    line-height:1.7
+}
+
+.cart-controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:12px
+}
+
+.cart-quantity{
+    display:flex;
+    align-items:center;
+    gap:10px
+}
+
+.cart-quantity button{
+    width:30px;
+    height:30px;
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+    cursor:pointer;
+    font-size:16px
+}
+
+.cart-quantity span{
+    min-width:20px;
+    text-align:center;
+    font-size:13px
+}
+
+.remove-button{
+    background:none;
+    border:none;
+    color:#666;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    cursor:pointer
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    font-size:18px
+}
+
+.empty{
+    color:#777;
+    text-align:center;
+    padding:30px 0
+}
+
+/* CHECKOUT */
+
+.checkout-section{
+    margin-top:24px
+}
+
+.checkout-label{
+    display:block;
+    color:#888;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:8px
+}
+
+.checkout-input,
+.checkout-select,
+.checkout-textarea{
+    width:100%;
+    background:#111;
+    border:1px solid #333;
+    color:#fff;
+    padding:14px;
+    font-size:14px;
+    outline:none;
+    border-radius:0
+}
+
+.checkout-input:focus,
+.checkout-select:focus,
+.checkout-textarea:focus{
+    border-color:#777
+}
+
+.checkout-input::placeholder,
+.checkout-textarea::placeholder{
+    color:#555
+}
+
+.checkout-textarea{
+    min-height:90px;
+    resize:vertical
+}
+
+.form-group{
+    margin-bottom:18px
+}
+
+.checkout-title{
+    font-size:22px;
+    margin-bottom:6px
+}
+
+.checkout-subtitle{
+    color:#777;
+    font-size:12px;
+    line-height:1.5;
+    margin-bottom:22px
+}
+
+.checkout-summary{
+    background:#101010;
+    border:1px solid #222;
+    padding:15px;
+    margin-top:10px
+}
+
+.summary-item{
+    padding:10px 0;
+    border-bottom:1px solid #222;
+    font-size:13px;
+    line-height:1.6
+}
+
+.summary-item:last-child{
+    border-bottom:none
+}
+
+.summary-name{
+    color:#fff;
+    font-size:14px;
+    margin-bottom:3px
+}
+
+.summary-details{
+    color:#777;
+    font-size:11px
+}
+
+.summary-price{
+    color:#aaa;
+    margin-top:3px
+}
+
+.checkout-total{
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+    padding-top:15px;
+    border-top:1px solid #333;
+    font-size:17px
+}
+
+.required{
+    color:#777
+}
+
+.error-message{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    border:1px solid #444;
+    background:#151515;
+    color:#aaa;
+    font-size:12px;
+    line-height:1.5
+}
+
+.error-message.active{
+    display:block
+}
+
+.success-screen{
+    display:none;
+    text-align:center;
+    padding:40px 10px 25px
+}
+
+.success-screen.active{
+    display:block
+}
+
+.success-icon{
+    font-size:42px;
+    margin-bottom:18px
+}
+
+.success-screen h2{
+    font-size:24px;
+    margin-bottom:10px
+}
+
+.success-screen p{
+    color:#888;
+    font-size:13px;
+    line-height:1.6
+}
+
+.back-button{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    background:#111;
+    border:1px solid #333;
+    color:#fff;
+    cursor:pointer;
+    letter-spacing:1px;
+    font-weight:bold
+}
+
+@media(max-width:380px){
+    .products{
+        gap:8px
+    }
+
+    .product-info{
+        padding:10px
+    }
+
+    .product-name{
+        font-size:13px
+    }
+}
 </style>
 </head>
+
 <body>
+
 <div class="app">
+
 <header class="header">
-<img src="logo.jpg" class="logo" alt="LNC COLLECTION">
-<div class="subtitle">Official Store</div>
+    <img src="logo.jpg" class="logo" alt="LNC COLLECTION">
+    <div class="subtitle">Official Store</div>
 </header>
 
 <section class="hero">
-<h1>LNC COLLECTION</h1>
-<p>Official clothing store.<br>Limited drops.</p>
+    <h1>LNC COLLECTION</h1>
+    <p>Official clothing store.<br>Limited drops.</p>
 </section>
 
 <section class="drop">
-<div class="drop-title"><h2>DROP 01</h2><span>03 ITEMS</span></div>
-<div class="products">
-<div class="product" onclick="openProduct('Black T-Shirt',40,['Black'],['S','M','L','XL'])">
-<div class="product-image">PRODUCT PHOTO</div>
-<div class="product-info"><div class="product-name">Black T-Shirt</div><div class="product-price">€40</div></div>
-</div>
-<div class="product" onclick="openProduct('White T-Shirt / Black Print',40,['White'],['S','M','L','XL'])">
-<div class="product-image">PRODUCT PHOTO</div>
-<div class="product-info"><div class="product-name">White T-Shirt</div><div class="product-price">€40</div></div>
-</div>
-<div class="product" onclick="openProduct('White T-Shirt / Blue Print',40,['White'],['S','M','L','XL'])">
-<div class="product-image">PRODUCT PHOTO</div>
-<div class="product-info"><div class="product-name">White T-Shirt / Blue Print</div><div class="product-price">€40</div></div>
-</div>
-</div>
+    <div class="drop-title">
+        <h2>DROP 01</h2>
+        <span>03 ITEMS</span>
+    </div>
+
+    <div class="products">
+
+        <div class="product"
+             onclick="openProduct('Black T-Shirt',40,['Black'],['S','M','L','XL'])">
+            <div class="product-image">PRODUCT PHOTO</div>
+            <div class="product-info">
+                <div class="product-name">Black T-Shirt</div>
+                <div class="product-price">€40</div>
+            </div>
+        </div>
+
+        <div class="product"
+             onclick="openProduct('White T-Shirt / Black Print',40,['White'],['S','M','L','XL'])">
+            <div class="product-image">PRODUCT PHOTO</div>
+            <div class="product-info">
+                <div class="product-name">White T-Shirt</div>
+                <div class="product-price">€40</div>
+            </div>
+        </div>
+
+        <div class="product"
+             onclick="openProduct('White T-Shirt / Blue Print',40,['White'],['S','M','L','XL'])">
+            <div class="product-image">PRODUCT PHOTO</div>
+            <div class="product-info">
+                <div class="product-name">White T-Shirt / Blue Print</div>
+                <div class="product-price">€40</div>
+            </div>
+        </div>
+
+    </div>
 </section>
 
 <section class="drop">
-<div class="drop-title"><h2>DROP 02</h2><span>02 ITEMS</span></div>
-<div class="products">
-<div class="product" onclick="openProduct('Black T-Shirt / White Print',40,['Black'],['S','M','L','XL'])">
-<div class="product-image">PRODUCT PHOTO</div>
-<div class="product-info"><div class="product-name">Black T-Shirt</div><div class="product-price">€40</div></div>
-</div>
-<div class="product" onclick="openProduct('Black Zip Hoodie / White Print',70,['Black'],['S','M','L','XL'])">
-<div class="product-image">PRODUCT PHOTO</div>
-<div class="product-info"><div class="product-name">Black Zip Hoodie</div><div class="product-price">€70</div></div>
-</div>
-</div>
+
+    <div class="drop-title">
+        <h2>DROP 02</h2>
+        <span>02 ITEMS</span>
+    </div>
+
+    <div class="products">
+
+        <div class="product"
+             onclick="openProduct('Black T-Shirt / White Print',40,['Black'],['S','M','L','XL'])">
+            <div class="product-image">PRODUCT PHOTO</div>
+            <div class="product-info">
+                <div class="product-name">Black T-Shirt</div>
+                <div class="product-price">€40</div>
+            </div>
+        </div>
+
+        <div class="product"
+             onclick="openProduct('Black Zip Hoodie / White Print',70,['Black'],['S','M','L','XL'])">
+            <div class="product-image">PRODUCT PHOTO</div>
+            <div class="product-info">
+                <div class="product-name">Black Zip Hoodie</div>
+                <div class="product-price">€70</div>
+            </div>
+        </div>
+
+    </div>
 </section>
+
 </div>
 
-<div class="cart-bar"><button class="cart-button" onclick="openCart()">🛍 CART (<span id="cartCount">0</span>)</button></div>
 
-<div class="modal" id="productModal"><div class="modal-content">
-<div class="modal-close" onclick="closeModal()">×</div>
-<h2 id="modalName"></h2><div class="modal-price">€<span id="modalPrice"></span></div>
-<div class="option-title">Color</div><div class="options" id="colors"></div>
-<div class="option-title">Size</div><div class="options" id="sizes"></div>
-<div class="option-title">Quantity</div>
-<div class="quantity"><button onclick="changeQuantity(-1)">−</button><span id="quantity">1</span><button onclick="changeQuantity(1)">+</button></div>
-<button class="add-button" onclick="addToCart()">ADD TO CART</button>
-</div></div>
+<!-- CART BAR -->
 
-<div class="modal" id="cartModal"><div class="modal-content">
-<div class="modal-close" onclick="closeCart()">×</div>
-<h2>Your Cart</h2><div id="cartItems"></div>
-<div class="total"><span>Total</span><strong>€<span id="cartTotal">0</span></strong></div>
-<button class="checkout" onclick="checkout()">CHECKOUT</button>
-</div></div>
+<div class="cart-bar">
+    <button class="cart-button" onclick="openCart()">
+        🛍 CART (<span id="cartCount">0</span>)
+    </button>
+</div>
+
+
+<!-- PRODUCT MODAL -->
+
+<div class="modal" id="productModal">
+
+    <div class="modal-content">
+
+        <div class="modal-close" onclick="closeModal()">×</div>
+
+        <h2 id="modalName"></h2>
+
+        <div class="modal-price">
+            €<span id="modalPrice"></span>
+        </div>
+
+        <div class="option-title">Color</div>
+        <div class="options" id="colors"></div>
+
+        <div class="option-title">Size</div>
+        <div class="options" id="sizes"></div>
+
+        <div class="option-title">Quantity</div>
+
+        <div class="quantity">
+            <button onclick="changeQuantity(-1)">−</button>
+            <span id="quantity">1</span>
+            <button onclick="changeQuantity(1)">+</button>
+        </div>
+
+        <button class="add-button" onclick="addToCart()">
+            ADD TO CART
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- CART MODAL -->
+
+<div class="modal" id="cartModal">
+
+    <div class="modal-content">
+
+        <div class="modal-close" onclick="closeCart()">×</div>
+
+        <h2>Your Cart</h2>
+
+        <div id="cartItems"></div>
+
+        <div class="total">
+            <span>Total</span>
+            <strong>€<span id="cartTotal">0</span></strong>
+        </div>
+
+        <button class="checkout" onclick="checkout()">
+            CHECKOUT
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- CHECKOUT MODAL -->
+
+<div class="modal" id="checkoutModal">
+
+    <div class="modal-content">
+
+        <div class="modal-close" onclick="closeCheckout()">×</div>
+
+        <div id="checkoutFormContainer">
+
+            <h2 class="checkout-title">Checkout</h2>
+
+            <div class="checkout-subtitle">
+                Please enter your contact and delivery information.
+            </div>
+
+            <div class="checkout-section">
+
+                <div class="form-group">
+                    <label class="checkout-label">
+                        Name <span class="required">*</span>
+                    </label>
+
+                    <input
+                        id="customerName"
+                        class="checkout-input"
+                        type="text"
+                        placeholder="Your name"
+                        autocomplete="name">
+                </div>
+
+                <div class="form-group">
+                    <label class="checkout-label">
+                        Telegram
+                    </label>
+
+                    <input
+                        id="customerTelegram"
+                        class="checkout-input"
+                        type="text"
+                        placeholder="@username">
+                </div>
+
+                <div class="form-group">
+                    <label class="checkout-label">
+                        Phone <span class="required">*</span>
+                    </label>
+
+                    <input
+                        id="customerPhone"
+                        class="checkout-input"
+                        type="tel"
+                        placeholder="+49 ...">
+                </div>
+
+                <div class="form-group">
+                    <label class="checkout-label">
+                        City <span class="required">*</span>
+                    </label>
+
+                    <input
+                        id="customerCity"
+                        class="checkout-input"
+                        type="text"
+                        placeholder="Your city"
+                        autocomplete="address-level2">
+                </div>
+
+                <div class="form-group">
+                    <label class="checkout-label">
+                        Delivery <span class="required">*</span>
+                    </label>
+
+                    <select id="deliveryMethod" class="checkout-select">
+                        <option value="">Select delivery method</option>
+                        <option value="DHL">DHL</option>
+                        <option value="DPD">DPD</option>
+                        <option value="Pickup">Pickup</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkout-label">
+                        Comment
+                    </label>
+
+                    <textarea
+                        id="customerComment"
+                        class="checkout-textarea"
+                        placeholder="Additional information..."></textarea>
+                </div>
+
+            </div>
+
+
+            <div class="checkout-section">
+
+                <div class="option-title">
+                    Order Summary
+                </div>
+
+                <div class="checkout-summary" id="checkoutSummary"></div>
+
+                <div class="checkout-total">
+                    <span>Total</span>
+                    <strong>€<span id="checkoutTotal">0</span></strong>
+                </div>
+
+            </div>
+
+
+            <div id="checkoutError" class="error-message"></div>
+
+            <button class="place-order" onclick="placeOrder()">
+                PLACE ORDER
+            </button>
+
+        </div>
+
+
+        <div id="successScreen" class="success-screen">
+
+            <div class="success-icon">✓</div>
+
+            <h2>Order Ready</h2>
+
+            <p>
+                Your order has been prepared successfully.
+                Please wait for confirmation.
+            </p>
+
+            <button class="back-button" onclick="finishCheckout()">
+                CLOSE
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 <script>
-const tg=window.Telegram?.WebApp;
-if(tg){tg.ready();tg.expand();}
-let cart=[],currentProduct=null,selectedColor=null,selectedSize=null,currentQuantity=1;
+
+const tg = window.Telegram?.WebApp;
+
+if(tg){
+    tg.ready();
+    tg.expand();
+}
+
+let cart = [];
+
+let currentProduct = null;
+
+let selectedColor = null;
+
+let selectedSize = null;
+
+let currentQuantity = 1;
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   PRODUCT
+========================= */
 
 function openProduct(name,price,colors,sizes){
-currentProduct={name,price,colors,sizes};currentQuantity=1;
-document.getElementById("modalName").innerText=name;
-document.getElementById("modalPrice").innerText=price;
-document.getElementById("quantity").innerText=1;
-selectedColor=colors[0];selectedSize=sizes[0];
-renderOptions("colors",colors,selectedColor);renderOptions("sizes",sizes,selectedSize);
-document.getElementById("productModal").classList.add("active");
+
+    currentProduct = {
+        name,
+        price,
+        colors,
+        sizes
+    };
+
+    currentQuantity = 1;
+
+    document.getElementById("modalName").innerText = name;
+
+    document.getElementById("modalPrice").innerText = price;
+
+    document.getElementById("quantity").innerText = 1;
+
+    selectedColor = colors[0];
+
+    selectedSize = sizes[0];
+
+    renderOptions(
+        "colors",
+        colors,
+        selectedColor
+    );
+
+    renderOptions(
+        "sizes",
+        sizes,
+        selectedSize
+    );
+
+    document
+        .getElementById("productModal")
+        .classList.add("active");
+
 }
+
+
+/* =========================
+   OPTIONS
+========================= */
+
 function renderOptions(id,options,selected){
-const c=document.getElementById(id);c.innerHTML="";
-options.forEach(option=>{const b=document.createElement("button");b.className="option"+(option===selected?" selected":"");b.innerText=option;b.onclick=()=>{if(id==="colors")selectedColor=option;else selectedSize=option;renderOptions(id,options,option)};c.appendChild(b);});
+
+    const container =
+        document.getElementById(id);
+
+    container.innerHTML = "";
+
+    options.forEach(option => {
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "option" +
+            (option === selected ? " selected" : "");
+
+        button.innerText = option;
+
+        button.onclick = () => {
+
+            if(id === "colors"){
+                selectedColor = option;
+            }else{
+                selectedSize = option;
+            }
+
+            renderOptions(
+                id,
+                options,
+                option
+            );
+
+        };
+
+        container.appendChild(button);
+
+    });
+
 }
-function changeQuantity(v){currentQuantity=Math.max(1,currentQuantity+v);document.getElementById("quantity").innerText=currentQuantity}
-function addToCart(){cart.push({name:currentProduct.name,price:currentProduct.price,color:selectedColor,size:selectedSize,quantity:currentQuantity});updateCartCount();closeModal();if(tg)tg.HapticFeedback.impactOccurred("light")}
-function updateCartCount(){document.getElementById("cartCount").innerText=cart.reduce((s,i)=>s+i.quantity,0)}
-function openCart(){renderCart();document.getElementById("cartModal").classList.add("active")}
-function closeCart(){document.getElementById("cartModal").classList.remove("active")}
-function closeModal(){document.getElementById("productModal").classList.remove("active")}
+
+
+/* =========================
+   QUANTITY
+========================= */
+
+function changeQuantity(value){
+
+    currentQuantity =
+        Math.max(
+            1,
+            currentQuantity + value
+        );
+
+    document.getElementById("quantity")
+        .innerText = currentQuantity;
+
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addToCart(){
+
+    if(!currentProduct){
+        return;
+    }
+
+    cart.push({
+        name: currentProduct.name,
+        price: currentProduct.price,
+        color: selectedColor,
+        size: selectedSize,
+        quantity: currentQuantity
+    });
+
+    updateCartCount();
+
+    closeModal();
+
+    if(tg && tg.HapticFeedback){
+        tg.HapticFeedback.impactOccurred("light");
+    }
+
+}
+
+
+/* =========================
+   CART COUNT
+========================= */
+
+function updateCartCount(){
+
+    const count =
+        cart.reduce(
+            (sum,item) => sum + item.quantity,
+            0
+        );
+
+    document.getElementById("cartCount")
+        .innerText = count;
+
+}
+
+
+/* =========================
+   CART
+========================= */
+
+function openCart(){
+
+    renderCart();
+
+    document
+        .getElementById("cartModal")
+        .classList.add("active");
+
+}
+
+
+function closeCart(){
+
+    document
+        .getElementById("cartModal")
+        .classList.remove("active");
+
+}
+
+
 function renderCart(){
-const c=document.getElementById("cartItems");c.innerHTML="";
-if(!cart.length){c.innerHTML='<div class="empty">Your cart is empty.</div>';document.getElementById("cartTotal").innerText="0";return}
-let total=0;
-cart.forEach(i=>{total+=i.price*i.quantity;const e=document.createElement("div");e.className="cart-item";e.innerHTML=`<div class="cart-item-name">${i.name}</div><div class="cart-item-details">Color: ${i.color}<br>Size: ${i.size}<br>Quantity: ${i.quantity}<br>€${i.price*i.quantity}</div>`;c.appendChild(e)});
-document.getElementById("cartTotal").innerText=total;
+
+    const container =
+        document.getElementById("cartItems");
+
+    container.innerHTML = "";
+
+    if(!cart.length){
+
+        container.innerHTML =
+            '<div class="empty">Your cart is empty.</div>';
+
+        document.getElementById("cartTotal")
+            .innerText = "0";
+
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach((item,index) => {
+
+        total +=
+            item.price * item.quantity;
+
+        const element =
+            document.createElement("div");
+
+        element.className = "cart-item";
+
+        element.innerHTML = `
+
+            <div class="cart-item-head">
+
+                <div>
+
+                    <div class="cart-item-name">
+                        ${escapeHtml(item.name)}
+                    </div>
+
+                    <div class="cart-item-details">
+                        Color: ${escapeHtml(item.color)}<br>
+                        Size: ${escapeHtml(item.size)}
+                    </div>
+
+                </div>
+
+                <div class="cart-item-price">
+                    €${item.price * item.quantity}
+                </div>
+
+            </div>
+
+            <div class="cart-controls">
+
+                <div class="cart-quantity">
+
+                    <button onclick="changeCartQuantity(${index},-1)">
+                        −
+                    </button>
+
+                    <span>
+                        ${item.quantity}
+                    </span>
+
+                    <button onclick="changeCartQuantity(${index},1)">
+                        +
+                    </button>
+
+                </div>
+
+                <button
+                    class="remove-button"
+                    onclick="removeFromCart(${index})">
+                    Remove
+                </button>
+
+            </div>
+
+        `;
+
+        container.appendChild(element);
+
+    });
+
+    document.getElementById("cartTotal")
+        .innerText = total;
+
 }
-function checkout(){if(!cart.length){alert("Your cart is empty.");return}alert("Checkout will be connected in the next step.")}
+
+
+/* =========================
+   CART QUANTITY
+========================= */
+
+function changeCartQuantity(index,value){
+
+    if(!cart[index]){
+        return;
+    }
+
+    cart[index].quantity += value;
+
+    if(cart[index].quantity <= 0){
+        cart.splice(index,1);
+    }
+
+    updateCartCount();
+
+    renderCart();
+
+}
+
+
+/* =========================
+   REMOVE
+========================= */
+
+function removeFromCart(index){
+
+    if(!cart[index]){
+        return;
+    }
+
+    cart.splice(index,1);
+
+    updateCartCount();
+
+    renderCart();
+
+}
+
+
+/* =========================
+   CHECKOUT
+========================= */
+
+function checkout(){
+
+    if(!cart.length){
+
+        alert("Your cart is empty.");
+
+        return;
+    }
+
+    closeCart();
+
+    renderCheckout();
+
+    document
+        .getElementById("checkoutModal")
+        .classList.add("active");
+
+}
+
+
+/* =========================
+   RENDER CHECKOUT
+========================= */
+
+function renderCheckout(){
+
+    const summary =
+        document.getElementById("checkoutSummary");
+
+    summary.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        const itemTotal =
+            item.price * item.quantity;
+
+        total += itemTotal;
+
+        const element =
+            document.createElement("div");
+
+        element.className = "summary-item";
+
+        element.innerHTML = `
+
+            <div class="summary-name">
+                ${escapeHtml(item.name)}
+            </div>
+
+            <div class="summary-details">
+                Color: ${escapeHtml(item.color)}<br>
+                Size: ${escapeHtml(item.size)}<br>
+                Quantity: ${item.quantity}
+            </div>
+
+            <div class="summary-price">
+                €${itemTotal}
+            </div>
+
+        `;
+
+        summary.appendChild(element);
+
+    });
+
+    document.getElementById("checkoutTotal")
+        .innerText = total;
+
+}
+
+
+/* =========================
+   TELEGRAM USER
+========================= */
+
+function fillTelegramUser(){
+
+    if(!tg || !tg.initDataUnsafe){
+        return;
+    }
+
+    const user =
+        tg.initDataUnsafe.user;
+
+    if(!user){
+        return;
+    }
+
+    const telegramInput =
+        document.getElementById("customerTelegram");
+
+    if(
+        user.username &&
+        !telegramInput.value
+    ){
+
+        telegramInput.value =
+            "@" + user.username;
+
+    }
+
+    const nameInput =
+        document.getElementById("customerName");
+
+    if(
+        !nameInput.value &&
+        (user.first_name || user.last_name)
+    ){
+
+        nameInput.value =
+            [
+                user.first_name,
+                user.last_name
+            ]
+            .filter(Boolean)
+            .join(" ");
+
+    }
+
+}
+
+
+/* =========================
+   VALIDATION
+========================= */
+
+function showCheckoutError(message){
+
+    const error =
+        document.getElementById("checkoutError");
+
+    error.innerText = message;
+
+    error.classList.add("active");
+
+}
+
+
+function clearCheckoutError(){
+
+    const error =
+        document.getElementById("checkoutError");
+
+    error.innerText = "";
+
+    error.classList.remove("active");
+
+}
+
+
+/* =========================
+   PLACE ORDER
+========================= */
+
+function placeOrder(){
+
+    clearCheckoutError();
+
+    if(!cart.length){
+
+        showCheckoutError(
+            "Your cart is empty."
+        );
+
+        return;
+    }
+
+    const name =
+        document.getElementById("customerName")
+            .value.trim();
+
+    const telegram =
+        document.getElementById("customerTelegram")
+            .value.trim();
+
+    const phone =
+        document.getElementById("customerPhone")
+            .value.trim();
+
+    const city =
+        document.getElementById("customerCity")
+            .value.trim();
+
+    const delivery =
+        document.getElementById("deliveryMethod")
+            .value;
+
+    const comment =
+        document.getElementById("customerComment")
+            .value.trim();
+
+
+    if(!name){
+
+        showCheckoutError(
+            "Please enter your name."
+        );
+
+        return;
+    }
+
+    if(!phone){
+
+        showCheckoutError(
+            "Please enter your phone number."
+        );
+
+        return;
+    }
+
+    if(!city){
+
+        showCheckoutError(
+            "Please enter your city."
+        );
+
+        return;
+    }
+
+    if(!delivery){
+
+        showCheckoutError(
+            "Please select a delivery method."
+        );
+
+        return;
+    }
+
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        total +=
+            item.price * item.quantity;
+
+    });
+
+
+    const telegramUser =
+        tg?.initDataUnsafe?.user || null;
+
+
+    const order = {
+
+        type: "LNC_COLLECTION_ORDER",
+
+        created_at:
+            new Date().toISOString(),
+
+        customer: {
+
+            name: name,
+
+            telegram:
+                telegram || null,
+
+            phone: phone,
+
+            city: city,
+
+            delivery: delivery,
+
+            comment:
+                comment || null
+
+        },
+
+        telegram_user: telegramUser ? {
+
+            id: telegramUser.id,
+
+            username:
+                telegramUser.username || null,
+
+            first_name:
+                telegramUser.first_name || null,
+
+            last_name:
+                telegramUser.last_name || null
+
+        } : null,
+
+        items: cart.map(item => ({
+
+            name: item.name,
+
+            price: item.price,
+
+            color: item.color,
+
+            size: item.size,
+
+            quantity: item.quantity,
+
+            subtotal:
+                item.price * item.quantity
+
+        })),
+
+        total: total,
+
+        currency: "EUR"
+
+    };
+
+
+    const orderData =
+        JSON.stringify(order);
+
+
+    /*
+       Telegram sendData has a size limit.
+       We keep the payload compact.
+    */
+
+    if(orderData.length > 4096){
+
+        showCheckoutError(
+            "The order is too large. Please reduce the number of items."
+        );
+
+        return;
+    }
+
+
+    /*
+       Telegram WebApp sendData.
+       This works when the Mini App is launched
+       in a context where Telegram supports sendData().
+    */
+
+    if(
+        tg &&
+        typeof tg.sendData === "function"
+    ){
+
+        try{
+
+            tg.sendData(orderData);
+
+            showSuccessScreen();
+
+            return;
+
+        }catch(error){
+
+            console.error(
+                "Telegram sendData error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /*
+       If sendData is unavailable, keep the order
+       prepared locally and show a clear message.
+    */
+
+    window.lastLncOrder = order;
+
+    showCheckoutError(
+        "Telegram order transfer is not available in this launch mode yet. The checkout form is working, but the bot connection needs to be completed."
+    );
+
+}
+
+
+/* =========================
+   SUCCESS
+========================= */
+
+function showSuccessScreen(){
+
+    document
+        .getElementById("checkoutFormContainer")
+        .style.display = "none";
+
+    document
+        .getElementById("successScreen")
+        .classList.add("active");
+
+}
+
+
+/* =========================
+   FINISH
+========================= */
+
+function finishCheckout(){
+
+    document
+        .getElementById("checkoutModal")
+        .classList.remove("active");
+
+    document
+        .getElementById("checkoutFormContainer")
+        .style.display = "block";
+
+    document
+        .getElementById("successScreen")
+        .classList.remove("active");
+
+    document
+        .getElementById("checkoutError")
+        .classList.remove("active");
+
+    cart = [];
+
+    updateCartCount();
+
+    document.getElementById("customerPhone")
+        .value = "";
+
+    document.getElementById("customerCity")
+        .value = "";
+
+    document.getElementById("customerComment")
+        .value = "";
+
+}
+
+
+/* =========================
+   CLOSE CHECKOUT
+========================= */
+
+function closeCheckout(){
+
+    document
+        .getElementById("checkoutModal")
+        .classList.remove("active");
+
+}
+
+
+/* =========================
+   CLOSE MODALS
+========================= */
+
+function closeModal(){
+
+    document
+        .getElementById("productModal")
+        .classList.remove("active");
+
+}
+
+
+/* =========================
+   AUTO TELEGRAM DATA
+========================= */
+
+fillTelegramUser();
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key !== "Escape"){
+            return;
+        }
+
+        closeModal();
+        closeCart();
+        closeCheckout();
+
+    }
+);
+
 </script>
+
 </body>
 </html>
