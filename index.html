@@ -2062,67 +2062,47 @@ function renderCheckout(){
 
 function fillTelegramUser(){
 
-    if(
-        !tg ||
-        !tg.initDataUnsafe
-    ){
-
+    if(!tg){
         return;
-
     }
-
 
     const user =
-        tg.initDataUnsafe.user;
-
+        tg.initDataUnsafe?.user || null;
 
     if(!user){
+        console.log("Telegram user data is not available");
         return;
     }
 
-
     const telegramInput =
-        document.getElementById(
-            "customerTelegram"
-        );
-
-
-    if(
-        user.username &&
-        !telegramInput.value
-    ){
-
-        telegramInput.value =
-            "@" +
-            user.username;
-
-    }
-
+        document.getElementById("customerTelegram");
 
     const nameInput =
-        document.getElementById(
-            "customerName"
-        );
+        document.getElementById("customerName");
 
-
-    if(
-        !nameInput.value &&
-        (
-            user.first_name ||
-            user.last_name
-        )
-    ){
-
-        nameInput.value =
-            [
-                user.first_name,
-                user.last_name
-            ]
-            .filter(Boolean)
-            .join(" ");
-
+    if(telegramInput && user.username){
+        telegramInput.value = "@" + user.username;
     }
 
+    if(nameInput){
+        const fullName = [
+            user.first_name,
+            user.last_name
+        ]
+        .filter(Boolean)
+        .join(" ");
+
+        if(fullName){
+            nameInput.value = fullName;
+        }
+    }
+
+    console.log("Telegram user loaded:", {
+        id: user.id,
+        username: user.username,
+        first_name: user.first_name,
+        last_name: user.last_name
+    });
 }
 
 
@@ -2702,5 +2682,3 @@ fillTelegramUser();
 
 </body>
 </html>
-```
-
