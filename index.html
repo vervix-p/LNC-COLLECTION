@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,10 +10,15 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
+}
+
+html{
+    background:#050505;
 }
 
 body{
@@ -20,6 +26,58 @@ body{
     color:#fff;
     font-family:Arial,Helvetica,sans-serif;
     min-height:100vh;
+    position:relative;
+}
+
+/* =========================
+   STATIC STAR BACKGROUND
+========================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,.75) 0px, rgba(255,255,255,.75) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,.45) 0px, rgba(255,255,255,.45) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,.9) 0px, rgba(255,255,255,.9) 1.2px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,.3) 0px, rgba(255,255,255,.3) 1px, transparent 1.5px);
+
+    background-size:
+        137px 173px,
+        211px 197px,
+        283px 251px,
+        347px 311px;
+
+    background-position:
+        12px 25px,
+        87px 103px,
+        31px 67px,
+        149px 17px;
+
+    opacity:.55;
+}
+
+/* дополнительное мягкое свечение */
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+
+    background-image:
+        radial-gradient(circle at 18% 22%, rgba(255,255,255,.12) 0px, transparent 3px),
+        radial-gradient(circle at 73% 14%, rgba(255,255,255,.10) 0px, transparent 3px),
+        radial-gradient(circle at 42% 68%, rgba(255,255,255,.08) 0px, transparent 3px),
+        radial-gradient(circle at 86% 76%, rgba(255,255,255,.10) 0px, transparent 3px),
+        radial-gradient(circle at 9% 87%, rgba(255,255,255,.08) 0px, transparent 3px);
+
+    opacity:.7;
 }
 
 button,
@@ -34,6 +92,9 @@ button{
 }
 
 .app{
+    position:relative;
+    z-index:1;
+
     max-width:600px;
     margin:0 auto;
     padding-bottom:110px;
@@ -101,6 +162,21 @@ button{
 }
 
 .drop-title span{
+    color:#777;
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+/* NEW — главный акцент */
+
+.drop-title .new-label{
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:2px;
+}
+
+.drop-title .items-label{
     color:#777;
     font-size:11px;
     letter-spacing:2px;
@@ -189,13 +265,19 @@ button{
 .cart-button{
     width:100%;
     padding:16px;
-    background:#fff;
-    color:#000;
+    background:#777;
+    color:#050505;
     border:none;
     font-size:14px;
     font-weight:bold;
     letter-spacing:1px;
     cursor:pointer;
+    transition:.2s;
+}
+
+.cart-button:active{
+    background:#666;
+    transform:scale(.99);
 }
 
 .modal{
@@ -564,7 +646,13 @@ button{
     .product-name{
         font-size:13px;
     }
+
+    .drop-title .new-label{
+        font-size:13px;
+    }
+
 }
+
 </style>
 </head>
 
@@ -591,7 +679,6 @@ button{
     <h1>LNC COLLECTION</h1>
 
     <p>
-        Официальный магазин.<br>
         Лимитированные дропы.
     </p>
 
@@ -608,7 +695,10 @@ button{
 
         <h2>DROP 02</h2>
 
-        <span>NEW · 02 ITEMS</span>
+        <span>
+            <span class="new-label">NEW</span>
+            <span class="items-label"> · 02 ITEMS</span>
+        </span>
 
     </div>
 
@@ -622,7 +712,7 @@ button{
             class="product"
             onclick="openProduct(
                 'Black T-Shirt — Create your Legacy',
-                3700,
+                3990,
                 ['Black'],
                 ['XS','S','M','L','XL','2XL','3XL']
             )">
@@ -641,7 +731,7 @@ button{
                 </div>
 
                 <div class="product-price">
-                    3 700 ₽
+                    3 990 ₽
                 </div>
 
             </div>
@@ -655,7 +745,7 @@ button{
             class="product"
             onclick="openProduct(
                 'Black Zip Hoodie — Create your Legacy',
-                4000,
+                4500,
                 ['Black'],
                 ['XS','S','M','L','XL','2XL']
             )">
@@ -674,7 +764,7 @@ button{
                 </div>
 
                 <div class="product-price">
-                    4 000 ₽
+                    4 500 ₽
                 </div>
 
             </div>
@@ -710,7 +800,7 @@ button{
             class="product"
             onclick="openProduct(
                 'Ash White',
-                3400,
+                3550,
                 ['Ash White'],
                 ['XS','S','M','L','XL','2XL','3XL']
             )">
@@ -726,7 +816,7 @@ button{
                 </div>
 
                 <div class="product-price">
-                    3 400 ₽
+                    3 550 ₽
                 </div>
 
             </div>
@@ -740,7 +830,7 @@ button{
             class="product"
             onclick="openProduct(
                 'Royal Blue — Iconic',
-                3400,
+                3550,
                 ['Royal Blue'],
                 ['XS','S','M','L','XL','2XL','3XL']
             )">
@@ -759,7 +849,7 @@ button{
                 </div>
 
                 <div class="product-price">
-                    3 400 ₽
+                    3 550 ₽
                 </div>
 
             </div>
@@ -773,7 +863,7 @@ button{
             class="product"
             onclick="openProduct(
                 'Midnight Monochrome',
-                3400,
+                3550,
                 ['Midnight'],
                 ['XS','S','M','L','XL','2XL','3XL']
             )">
@@ -789,7 +879,7 @@ button{
                 </div>
 
                 <div class="product-price">
-                    3 400 ₽
+                    3 550 ₽
                 </div>
 
             </div>
@@ -859,7 +949,7 @@ button{
         class="cart-button"
         onclick="openCart()">
 
-        🛍 КОРЗИНА
+        ◻ КОРЗИНА
         (<span id="cartCount">0</span>)
 
     </button>
@@ -2090,10 +2180,6 @@ async function placeOrder(){
     clearCheckoutError();
 
 
-    // =========================
-    // CHECK CART
-    // =========================
-
     if(!cart.length){
 
         showCheckoutError(
@@ -2104,10 +2190,6 @@ async function placeOrder(){
 
     }
 
-
-    // =========================
-    // GET FORM DATA
-    // =========================
 
     const name =
         document.getElementById(
@@ -2144,10 +2226,6 @@ async function placeOrder(){
             "customerComment"
         ).value.trim();
 
-
-    // =========================
-    // VALIDATION
-    // =========================
 
     if(!name){
 
@@ -2193,42 +2271,26 @@ async function placeOrder(){
     }
 
 
-    // =========================
-    // TOTAL
-    // =========================
-
     let total = 0;
 
 
     cart.forEach(item => {
 
         total +=
-            Number(item.price || 0) *
-            Number(item.quantity || 1);
+            item.price *
+            item.quantity;
 
     });
 
-
-    // =========================
-    // TELEGRAM USER
-    // =========================
 
     const telegramUser =
         tg?.initDataUnsafe?.user ||
         null;
 
 
-    // =========================
-    // ORDER ID
-    // =========================
-
     const orderId =
         generateOrderId();
 
-
-    // =========================
-    // ORDER
-    // =========================
 
     const order = {
 
@@ -2296,7 +2358,7 @@ async function placeOrder(){
                     item.name,
 
                 price:
-                    Number(item.price || 0),
+                    item.price,
 
                 color:
                     item.color ||
@@ -2307,11 +2369,11 @@ async function placeOrder(){
                     null,
 
                 quantity:
-                    Number(item.quantity || 1),
+                    item.quantity,
 
                 subtotal:
-                    Number(item.price || 0) *
-                    Number(item.quantity || 1)
+                    item.price *
+                    item.quantity
 
             })),
 
@@ -2325,29 +2387,9 @@ async function placeOrder(){
     };
 
 
-    // =========================
-    // JSON
-    // =========================
-
     const orderData =
         JSON.stringify(order);
 
-
-    console.log(
-        "LNC ORDER:",
-        order
-    );
-
-
-    console.log(
-        "WORKER URL:",
-        WORKER_URL
-    );
-
-
-    // =========================
-    // TELEGRAM LIMIT
-    // =========================
 
     if(orderData.length > 4096){
 
@@ -2359,10 +2401,6 @@ async function placeOrder(){
 
     }
 
-
-    // =========================
-    // BUTTON
-    // =========================
 
     const button =
         document.querySelector(
@@ -2381,16 +2419,7 @@ async function placeOrder(){
     }
 
 
-    // =========================
-    // SEND TO WORKER
-    // =========================
-
     try{
-
-        console.log(
-            "STEP 1: отправляем заказ в Cloudflare..."
-        );
-
 
         const response =
             await fetch(
@@ -2414,111 +2443,46 @@ async function placeOrder(){
             );
 
 
-        console.log(
-            "STEP 2: Cloudflare ответил",
-            response.status,
-            response.statusText
-        );
-
-
-        // =========================
-        // READ RESPONSE AS TEXT
-        // =========================
-
-        const responseText =
-            await response.text();
+        const result =
+            await response.json();
 
 
         console.log(
-            "STEP 3: ответ Cloudflare:",
-            responseText
-        );
-
-
-        // =========================
-        // EMPTY RESPONSE
-        // =========================
-
-        if(!responseText){
-
-            throw new Error(
-                `Cloudflare вернул пустой ответ. HTTP ${response.status}`
-            );
-
-        }
-
-
-        // =========================
-        // PARSE JSON
-        // =========================
-
-        let result;
-
-
-        try{
-
-            result =
-                JSON.parse(
-                    responseText
-                );
-
-        }catch(parseError){
-
-            console.error(
-                "JSON PARSE ERROR:",
-                parseError
-            );
-
-
-            throw new Error(
-                `Cloudflare вернул не JSON. HTTP ${response.status}. Ответ: ${responseText.slice(0,300)}`
-            );
-
-        }
-
-
-        console.log(
-            "STEP 4: JSON Cloudflare:",
+            "Cloudflare response:",
             result
         );
 
 
-        // =========================
-        // HTTP ERROR
-        // =========================
+        if(
+            !response.ok ||
+            !result.success
+        ){
 
-        if(!response.ok){
-
-            throw new Error(
-                result.error ||
-                result.message ||
-                `Cloudflare HTTP ${response.status}`
+            console.error(
+                "Worker error:",
+                result
             );
 
-        }
 
-
-        // =========================
-        // WORKER ERROR
-        // =========================
-
-        if(!result.success){
-
-            throw new Error(
-                result.error ||
-                "Worker сообщил об ошибке."
+            showCheckoutError(
+                "Не удалось отправить заказ. Попробуйте ещё раз."
             );
 
+
+            if(button){
+
+                button.disabled =
+                    false;
+
+                button.innerText =
+                    "ПОДТВЕРДИТЬ ЗАКАЗ";
+
+            }
+
+
+            return;
+
         }
-
-
-        // =========================
-        // SUCCESS
-        // =========================
-
-        console.log(
-            "STEP 5: заказ успешно отправлен!"
-        );
 
 
         showSuccessScreen(
@@ -2529,34 +2493,13 @@ async function placeOrder(){
     }catch(error){
 
         console.error(
-            "FINAL ORDER ERROR:",
+            "Order request error:",
             error
         );
 
 
-        // =========================
-        // SHOW REAL ERROR
-        // =========================
-
-        let message =
-            error?.message ||
-            String(error);
-
-
-        if(
-            message ===
-            "Failed to fetch"
-        ){
-
-            message =
-                "Failed to fetch — Mini App не смог подключиться к Cloudflare Worker. Возможная причина: CORS, блокировка Cloudflare или неправильный URL Worker.";
-
-        }
-
-
         showCheckoutError(
-            "Ошибка отправки:\n\n" +
-            message
+            "Ошибка соединения. Попробуйте ещё раз."
         );
 
 
@@ -2757,6 +2700,8 @@ document.addEventListener(
 fillTelegramUser();
 
 </script>
-    
+
 </body>
 </html>
+```
+
