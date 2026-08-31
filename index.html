@@ -3171,11 +3171,63 @@ function renderCatalog(){
 
 }
 
+function createProductCard(product, index){
 
-function createProductCard(
-    product,
-    index
-){
+    const element =
+        document.createElement("div");
+
+    element.className =
+        "product";
+
+    element.style.animationDelay =
+        `${index * 90}ms`;
+
+    const subtitle =
+        product.subtitle
+            ? `<span class="product-subtitle">${escapeHtml(product.subtitle)}</span>`
+            : "";
+
+    element.innerHTML = `
+        <div class="product-image-wrap">
+
+            <img
+                class="product-image"
+                src="${escapeHtml(product.images[0])}"
+                alt="${escapeHtml(product.name)}"
+                loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+
+                ${escapeHtml(product.displayName)}
+
+                ${
+                    subtitle
+                        ? `<br>${subtitle}`
+                        : ""
+                }
+
+            </div>
+
+            <div class="product-price">
+                ${formatPrice(product.price)} ₽
+            </div>
+
+        </div>
+    `;
+
+    // Открываем товар при любом нажатии на карточку
+    element.onclick = function(){
+
+        openProduct(product.id);
+
+    };
+
+    return element;
+}
 
     const element =
         document.createElement(
