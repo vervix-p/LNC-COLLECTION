@@ -10,6 +10,10 @@
 
 <style>
 
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -26,57 +30,7 @@ body{
     font-family:Arial,Helvetica,sans-serif;
     min-height:100vh;
     position:relative;
-}
-
-/* =========================
-   STATIC STAR BACKGROUND
-========================= */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-
-    background-image:
-        radial-gradient(circle, rgba(255,255,255,.75) 0px, rgba(255,255,255,.75) 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(255,255,255,.45) 0px, rgba(255,255,255,.45) 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(255,255,255,.9) 0px, rgba(255,255,255,.9) 1.2px, transparent 1.8px),
-        radial-gradient(circle, rgba(255,255,255,.3) 0px, rgba(255,255,255,.3) 1px, transparent 1.5px);
-
-    background-size:
-        137px 173px,
-        211px 197px,
-        283px 251px,
-        347px 311px;
-
-    background-position:
-        12px 25px,
-        87px 103px,
-        31px 67px,
-        149px 17px;
-
-    opacity:.55;
-}
-
-/* дополнительное мягкое свечение */
-
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-
-    background-image:
-        radial-gradient(circle at 18% 22%, rgba(255,255,255,.12) 0px, transparent 3px),
-        radial-gradient(circle at 73% 14%, rgba(255,255,255,.10) 0px, transparent 3px),
-        radial-gradient(circle at 42% 68%, rgba(255,255,255,.08) 0px, transparent 3px),
-        radial-gradient(circle at 86% 76%, rgba(255,255,255,.10) 0px, transparent 3px),
-        radial-gradient(circle at 9% 87%, rgba(255,255,255,.08) 0px, transparent 3px);
-
-    opacity:.7;
+    overflow-x:hidden;
 }
 
 button,
@@ -90,6 +44,101 @@ button{
     -webkit-tap-highlight-color:transparent;
 }
 
+
+/* =========================================================
+   STATIC STAR BACKGROUND
+========================================================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.72) 0px,
+            rgba(255,255,255,.72) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.42) 0px,
+            rgba(255,255,255,.42) 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.82) 0px,
+            rgba(255,255,255,.82) 1.2px,
+            transparent 1.8px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.28) 0px,
+            rgba(255,255,255,.28) 1px,
+            transparent 1.5px
+        );
+
+    background-size:
+        137px 173px,
+        211px 197px,
+        283px 251px,
+        347px 311px;
+
+    background-position:
+        12px 25px,
+        87px 103px,
+        31px 67px,
+        149px 17px;
+
+    opacity:.52;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+
+    background-image:
+        radial-gradient(
+            circle at 18% 22%,
+            rgba(255,255,255,.11) 0px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 73% 14%,
+            rgba(255,255,255,.09) 0px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 42% 68%,
+            rgba(255,255,255,.07) 0px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 86% 76%,
+            rgba(255,255,255,.09) 0px,
+            transparent 3px
+        ),
+        radial-gradient(
+            circle at 9% 87%,
+            rgba(255,255,255,.07) 0px,
+            transparent 3px
+        );
+
+    opacity:.7;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
 .app{
     position:relative;
     z-index:1;
@@ -98,6 +147,11 @@ button{
     margin:0 auto;
     padding-bottom:110px;
 }
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header{
     padding:22px 18px 10px;
@@ -110,6 +164,8 @@ button{
     height:auto;
     display:block;
     margin:0 auto 20px;
+
+    animation:logoReveal .8s ease both;
 }
 
 .subtitle{
@@ -117,18 +173,32 @@ button{
     font-size:12px;
     letter-spacing:3px;
     text-transform:uppercase;
+
+    animation:fadeUp .7s ease .1s both;
 }
 
+
+/* =========================================================
+   HERO
+========================================================= */
+
 .hero{
-    margin:20px 16px 30px;
-    padding:28px 20px;
+    margin:20px 16px 36px;
+    padding:30px 20px;
+
     border:1px solid #222;
-    background:radial-gradient(
-        circle at 50% 0%,
-        #242424 0%,
-        #080808 55%
-    );
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,255,255,.12) 0%,
+            #181818 22%,
+            #080808 62%
+        );
+
     text-align:center;
+
+    animation:fadeUp .75s ease .15s both;
 }
 
 .hero h1{
@@ -143,15 +213,21 @@ button{
     line-height:1.5;
 }
 
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
 .drop{
     padding:0 16px;
-    margin-bottom:38px;
+    margin-bottom:42px;
 }
 
 .drop-title{
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     margin-bottom:15px;
 }
 
@@ -160,26 +236,29 @@ button{
     letter-spacing:1px;
 }
 
-.drop-title span{
-    color:#777;
-    font-size:11px;
-    letter-spacing:2px;
+.drop-meta{
+    display:flex;
+    align-items:center;
+    gap:7px;
 }
 
-/* NEW — главный акцент */
-
-.drop-title .new-label{
+.new-label{
     color:#fff;
     font-size:14px;
     font-weight:700;
     letter-spacing:2px;
 }
 
-.drop-title .items-label{
+.items-label{
     color:#777;
     font-size:11px;
     letter-spacing:2px;
 }
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
 
 .products{
     display:grid;
@@ -188,32 +267,50 @@ button{
 }
 
 .product{
-    background:#0d0d0d;
+    background:rgba(13,13,13,.94);
     border:1px solid #202020;
     overflow:hidden;
     cursor:pointer;
-    transition:.2s;
+
+    opacity:0;
+    transform:translateY(10px);
+
+    animation:cardReveal .7s ease forwards;
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        background .22s ease;
+}
+
+.product:hover{
+    border-color:#353535;
+    background:#111;
+    transform:translateY(-2px);
 }
 
 .product:active{
-    transform:scale(.98);
+    transform:scale(.985);
+}
+
+.product-image-wrap{
+    position:relative;
+    overflow:hidden;
 }
 
 .product-image{
     width:100%;
     aspect-ratio:1/1.15;
-    background:linear-gradient(
-        135deg,
-        #181818,
-        #050505
-    );
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#555;
-    font-size:11px;
-    text-align:center;
-    padding:15px;
+    object-fit:cover;
+    display:block;
+
+    transition:
+        transform .45s cubic-bezier(.2,.7,.2,1),
+        filter .45s ease;
+}
+
+.product:hover .product-image{
+    transform:scale(1.025);
 }
 
 .product-info{
@@ -226,6 +323,10 @@ button{
     line-height:1.3;
 }
 
+.product-subtitle{
+    color:#777;
+}
+
 .product-price{
     color:#aaa;
     font-size:13px;
@@ -233,7 +334,7 @@ button{
 
 .book-section{
     padding:0 16px;
-    margin-bottom:38px;
+    margin-bottom:42px;
 }
 
 .book-title{
@@ -247,46 +348,81 @@ button{
     grid-template-columns:1fr;
 }
 
+
+/* =========================================================
+   CART BAR
+========================================================= */
+
 .cart-bar{
     position:fixed;
     bottom:0;
     left:50%;
+
     transform:translateX(-50%);
+
     width:100%;
     max-width:600px;
+
     padding:12px 16px 18px;
-    background:rgba(5,5,5,.95);
+
+    background:rgba(5,5,5,.94);
+
     border-top:1px solid #222;
-    backdrop-filter:blur(10px);
-    z-index:10;
+
+    backdrop-filter:blur(12px);
+
+    z-index:50;
 }
 
 .cart-button{
     width:100%;
+
     padding:16px;
+
     background:#777;
-    color:#050505;
+    color:#070707;
+
     border:none;
+
     font-size:14px;
     font-weight:bold;
+
     letter-spacing:1px;
+
     cursor:pointer;
-    transition:.2s;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.cart-button:hover{
+    background:#858585;
 }
 
 .cart-button:active{
-    background:#666;
+    background:#696969;
     transform:scale(.99);
 }
+
+
+/* =========================================================
+   MODALS
+========================================================= */
 
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.8);
+
+    background:rgba(0,0,0,.82);
+
     display:none;
     align-items:flex-end;
     justify-content:center;
+
     z-index:100;
+
+    animation:modalBackground .2s ease;
 }
 
 .modal.active{
@@ -296,36 +432,182 @@ button{
 .modal-content{
     width:100%;
     max-width:600px;
-    max-height:90vh;
+
+    max-height:92vh;
+
     overflow-y:auto;
+
     background:#0b0b0b;
+
     border-top:1px solid #333;
-    padding:22px;
+
+    padding:20px 20px 28px;
+
+    animation:modalUp .3s cubic-bezier(.2,.7,.2,1);
 }
 
 .modal-close{
     text-align:right;
+
     color:#777;
-    font-size:25px;
+
+    font-size:26px;
+
     cursor:pointer;
-    margin-bottom:10px;
+
+    margin-bottom:8px;
+
+    transition:
+        color .2s ease,
+        transform .2s ease;
+}
+
+.modal-close:hover{
+    color:#fff;
+}
+
+.modal-close:active{
+    transform:scale(.9);
 }
 
 .modal h2{
     font-size:22px;
-    margin-bottom:8px;
+    margin-bottom:7px;
 }
 
 .modal-price{
     color:#aaa;
-    margin-bottom:25px;
+    margin-bottom:18px;
 }
+
+
+/* =========================================================
+   PRODUCT GALLERY
+========================================================= */
+
+.product-gallery{
+    position:relative;
+
+    margin:0 -20px 20px;
+}
+
+.gallery-track{
+    display:flex;
+
+    width:100%;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    scroll-snap-type:x mandatory;
+
+    scrollbar-width:none;
+
+    overscroll-behavior-x:contain;
+
+    -webkit-overflow-scrolling:touch;
+}
+
+.gallery-track::-webkit-scrollbar{
+    display:none;
+}
+
+.gallery-slide{
+    flex:0 0 100%;
+
+    scroll-snap-align:start;
+
+    position:relative;
+}
+
+.gallery-slide img{
+    display:block;
+
+    width:100%;
+
+    aspect-ratio:1/1.08;
+
+    object-fit:cover;
+
+    background:#111;
+
+    user-select:none;
+    -webkit-user-drag:none;
+}
+
+.gallery-counter{
+    position:absolute;
+
+    right:12px;
+    bottom:12px;
+
+    padding:6px 8px;
+
+    background:rgba(0,0,0,.62);
+
+    color:#aaa;
+
+    font-size:10px;
+
+    letter-spacing:1px;
+}
+
+.gallery-dots{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+
+    margin-top:10px;
+}
+
+.gallery-dot{
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#444;
+
+    transition:
+        width .2s ease,
+        background .2s ease;
+}
+
+.gallery-dot.active{
+    width:16px;
+    border-radius:5px;
+    background:#fff;
+}
+
+.product-description{
+    margin:0 0 20px;
+
+    color:#888;
+
+    font-size:13px;
+
+    line-height:1.65;
+}
+
+.product-description strong{
+    color:#ccc;
+    font-weight:normal;
+}
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
 
 .option-title{
     color:#888;
+
     font-size:11px;
+
     text-transform:uppercase;
+
     letter-spacing:2px;
+
     margin-bottom:10px;
     margin-top:20px;
 }
@@ -338,10 +620,24 @@ button{
 
 .option{
     padding:11px 16px;
+
     background:#111;
+
     color:#fff;
+
     border:1px solid #333;
+
     cursor:pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .15s ease;
+}
+
+.option:active{
+    transform:scale(.97);
 }
 
 .option.selected{
@@ -350,122 +646,360 @@ button{
     border-color:#fff;
 }
 
+
+/* =========================================================
+   QUANTITY
+========================================================= */
+
 .quantity{
     display:flex;
+
     align-items:center;
+
     gap:20px;
 }
 
 .quantity button{
     width:42px;
     height:42px;
+
     background:#111;
+
     border:1px solid #333;
+
     color:#fff;
+
     font-size:20px;
+
     cursor:pointer;
+
+    transition:
+        background .2s ease,
+        transform .15s ease;
+}
+
+.quantity button:hover{
+    background:#1a1a1a;
+}
+
+.quantity button:active{
+    transform:scale(.94);
 }
 
 .quantity span{
     font-size:18px;
+
     min-width:20px;
+
     text-align:center;
 }
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 .add-button,
 .checkout,
 .place-order{
     width:100%;
+
     margin-top:28px;
+
     padding:16px;
+
     background:#fff;
+
     color:#000;
+
     border:none;
+
     font-weight:bold;
+
     cursor:pointer;
+
     letter-spacing:1px;
+
+    transition:
+        background .2s ease,
+        transform .15s ease,
+        opacity .2s ease;
 }
+
+.add-button:hover,
+.checkout:hover,
+.place-order:hover{
+    background:#e8e8e8;
+}
+
+.add-button:active,
+.checkout:active,
+.place-order:active{
+    transform:scale(.99);
+}
+
+.place-order:disabled{
+    opacity:.55;
+    cursor:default;
+    transform:none;
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
 
 .cart-item{
     padding:16px 0;
+
     border-bottom:1px solid #222;
+
+    animation:fadeUp .25s ease both;
 }
 
 .cart-item-head{
     display:flex;
+
     justify-content:space-between;
+
     align-items:flex-start;
+
     gap:10px;
 }
 
 .cart-item-name{
     font-size:15px;
+
     margin-bottom:6px;
 }
 
 .cart-item-price{
     font-size:14px;
+
     color:#fff;
+
     white-space:nowrap;
 }
 
 .cart-item-details{
     color:#888;
+
     font-size:12px;
+
     line-height:1.7;
 }
 
 .cart-controls{
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     margin-top:12px;
 }
 
 .cart-quantity{
     display:flex;
+
     align-items:center;
+
     gap:10px;
 }
 
 .cart-quantity button{
     width:30px;
     height:30px;
+
     background:#111;
+
     color:#fff;
+
     border:1px solid #333;
+
     cursor:pointer;
+
     font-size:16px;
+
+    transition:
+        background .2s ease,
+        transform .15s ease;
+}
+
+.cart-quantity button:active{
+    transform:scale(.9);
 }
 
 .cart-quantity span{
     min-width:20px;
+
     text-align:center;
+
     font-size:13px;
 }
 
 .remove-button{
     background:none;
+
     border:none;
+
     color:#666;
+
     font-size:11px;
+
     text-transform:uppercase;
+
     letter-spacing:1px;
+
     cursor:pointer;
+}
+
+.remove-button:hover{
+    color:#aaa;
 }
 
 .total{
     display:flex;
+
     justify-content:space-between;
+
     margin-top:20px;
+
     font-size:18px;
 }
 
 .empty{
     color:#777;
+
     text-align:center;
+
     padding:30px 0;
 }
+
+
+/* =========================================================
+   PROMO CODE
+========================================================= */
+
+.promo-section{
+    margin-top:24px;
+
+    padding-top:20px;
+
+    border-top:1px solid #222;
+}
+
+.promo-title{
+    color:#888;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    margin-bottom:9px;
+}
+
+.promo-row{
+    display:flex;
+
+    gap:8px;
+}
+
+.promo-input{
+    flex:1;
+
+    min-width:0;
+
+    background:#111;
+
+    border:1px solid #333;
+
+    color:#fff;
+
+    padding:14px;
+
+    font-size:14px;
+
+    outline:none;
+
+    border-radius:0;
+
+    text-transform:none;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.promo-input:focus{
+    border-color:#666;
+    background:#151515;
+}
+
+.promo-input::placeholder{
+    color:#555;
+}
+
+.promo-button{
+    min-width:100px;
+
+    padding:14px 12px;
+
+    background:#222;
+
+    color:#fff;
+
+    border:1px solid #333;
+
+    cursor:pointer;
+
+    font-size:11px;
+
+    letter-spacing:1px;
+
+    font-weight:bold;
+
+    transition:
+        background .2s ease,
+        transform .15s ease;
+}
+
+.promo-button:hover{
+    background:#2d2d2d;
+}
+
+.promo-button:active{
+    transform:scale(.98);
+}
+
+.promo-message{
+    display:none;
+
+    margin-top:9px;
+
+    font-size:11px;
+
+    line-height:1.5;
+}
+
+.promo-message.active{
+    display:block;
+}
+
+.promo-message.success{
+    color:#aaa;
+}
+
+.promo-message.error{
+    color:#777;
+}
+
+
+/* =========================================================
+   CHECKOUT
+========================================================= */
 
 .checkout-section{
     margin-top:24px;
@@ -473,10 +1007,15 @@ button{
 
 .checkout-label{
     display:block;
+
     color:#888;
+
     font-size:11px;
+
     text-transform:uppercase;
+
     letter-spacing:2px;
+
     margin-bottom:8px;
 }
 
@@ -484,19 +1023,31 @@ button{
 .checkout-select,
 .checkout-textarea{
     width:100%;
+
     background:#111;
+
     border:1px solid #333;
+
     color:#fff;
+
     padding:14px;
+
     font-size:14px;
+
     outline:none;
+
     border-radius:0;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease;
 }
 
 .checkout-input:focus,
 .checkout-select:focus,
 .checkout-textarea:focus{
     border-color:#777;
+    background:#151515;
 }
 
 .checkout-input::placeholder,
@@ -527,15 +1078,21 @@ button{
 
 .checkout-summary{
     background:#101010;
+
     border:1px solid #222;
+
     padding:15px;
+
     margin-top:10px;
 }
 
 .summary-item{
     padding:10px 0;
+
     border-bottom:1px solid #222;
+
     font-size:13px;
+
     line-height:1.6;
 }
 
@@ -545,92 +1102,233 @@ button{
 
 .summary-name{
     color:#fff;
+
     font-size:14px;
+
     margin-bottom:3px;
 }
 
 .summary-details{
     color:#777;
+
     font-size:11px;
 }
 
 .summary-price{
     color:#aaa;
+
     margin-top:3px;
 }
 
 .checkout-total{
     display:flex;
+
     justify-content:space-between;
+
     margin-top:15px;
+
     padding-top:15px;
+
     border-top:1px solid #333;
+
     font-size:17px;
+}
+
+.checkout-discount{
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:8px;
+
+    color:#999;
+
+    font-size:12px;
+}
+
+.checkout-final{
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:10px;
+
+    padding-top:12px;
+
+    border-top:1px solid #333;
+
+    font-size:19px;
 }
 
 .required{
     color:#777;
 }
 
+
+/* =========================================================
+   ERROR
+========================================================= */
+
 .error-message{
     display:none;
+
     margin-top:15px;
+
     padding:12px;
+
     border:1px solid #444;
+
     background:#151515;
+
     color:#aaa;
+
     font-size:12px;
+
     line-height:1.5;
 }
 
 .error-message.active{
     display:block;
+
+    animation:fadeUp .2s ease both;
 }
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
 
 .success-screen{
     display:none;
+
     text-align:center;
+
     padding:40px 10px 25px;
 }
 
 .success-screen.active{
     display:block;
+
+    animation:fadeUp .35s ease both;
 }
 
 .success-icon{
     font-size:42px;
+
     margin-bottom:18px;
 }
 
 .success-screen h2{
     font-size:24px;
+
     margin-bottom:12px;
 }
 
 .success-screen p{
     color:#888;
+
     font-size:13px;
+
     line-height:1.6;
 }
 
 .back-button{
     width:100%;
+
     margin-top:25px;
+
     padding:15px;
+
     background:#111;
+
     border:1px solid #333;
+
     color:#fff;
+
     cursor:pointer;
+
     letter-spacing:1px;
+
     font-weight:bold;
 }
 
 .order-number{
     margin-top:15px;
+
     color:#666;
+
     font-size:11px;
+
     letter-spacing:1px;
 }
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes cardReveal{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes modalUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes modalBackground{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes logoReveal{
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:380px){
 
@@ -646,8 +1344,20 @@ button{
         font-size:13px;
     }
 
-    .drop-title .new-label{
+    .new-label{
         font-size:13px;
+    }
+
+    .items-label{
+        font-size:10px;
+    }
+
+    .promo-row{
+        flex-direction:column;
+    }
+
+    .promo-button{
+        width:100%;
     }
 
 }
@@ -655,292 +1365,125 @@ button{
 </style>
 </head>
 
+
 <body>
 
 <div class="app">
 
-<header class="header">
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-    <img
-        src="logo.jpg"
-        class="logo"
-        alt="LNC COLLECTION">
+    <header class="header">
 
-    <div class="subtitle">
-        Официальный магазин
-    </div>
+        <img
+            src="logo.jpg"
+            class="logo"
+            alt="LNC COLLECTION">
 
-</header>
+        <div class="subtitle">
+            Официальный магазин
+        </div>
 
-
-<section class="hero">
-
-    <h1>LNC COLLECTION</h1>
-
-    <p>
-        Лимитированные дропы.
-    </p>
-
-</section>
+    </header>
 
 
-<!-- =========================
-     DROP 02
-========================= -->
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
-<section class="drop">
+    <section class="hero">
 
-    <div class="drop-title">
+        <h1>LNC COLLECTION</h1>
 
-        <h2>DROP 02</h2>
+        <p>
+            Лимитированные дропы.
+        </p>
 
-        <span>
-            <span class="new-label">NEW</span>
-            <span class="items-label"> · 02 ITEMS</span>
-        </span>
-
-    </div>
+    </section>
 
 
-    <div class="products">
+    <!-- =====================================================
+         DROP 02
+    ====================================================== -->
 
+    <section class="drop">
 
-        <!-- BLACK T-SHIRT -->
+        <div class="drop-title">
 
-        <div
-            class="product"
-            onclick="openProduct(
-                'Black T-Shirt — Create your Legacy',
-                3990,
-                ['Black'],
-                ['XS','S','M','L','XL','2XL','3XL']
-            )">
+            <h2>DROP 02</h2>
 
-            <div class="product-image">
-                ФОТО ТОВАРА
-            </div>
+            <div class="drop-meta">
 
-            <div class="product-info">
+                <span class="new-label">
+                    NEW
+                </span>
 
-                <div class="product-name">
-                    Black T-Shirt<br>
-                    <span style="color:#777">
-                        Create your Legacy
-                    </span>
-                </div>
-
-                <div class="product-price">
-                    3 990 ₽
-                </div>
+                <span class="items-label">
+                    · 02 ITEMS
+                </span>
 
             </div>
 
         </div>
 
 
-        <!-- BLACK ZIP HOODIE -->
-
         <div
-            class="product"
-            onclick="openProduct(
-                'Black Zip Hoodie — Create your Legacy',
-                4500,
-                ['Black'],
-                ['XS','S','M','L','XL','2XL']
-            )">
-
-            <div class="product-image">
-                ФОТО ТОВАРА
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-name">
-                    Black Zip Hoodie<br>
-                    <span style="color:#777">
-                        Create your Legacy
-                    </span>
-                </div>
-
-                <div class="product-price">
-                    4 500 ₽
-                </div>
-
-            </div>
-
+            class="products"
+            id="drop02Products">
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================
-     DROP 01
-========================= -->
+    <!-- =====================================================
+         DROP 01
+    ====================================================== -->
 
-<section class="drop">
+    <section class="drop">
 
-    <div class="drop-title">
+        <div class="drop-title">
 
-        <h2>DROP 01</h2>
+            <h2>DROP 01</h2>
 
-        <span>03 ITEMS</span>
-
-    </div>
-
-
-    <div class="products">
-
-
-        <!-- ASH WHITE -->
-
-        <div
-            class="product"
-            onclick="openProduct(
-                'Ash White',
-                3550,
-                ['Ash White'],
-                ['XS','S','M','L','XL','2XL','3XL']
-            )">
-
-            <div class="product-image">
-                ФОТО ТОВАРА
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-name">
-                    Ash White
-                </div>
-
-                <div class="product-price">
-                    3 550 ₽
-                </div>
-
-            </div>
+            <span class="items-label">
+                03 ITEMS
+            </span>
 
         </div>
 
 
-        <!-- ROYAL BLUE -->
-
         <div
-            class="product"
-            onclick="openProduct(
-                'Royal Blue — Iconic',
-                3550,
-                ['Royal Blue'],
-                ['XS','S','M','L','XL','2XL','3XL']
-            )">
-
-            <div class="product-image">
-                ФОТО ТОВАРА
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-name">
-                    Royal Blue<br>
-                    <span style="color:#777">
-                        Iconic
-                    </span>
-                </div>
-
-                <div class="product-price">
-                    3 550 ₽
-                </div>
-
-            </div>
-
+            class="products"
+            id="drop01Products">
         </div>
 
+    </section>
 
-        <!-- MIDNIGHT MONOCHROME -->
 
-        <div
-            class="product"
-            onclick="openProduct(
-                'Midnight Monochrome',
-                3550,
-                ['Midnight'],
-                ['XS','S','M','L','XL','2XL','3XL']
-            )">
+    <!-- =====================================================
+         BOOK
+    ====================================================== -->
 
-            <div class="product-image">
-                ФОТО ТОВАРА
-            </div>
+    <section class="book-section">
 
-            <div class="product-info">
-
-                <div class="product-name">
-                    Midnight Monochrome
-                </div>
-
-                <div class="product-price">
-                    3 550 ₽
-                </div>
-
-            </div>
-
+        <div class="book-title">
+            BOOK
         </div>
 
-    </div>
-
-</section>
-
-
-<!-- =========================
-     BOOK
-========================= -->
-
-<section class="book-section">
-
-    <div class="book-title">
-        BOOK
-    </div>
-
-
-    <div class="book-products">
-
-
         <div
-            class="product"
-            onclick="openProduct(
-                'Book Love Never',
-                9999,
-                [],
-                []
-            )">
-
-            <div class="product-image">
-                ФОТО КНИГИ
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-name">
-                    Book Love Never
-                </div>
-
-                <div class="product-price">
-                    9 999 ₽
-                </div>
-
-            </div>
-
+            class="book-products"
+            id="bookProducts">
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      CART BAR
-========================= -->
+========================================================= -->
 
 <div class="cart-bar">
 
@@ -956,9 +1499,9 @@ button{
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      PRODUCT MODAL
-========================= -->
+========================================================= -->
 
 <div
     class="modal"
@@ -975,6 +1518,12 @@ button{
         </div>
 
 
+        <div
+            id="productGallery"
+            class="product-gallery">
+        </div>
+
+
         <h2 id="modalName"></h2>
 
 
@@ -982,6 +1531,12 @@ button{
 
             <span id="modalPrice"></span> ₽
 
+        </div>
+
+
+        <div
+            id="modalDescription"
+            class="product-description">
         </div>
 
 
@@ -1050,9 +1605,9 @@ button{
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      CART MODAL
-========================= -->
+========================================================= -->
 
 <div
     class="modal"
@@ -1077,6 +1632,41 @@ button{
         <div id="cartItems"></div>
 
 
+        <div class="promo-section">
+
+            <div class="promo-title">
+                Промокод
+            </div>
+
+
+            <div class="promo-row">
+
+                <input
+                    id="promoInput"
+                    class="promo-input"
+                    type="text"
+                    placeholder="Введите промокод"
+                    autocomplete="off">
+
+                <button
+                    class="promo-button"
+                    onclick="applyPromoCode()">
+
+                    ПРИМЕНИТЬ
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="promoMessage"
+                class="promo-message">
+            </div>
+
+        </div>
+
+
         <div class="total">
 
             <span>
@@ -1085,6 +1675,38 @@ button{
 
             <strong>
                 <span id="cartTotal">0</span> ₽
+            </strong>
+
+        </div>
+
+
+        <div
+            id="cartDiscount"
+            class="checkout-discount"
+            style="display:none;">
+
+            <span>
+                Скидка
+            </span>
+
+            <span>
+                −<span id="cartDiscountValue">0</span> ₽
+            </span>
+
+        </div>
+
+
+        <div
+            id="cartFinal"
+            class="checkout-final"
+            style="display:none;">
+
+            <span>
+                К оплате
+            </span>
+
+            <strong>
+                <span id="cartFinalValue">0</span> ₽
             </strong>
 
         </div>
@@ -1103,9 +1725,9 @@ button{
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
      CHECKOUT MODAL
-========================= -->
+========================================================= -->
 
 <div
     class="modal"
@@ -1162,9 +1784,7 @@ button{
             <div class="form-group">
 
                 <label class="checkout-label">
-
                     Telegram
-
                 </label>
 
                 <input
@@ -1262,8 +1882,7 @@ button{
                 <textarea
                     id="customerComment"
                     class="checkout-textarea"
-                    placeholder="Дополнительная информация...">
-                </textarea>
+                    placeholder="Дополнительная информация..."></textarea>
 
             </div>
 
@@ -1273,9 +1892,7 @@ button{
             <div class="checkout-section">
 
                 <div class="option-title">
-
                     Ваш заказ
-
                 </div>
 
 
@@ -1288,7 +1905,41 @@ button{
                 <div class="checkout-total">
 
                     <span>
-                        Итого
+                        Без скидки
+                    </span>
+
+                    <strong>
+                        <span id="checkoutOriginalTotal">
+                            0
+                        </span>
+                        ₽
+                    </strong>
+
+                </div>
+
+
+                <div
+                    id="checkoutDiscountRow"
+                    class="checkout-discount"
+                    style="display:none;">
+
+                    <span>
+                        Скидка
+                    </span>
+
+                    <span>
+                        −<span id="checkoutDiscount">
+                            0
+                        </span> ₽
+                    </span>
+
+                </div>
+
+
+                <div class="checkout-final">
+
+                    <span>
+                        К оплате
                     </span>
 
                     <strong>
@@ -1369,9 +2020,9 @@ button{
 
 <script>
 
-/* =========================
+/* =========================================================
    TELEGRAM
-========================= */
+========================================================= */
 
 const tg =
     window.Telegram?.WebApp || null;
@@ -1386,17 +2037,285 @@ if(tg){
 }
 
 
-/* =========================
+/* =========================================================
    WORKER
-========================= */
+========================================================= */
 
 const WORKER_URL =
     "https://lnc-telegram-bot.vervixproducer.workers.dev/";
 
 
-/* =========================
+/* =========================================================
+   PRODUCT CATALOG
+========================================================= */
+
+const PRODUCTS = {
+
+    blackTshirt: {
+
+        id:
+            "black-tshirt",
+
+        name:
+            "Black T-Shirt — Create your Legacy",
+
+        displayName:
+            "Black T-Shirt",
+
+        subtitle:
+            "Create your Legacy",
+
+        price:
+            3990,
+
+        colors:
+            ["Black"],
+
+        sizes:
+            ["XS","S","M","L","XL","2XL","3XL"],
+
+        drop:
+            "DROP 02",
+
+        images: [
+
+            "LNC/Black T-Shirt/1.png",
+
+            "LNC/Black T-Shirt/2.png",
+
+            "LNC/Black T-Shirt/3.png"
+
+        ],
+
+        description:
+            "Чёрный силуэт без попытки понравиться всем. " +
+            "Эта вещь про характер, который не требует объяснений — " +
+            "ты просто надеваешь её и продолжаешь создавать своё Legacy."
+
+    },
+
+
+    blackZipHoodie: {
+
+        id:
+            "black-zip-hoodie",
+
+        name:
+            "Black Zip Hoodie — Create your Legacy",
+
+        displayName:
+            "Black Zip Hoodie",
+
+        subtitle:
+            "Create your Legacy",
+
+        price:
+            4500,
+
+        colors:
+            ["Black"],
+
+        sizes:
+            ["XS","S","M","L","XL","2XL"],
+
+        drop:
+            "DROP 02",
+
+        images: [
+
+            "LNC/Black Zip Hoodie/1.png",
+
+            "LNC/Black Zip Hoodie/2.png",
+
+            "LNC/Black Zip Hoodie/3.png"
+
+        ],
+
+        description:
+            "Худи для тех моментов, когда внешний шум уже не имеет значения. " +
+            "Чёрный цвет, тяжёлый визуальный образ и ощущение вещи, " +
+            "которую хочется носить как часть собственного характера."
+
+    },
+
+
+    ashWhite: {
+
+        id:
+            "ash-white",
+
+        name:
+            "Ash White",
+
+        displayName:
+            "Ash White",
+
+        subtitle:
+            "",
+
+        price:
+            3550,
+
+        colors:
+            ["Ash White"],
+
+        sizes:
+            ["XS","S","M","L","XL","2XL","3XL"],
+
+        drop:
+            "DROP 01",
+
+        images: [
+
+            "LNC/Ash White/(1).png",
+
+            "LNC/Ash White/(2).png",
+
+            "LNC/Ash White/(3).png"
+
+        ],
+
+        description:
+            "Спокойная снаружи, но далеко не обычная внутри. " +
+            "Ash White создана для тех образов, где не нужно поднимать голос, " +
+            "чтобы оставить после себя впечатление."
+
+    },
+
+
+    royalBlue: {
+
+        id:
+            "royal-blue",
+
+        name:
+            "Royal Blue — Iconic",
+
+        displayName:
+            "Royal Blue",
+
+        subtitle:
+            "Iconic",
+
+        price:
+            3550,
+
+        colors:
+            ["Royal Blue"],
+
+        sizes:
+            ["XS","S","M","L","XL","2XL","3XL"],
+
+        drop:
+            "DROP 01",
+
+        images: [
+
+            "LNC/Royal Blue/1.png",
+
+            "LNC/Royal Blue/2.png",
+
+            "LNC/Royal Blue/3.png"
+
+        ],
+
+        description:
+            "Цвет, который невозможно спрятать среди остальных. " +
+            "Royal Blue построена вокруг одной идеи: иногда достаточно одной детали, " +
+            "чтобы весь образ начал говорить за тебя."
+
+    },
+
+
+    midnight: {
+
+        id:
+            "midnight-monochrome",
+
+        name:
+            "Midnight Monochrome",
+
+        displayName:
+            "Midnight Monochrome",
+
+        subtitle:
+            "",
+
+        price:
+            3550,
+
+        colors:
+            ["Midnight"],
+
+        sizes:
+            ["XS","S","M","L","XL","2XL","3XL"],
+
+        drop:
+            "DROP 01",
+
+        images: [
+
+            "LNC/Midnight Monochrome/1.png",
+
+            "LNC/Midnight Monochrome/2.png",
+
+            "LNC/Midnight Monochrome/3.png"
+
+        ],
+
+        description:
+            "Тёмная эстетика без лишнего давления. " +
+            "Midnight Monochrome ощущается как ночь в городе — " +
+            "сдержанная, холодная и уверенная в себе."
+
+    },
+
+
+    book: {
+
+        id:
+            "book-love-never",
+
+        name:
+            "Book Love Never",
+
+        displayName:
+            "Book Love Never",
+
+        subtitle:
+            "",
+
+        price:
+            9999,
+
+        colors:
+            [],
+
+        sizes:
+            [],
+
+        drop:
+            "BOOK",
+
+        images: [
+
+            "LNC/Book Love Never/1.PNG"
+
+        ],
+
+        description:
+            "LOVE NEVER — отдельная часть мира LNC COLLECTION. " +
+            "Не просто дополнение к одежде, а предмет, который остаётся с тобой " +
+            "дольше одного дропа."
+
+    }
+
+};
+
+
+/* =========================================================
    STATE
-========================= */
+========================================================= */
 
 let cart = [];
 
@@ -1408,10 +2327,49 @@ let selectedSize = null;
 
 let currentQuantity = 1;
 
+let activePromo = null;
 
-/* =========================
+let galleryObserver = null;
+
+
+/* =========================================================
+   PROMOCODES
+========================================================= */
+
+const PROMO_CODES = {
+
+    "lnc collection": {
+
+        code:
+            "LNC COLLECTION",
+
+        type:
+            "DROP01",
+
+        percent:
+            15
+
+    },
+
+    "legacy": {
+
+        code:
+            "Legacy",
+
+        type:
+            "ALL",
+
+        percent:
+            10
+
+    }
+
+};
+
+
+/* =========================================================
    HELPERS
-========================= */
+========================================================= */
 
 function escapeHtml(value){
 
@@ -1433,6 +2391,16 @@ function formatPrice(value){
 }
 
 
+function normalizePromo(value){
+
+    return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g," ");
+
+}
+
+
 function generateOrderId(){
 
     const now =
@@ -1445,7 +2413,8 @@ function generateOrderId(){
 
     const random =
         Math.floor(
-            1000 + Math.random() * 9000
+            1000 +
+            Math.random() * 9000
         );
 
     return `LNC-${date}-${random}`;
@@ -1453,126 +2422,585 @@ function generateOrderId(){
 }
 
 
-/* =========================
-   PRODUCT
-========================= */
+/* =========================================================
+   PRODUCT CALCULATIONS
+========================================================= */
 
-function openProduct(
-    name,
-    price,
-    colors,
-    sizes
+function getCartSubtotal(){
+
+    return cart.reduce(
+        (sum,item) => {
+
+            return sum +
+                Number(item.price || 0) *
+                Number(item.quantity || 1);
+
+        },
+        0
+    );
+
+}
+
+
+function getPromoDiscount(){
+
+    if(
+        !activePromo ||
+        !cart.length
+    ){
+
+        return 0;
+
+    }
+
+
+    if(
+        activePromo.type ===
+        "DROP01"
+    ){
+
+        return cart.reduce(
+            (sum,item) => {
+
+                if(
+                    item.drop !==
+                    "DROP 01"
+                ){
+
+                    return sum;
+
+                }
+
+
+                return sum +
+                    (
+                        Number(item.price || 0) *
+                        Number(item.quantity || 1)
+                    ) *
+                    activePromo.percent /
+                    100;
+
+            },
+            0
+        );
+
+    }
+
+
+    if(
+        activePromo.type ===
+        "ALL"
+    ){
+
+        return getCartSubtotal() *
+            activePromo.percent /
+            100;
+
+    }
+
+
+    return 0;
+
+}
+
+
+function getCartTotal(){
+
+    return Math.max(
+        0,
+        getCartSubtotal() -
+        getPromoDiscount()
+    );
+
+}
+
+
+/* =========================================================
+   RENDER CATALOG
+========================================================= */
+
+function renderCatalog(){
+
+    const drop02 =
+        document.getElementById(
+            "drop02Products"
+        );
+
+
+    const drop01 =
+        document.getElementById(
+            "drop01Products"
+        );
+
+
+    const book =
+        document.getElementById(
+            "bookProducts"
+        );
+
+
+    drop02.innerHTML = "";
+
+    drop01.innerHTML = "";
+
+    book.innerHTML = "";
+
+
+    Object.values(PRODUCTS)
+        .forEach(
+            (product,index) => {
+
+                const element =
+                    createProductCard(
+                        product,
+                        index
+                    );
+
+
+                if(
+                    product.drop ===
+                    "DROP 02"
+                ){
+
+                    drop02.appendChild(
+                        element
+                    );
+
+                }
+
+                if(
+                    product.drop ===
+                    "DROP 01"
+                ){
+
+                    drop01.appendChild(
+                        element
+                    );
+
+                }
+
+                if(
+                    product.drop ===
+                    "BOOK"
+                ){
+
+                    book.appendChild(
+                        element
+                    );
+
+                }
+
+            }
+        );
+
+}
+
+
+function createProductCard(
+    product,
+    index
 ){
 
-    currentProduct = {
-        name,
-        price,
-        colors,
-        sizes
-    };
+    const element =
+        document.createElement("div");
 
 
-    currentQuantity = 1;
+    element.className =
+        "product";
 
 
-    document.getElementById("modalName")
-        .innerText = name;
+    element.style.animationDelay =
+        `${index * 70}ms`;
 
 
-    document.getElementById("modalPrice")
-        .innerText = formatPrice(price);
+    const image =
+        product.images[0];
 
 
-    document.getElementById("quantity")
-        .innerText = "1";
+    const subtitle =
+        product.subtitle
+            ? `<span class="product-subtitle">${escapeHtml(product.subtitle)}</span>`
+            : "";
+
+
+    element.innerHTML = `
+
+        <div class="product-image-wrap">
+
+            <img
+                class="product-image"
+                src="${escapeHtml(image)}"
+                alt="${escapeHtml(product.name)}"
+                loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+
+                ${escapeHtml(product.displayName)}
+
+                ${
+                    subtitle
+                        ? `<br>${subtitle}`
+                        : ""
+                }
+
+            </div>
+
+            <div class="product-price">
+
+                ${formatPrice(product.price)} ₽
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    element.addEventListener(
+        "click",
+        () => openProduct(
+            product.id
+        )
+    );
+
+
+    return element;
+
+}
+
+
+/* =========================================================
+   OPEN PRODUCT
+========================================================= */
+
+function openProduct(
+    productId
+){
+
+    const product =
+        Object.values(PRODUCTS)
+            .find(
+                item =>
+                    item.id ===
+                    productId
+            );
+
+
+    if(!product){
+        return;
+    }
+
+
+    currentProduct =
+        product;
+
+
+    currentQuantity =
+        1;
 
 
     selectedColor =
-        colors.length
-            ? colors[0]
+        product.colors.length
+            ? product.colors[0]
             : null;
 
 
     selectedSize =
-        sizes.length
-            ? sizes[0]
+        product.sizes.length
+            ? product.sizes[0]
             : null;
 
 
+    document.getElementById(
+        "modalName"
+    ).innerText =
+        product.name;
+
+
+    document.getElementById(
+        "modalPrice"
+    ).innerText =
+        formatPrice(product.price);
+
+
+    document.getElementById(
+        "quantity"
+    ).innerText =
+        "1";
+
+
+    document.getElementById(
+        "modalDescription"
+    ).innerText =
+        product.description;
+
+
+    renderProductGallery(
+        product
+    );
+
+
+    renderOptions(
+        "colors",
+        product.colors,
+        selectedColor
+    );
+
+
+    renderOptions(
+        "sizes",
+        product.sizes,
+        selectedSize
+    );
+
+
     const colorTitle =
-        document.getElementById("colorTitle");
+        document.getElementById(
+            "colorTitle"
+        );
 
-    const colorsContainer =
-        document.getElementById("colors");
+
+    const colors =
+        document.getElementById(
+            "colors"
+        );
 
 
-    if(colors.length){
+    if(product.colors.length){
 
         colorTitle.style.display =
             "block";
 
-        colorsContainer.style.display =
+        colors.style.display =
             "flex";
-
-        renderOptions(
-            "colors",
-            colors,
-            selectedColor
-        );
 
     }else{
 
         colorTitle.style.display =
             "none";
 
-        colorsContainer.style.display =
+        colors.style.display =
             "none";
 
     }
 
 
     const sizeTitle =
-        document.getElementById("sizeTitle");
+        document.getElementById(
+            "sizeTitle"
+        );
 
-    const sizesContainer =
-        document.getElementById("sizes");
+
+    const sizes =
+        document.getElementById(
+            "sizes"
+        );
 
 
-    if(sizes.length){
+    if(product.sizes.length){
 
         sizeTitle.style.display =
             "block";
 
-        sizesContainer.style.display =
+        sizes.style.display =
             "flex";
-
-        renderOptions(
-            "sizes",
-            sizes,
-            selectedSize
-        );
 
     }else{
 
         sizeTitle.style.display =
             "none";
 
-        sizesContainer.style.display =
+        sizes.style.display =
             "none";
 
     }
 
 
     document
-        .getElementById("productModal")
-        .classList.add("active");
+        .getElementById(
+            "productModal"
+        )
+        .classList.add(
+            "active"
+        );
+
+
+    if(tg){
+
+        tg.HapticFeedback?.impactOccurred(
+            "light"
+        );
+
+    }
 
 }
 
 
-/* =========================
+/* =========================================================
+   PRODUCT GALLERY
+========================================================= */
+
+function renderProductGallery(
+    product
+){
+
+    const gallery =
+        document.getElementById(
+            "productGallery"
+        );
+
+
+    gallery.innerHTML = "";
+
+
+    const track =
+        document.createElement(
+            "div"
+        );
+
+
+    track.className =
+        "gallery-track";
+
+
+    const dots =
+        document.createElement(
+            "div"
+        );
+
+
+    dots.className =
+        "gallery-dots";
+
+
+    product.images.forEach(
+        (image,index) => {
+
+            const slide =
+                document.createElement(
+                    "div"
+                );
+
+
+            slide.className =
+                "gallery-slide";
+
+
+            slide.innerHTML = `
+
+                <img
+                    src="${escapeHtml(image)}"
+                    alt="${escapeHtml(product.name)} — фото ${index + 1}"
+                    draggable="false">
+
+                <div class="gallery-counter">
+                    ${index + 1}/${product.images.length}
+                </div>
+
+            `;
+
+
+            track.appendChild(
+                slide
+            );
+
+
+            const dot =
+                document.createElement(
+                    "div"
+                );
+
+
+            dot.className =
+                "gallery-dot" +
+                (
+                    index === 0
+                        ? " active"
+                        : ""
+                );
+
+
+            dots.appendChild(
+                dot
+            );
+
+        }
+    );
+
+
+    gallery.appendChild(
+        track
+    );
+
+
+    if(product.images.length > 1){
+
+        gallery.appendChild(
+            dots
+        );
+
+    }
+
+
+    const galleryDots =
+        [...dots.children];
+
+
+    if(galleryDots.length){
+
+        track.addEventListener(
+            "scroll",
+            () => {
+
+                const width =
+                    track.clientWidth;
+
+
+                if(!width){
+                    return;
+                }
+
+
+                const index =
+                    Math.round(
+                        track.scrollLeft /
+                        width
+                    );
+
+
+                galleryDots
+                    .forEach(
+                        (
+                            dot,
+                            dotIndex
+                        ) => {
+
+                            dot.classList.toggle(
+                                "active",
+                                dotIndex === index
+                            );
+
+                        }
+                    );
+
+            },
+            {
+                passive:true
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================================================
    OPTIONS
-========================= */
+========================================================= */
 
 function renderOptions(
     id,
@@ -1581,85 +3009,101 @@ function renderOptions(
 ){
 
     const container =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
 
 
     container.innerHTML = "";
 
 
-    options.forEach(option => {
+    options.forEach(
+        option => {
 
-        const button =
-            document.createElement("button");
+            const button =
+                document.createElement(
+                    "button"
+                );
 
 
-        button.className =
-            "option" +
-            (
-                option === selected
-                    ? " selected"
-                    : ""
+            button.className =
+                "option" +
+                (
+                    option === selected
+                        ? " selected"
+                        : ""
+                );
+
+
+            button.innerText =
+                option;
+
+
+            button.onclick =
+                () => {
+
+                    if(
+                        id ===
+                        "colors"
+                    ){
+
+                        selectedColor =
+                            option;
+
+                    }else{
+
+                        selectedSize =
+                            option;
+
+                    }
+
+
+                    renderOptions(
+                        id,
+                        options,
+                        option
+                    );
+
+                };
+
+
+            container.appendChild(
+                button
             );
 
-
-        button.innerText =
-            option;
-
-
-        button.onclick = () => {
-
-            if(id === "colors"){
-
-                selectedColor =
-                    option;
-
-            }else{
-
-                selectedSize =
-                    option;
-
-            }
-
-
-            renderOptions(
-                id,
-                options,
-                option
-            );
-
-        };
-
-
-        container.appendChild(button);
-
-    });
+        }
+    );
 
 }
 
 
-/* =========================
+/* =========================================================
    QUANTITY
-========================= */
+========================================================= */
 
-function changeQuantity(value){
+function changeQuantity(
+    value
+){
 
     currentQuantity =
         Math.max(
             1,
-            currentQuantity + value
+            currentQuantity +
+            value
         );
 
 
-    document.getElementById("quantity")
-        .innerText =
+    document.getElementById(
+        "quantity"
+    ).innerText =
         currentQuantity;
 
 }
 
 
-/* =========================
+/* =========================================================
    ADD TO CART
-========================= */
+========================================================= */
 
 function addToCart(){
 
@@ -1669,6 +3113,9 @@ function addToCart(){
 
 
     cart.push({
+
+        productId:
+            currentProduct.id,
 
         name:
             currentProduct.name,
@@ -1683,53 +3130,223 @@ function addToCart(){
             selectedSize,
 
         quantity:
-            currentQuantity
+            currentQuantity,
+
+        drop:
+            currentProduct.drop
 
     });
 
+
+    saveCart();
 
     updateCartCount();
 
     closeModal();
 
 
-    if(
-        tg &&
-        tg.HapticFeedback
-    ){
+    showMiniFeedback(
+        "ДОБАВЛЕНО В КОРЗИНУ"
+    );
 
-        tg.HapticFeedback
-            .impactOccurred("light");
+
+    if(tg){
+
+        tg.HapticFeedback?.impactOccurred(
+            "light"
+        );
 
     }
 
 }
 
 
-/* =========================
+/* =========================================================
+   MINI FEEDBACK
+========================================================= */
+
+function showMiniFeedback(
+    text
+){
+
+    const existing =
+        document.getElementById(
+            "miniFeedback"
+        );
+
+
+    if(existing){
+
+        existing.remove();
+
+    }
+
+
+    const element =
+        document.createElement(
+            "div"
+        );
+
+
+    element.id =
+        "miniFeedback";
+
+
+    element.style.cssText = `
+        position:fixed;
+        left:50%;
+        bottom:100px;
+        transform:translateX(-50%);
+        z-index:999;
+        background:#fff;
+        color:#000;
+        padding:11px 15px;
+        font-size:11px;
+        font-weight:bold;
+        letter-spacing:1px;
+        white-space:nowrap;
+        box-shadow:0 10px 30px rgba(0,0,0,.35);
+        animation:fadeUp .25s ease both;
+    `;
+
+
+    element.innerText =
+        text;
+
+
+    document.body.appendChild(
+        element
+    );
+
+
+    setTimeout(
+        () => {
+
+            element.style.opacity =
+                "0";
+
+            element.style.transform =
+                "translateX(-50%) translateY(5px)";
+
+            element.style.transition =
+                "all .25s ease";
+
+        },
+        1300
+    );
+
+
+    setTimeout(
+        () => {
+
+            element.remove();
+
+        },
+        1600
+    );
+
+}
+
+
+/* =========================================================
+   CART STORAGE
+========================================================= */
+
+function saveCart(){
+
+    try{
+
+        localStorage.setItem(
+            "lnc_cart",
+            JSON.stringify(cart)
+        );
+
+    }catch(error){
+
+        console.warn(
+            "Cart storage unavailable:",
+            error
+        );
+
+    }
+
+}
+
+
+function loadCart(){
+
+    try{
+
+        const saved =
+            localStorage.getItem(
+                "lnc_cart"
+            );
+
+
+        if(saved){
+
+            const parsed =
+                JSON.parse(saved);
+
+
+            if(Array.isArray(parsed)){
+
+                cart =
+                    parsed;
+
+            }
+
+        }
+
+    }catch(error){
+
+        console.warn(
+            "Could not restore cart:",
+            error
+        );
+
+
+        cart = [];
+
+    }
+
+}
+
+
+/* =========================================================
    CART COUNT
-========================= */
+========================================================= */
 
 function updateCartCount(){
 
     const count =
         cart.reduce(
-            (sum,item) =>
-                sum + item.quantity,
+            (
+                sum,
+                item
+            ) => {
+
+                return sum +
+                    Number(
+                        item.quantity || 0
+                    );
+
+            },
             0
         );
 
 
-    document.getElementById("cartCount")
-        .innerText =
+    document.getElementById(
+        "cartCount"
+    ).innerText =
         count;
 
 }
 
 
-/* =========================
+/* =========================================================
    CART
-========================= */
+========================================================= */
 
 function openCart(){
 
@@ -1737,8 +3354,12 @@ function openCart(){
 
 
     document
-        .getElementById("cartModal")
-        .classList.add("active");
+        .getElementById(
+            "cartModal"
+        )
+        .classList.add(
+            "active"
+        );
 
 }
 
@@ -1746,8 +3367,12 @@ function openCart(){
 function closeCart(){
 
     document
-        .getElementById("cartModal")
-        .classList.remove("active");
+        .getElementById(
+            "cartModal"
+        )
+        .classList.remove(
+            "active"
+        );
 
 }
 
@@ -1755,7 +3380,9 @@ function closeCart(){
 function renderCart(){
 
     const container =
-        document.getElementById("cartItems");
+        document.getElementById(
+            "cartItems"
+        );
 
 
     container.innerHTML = "";
@@ -1767,9 +3394,22 @@ function renderCart(){
             '<div class="empty">Корзина пуста.</div>';
 
 
-        document.getElementById("cartTotal")
-            .innerText =
+        document.getElementById(
+            "cartTotal"
+        ).innerText =
             "0";
+
+
+        document.getElementById(
+            "cartDiscount"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "cartFinal"
+        ).style.display =
+            "none";
 
 
         return;
@@ -1777,23 +3417,29 @@ function renderCart(){
     }
 
 
-    let total = 0;
-
-
     cart.forEach(
-        (item,index) => {
-
-            total +=
-                item.price *
-                item.quantity;
-
+        (
+            item,
+            index
+        ) => {
 
             const element =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             element.className =
                 "cart-item";
+
+
+            const subtotal =
+                Number(
+                    item.price || 0
+                ) *
+                Number(
+                    item.quantity || 1
+                );
 
 
             element.innerHTML = `
@@ -1829,10 +3475,7 @@ function renderCart(){
 
                     <div class="cart-item-price">
 
-                        ${formatPrice(
-                            item.price *
-                            item.quantity
-                        )} ₽
+                        ${formatPrice(subtotal)} ₽
 
                     </div>
 
@@ -1873,22 +3516,92 @@ function renderCart(){
             `;
 
 
-            container.appendChild(element);
+            container.appendChild(
+                element
+            );
 
         }
     );
 
 
-    document.getElementById("cartTotal")
-        .innerText =
-        formatPrice(total);
+    updateCartTotals();
+
+
+    updatePromoMessage();
 
 }
 
 
-/* =========================
+/* =========================================================
+   CART TOTALS
+========================================================= */
+
+function updateCartTotals(){
+
+    const subtotal =
+        getCartSubtotal();
+
+
+    const discount =
+        getPromoDiscount();
+
+
+    const finalTotal =
+        getCartTotal();
+
+
+    document.getElementById(
+        "cartTotal"
+    ).innerText =
+        formatPrice(subtotal);
+
+
+    if(discount > 0){
+
+        document.getElementById(
+            "cartDiscount"
+        ).style.display =
+            "flex";
+
+
+        document.getElementById(
+            "cartDiscountValue"
+        ).innerText =
+            formatPrice(discount);
+
+
+        document.getElementById(
+            "cartFinal"
+        ).style.display =
+            "flex";
+
+
+        document.getElementById(
+            "cartFinalValue"
+        ).innerText =
+            formatPrice(finalTotal);
+
+    }else{
+
+        document.getElementById(
+            "cartDiscount"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "cartFinal"
+        ).style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =========================================================
    CART QUANTITY
-========================= */
+========================================================= */
 
 function changeCartQuantity(
     index,
@@ -1904,12 +3617,19 @@ function changeCartQuantity(
         value;
 
 
-    if(cart[index].quantity <= 0){
+    if(
+        cart[index].quantity <= 0
+    ){
 
-        cart.splice(index,1);
+        cart.splice(
+            index,
+            1
+        );
 
     }
 
+
+    saveCart();
 
     updateCartCount();
 
@@ -1918,19 +3638,26 @@ function changeCartQuantity(
 }
 
 
-/* =========================
+/* =========================================================
    REMOVE
-========================= */
+========================================================= */
 
-function removeFromCart(index){
+function removeFromCart(
+    index
+){
 
     if(!cart[index]){
         return;
     }
 
 
-    cart.splice(index,1);
+    cart.splice(
+        index,
+        1
+    );
 
+
+    saveCart();
 
     updateCartCount();
 
@@ -1939,9 +3666,225 @@ function removeFromCart(index){
 }
 
 
-/* =========================
+/* =========================================================
+   PROMO
+========================================================= */
+
+function applyPromoCode(){
+
+    const input =
+        document.getElementById(
+            "promoInput"
+        );
+
+
+    const normalized =
+        normalizePromo(
+            input.value
+        );
+
+
+    if(!normalized){
+
+        setPromoMessage(
+            "Введите промокод.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    const promo =
+        PROMO_CODES[
+            normalized
+        ];
+
+
+    if(!promo){
+
+        activePromo =
+            null;
+
+
+        updateCartTotals();
+
+
+        updateCheckoutPreview();
+
+
+        setPromoMessage(
+            "Промокод не найден.",
+            false
+        );
+
+        return;
+
+    }
+
+
+    if(
+        promo.type ===
+        "DROP01"
+    ){
+
+        const hasDrop01 =
+            cart.some(
+                item =>
+                    item.drop ===
+                    "DROP 01"
+            );
+
+
+        if(!hasDrop01){
+
+            activePromo =
+                null;
+
+
+            updateCartTotals();
+
+            setPromoMessage(
+                "Этот промокод действует только на товары DROP 01.",
+                false
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    activePromo = {
+        code:
+            promo.code,
+
+        type:
+            promo.type,
+
+        percent:
+            promo.percent
+    };
+
+
+    updateCartTotals();
+
+    updateCheckoutPreview();
+
+
+    let message =
+        `Промокод ${promo.code} применён — скидка ${promo.percent}%`;
+
+
+    if(
+        promo.type ===
+        "DROP01"
+    ){
+
+        message +=
+            " на товары DROP 01.";
+
+    }else{
+
+        message +=
+            " на всю корзину.";
+
+    }
+
+
+    setPromoMessage(
+        message,
+        true
+    );
+
+
+    if(tg){
+
+        tg.HapticFeedback?.notificationOccurred(
+            "success"
+        );
+
+    }
+
+}
+
+
+function updatePromoMessage(){
+
+    if(!activePromo){
+
+        return;
+
+    }
+
+
+    if(
+        activePromo.type ===
+        "DROP01"
+    ){
+
+        const hasDrop01 =
+            cart.some(
+                item =>
+                    item.drop ===
+                    "DROP 01"
+            );
+
+
+        if(!hasDrop01){
+
+            activePromo =
+                null;
+
+
+            setPromoMessage(
+                "",
+                false
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    updateCartTotals();
+
+}
+
+
+function setPromoMessage(
+    message,
+    success
+){
+
+    const element =
+        document.getElementById(
+            "promoMessage"
+        );
+
+
+    element.innerText =
+        message;
+
+
+    element.className =
+        "promo-message active " +
+        (
+            success
+                ? "success"
+                : "error"
+        );
+
+}
+
+
+/* =========================================================
    CHECKOUT
-========================= */
+========================================================= */
 
 function checkout(){
 
@@ -1962,8 +3905,12 @@ function checkout(){
 
 
     document
-        .getElementById("checkoutModal")
-        .classList.add("active");
+        .getElementById(
+            "checkoutModal"
+        )
+        .classList.add(
+            "active"
+        );
 
 
     fillTelegramUser();
@@ -1971,9 +3918,9 @@ function checkout(){
 }
 
 
-/* =========================
+/* =========================================================
    RENDER CHECKOUT
-========================= */
+========================================================= */
 
 function renderCheckout(){
 
@@ -1986,129 +3933,202 @@ function renderCheckout(){
     summary.innerHTML = "";
 
 
-    let total = 0;
+    cart.forEach(
+        item => {
+
+            const itemTotal =
+                Number(
+                    item.price || 0
+                ) *
+                Number(
+                    item.quantity || 1
+                );
 
 
-    cart.forEach(item => {
-
-        const itemTotal =
-            item.price *
-            item.quantity;
-
-
-        total += itemTotal;
+            const element =
+                document.createElement(
+                    "div"
+                );
 
 
-        const element =
-            document.createElement("div");
+            element.className =
+                "summary-item";
 
 
-        element.className =
-            "summary-item";
+            element.innerHTML = `
+
+                <div class="summary-name">
+
+                    ${escapeHtml(item.name)}
+
+                </div>
 
 
-        element.innerHTML = `
+                <div class="summary-details">
 
-            <div class="summary-name">
+                    ${
+                        item.color
+                            ? `Цвет: ${escapeHtml(item.color)}<br>`
+                            : ""
+                    }
 
-                ${escapeHtml(item.name)}
+                    ${
+                        item.size
+                            ? `Размер: ${escapeHtml(item.size)}<br>`
+                            : ""
+                    }
 
-            </div>
+                    Количество: ${item.quantity}
 
-
-            <div class="summary-details">
-
-                ${
-                    item.color
-                        ? `Цвет: ${escapeHtml(item.color)}<br>`
-                        : ""
-                }
-
-                ${
-                    item.size
-                        ? `Размер: ${escapeHtml(item.size)}<br>`
-                        : ""
-                }
-
-                Количество: ${item.quantity}
-
-            </div>
+                </div>
 
 
-            <div class="summary-price">
+                <div class="summary-price">
 
-                ${formatPrice(itemTotal)} ₽
+                    ${formatPrice(itemTotal)} ₽
 
-            </div>
+                </div>
 
-        `;
-
-
-        summary.appendChild(element);
-
-    });
+            `;
 
 
-    document.getElementById("checkoutTotal")
-        .innerText =
-        formatPrice(total);
+            summary.appendChild(
+                element
+            );
+
+        }
+    );
+
+
+    updateCheckoutPreview();
 
 }
 
 
-/* =========================
+function updateCheckoutPreview(){
+
+    const subtotal =
+        getCartSubtotal();
+
+
+    const discount =
+        getPromoDiscount();
+
+
+    const finalTotal =
+        getCartTotal();
+
+
+    document.getElementById(
+        "checkoutOriginalTotal"
+    ).innerText =
+        formatPrice(subtotal);
+
+
+    document.getElementById(
+        "checkoutTotal"
+    ).innerText =
+        formatPrice(finalTotal);
+
+
+    if(discount > 0){
+
+        document.getElementById(
+            "checkoutDiscountRow"
+        ).style.display =
+            "flex";
+
+
+        document.getElementById(
+            "checkoutDiscount"
+        ).innerText =
+            formatPrice(discount);
+
+    }else{
+
+        document.getElementById(
+            "checkoutDiscountRow"
+        ).style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =========================================================
    TELEGRAM USER
-========================= */
+========================================================= */
 
 function fillTelegramUser(){
 
-    if(!tg){
+    if(
+        !tg ||
+        !tg.initDataUnsafe
+    ){
+
         return;
+
     }
+
 
     const user =
-        tg.initDataUnsafe?.user || null;
+        tg.initDataUnsafe.user;
+
 
     if(!user){
-        console.log("Telegram user data is not available");
         return;
     }
 
+
     const telegramInput =
-        document.getElementById("customerTelegram");
+        document.getElementById(
+            "customerTelegram"
+        );
+
+
+    if(
+        user.username &&
+        !telegramInput.value
+    ){
+
+        telegramInput.value =
+            "@" +
+            user.username;
+
+    }
+
 
     const nameInput =
-        document.getElementById("customerName");
+        document.getElementById(
+            "customerName"
+        );
 
-    if(telegramInput && user.username){
-        telegramInput.value = "@" + user.username;
-    }
 
-    if(nameInput){
-        const fullName = [
-            user.first_name,
+    if(
+        !nameInput.value &&
+        (
+            user.first_name ||
             user.last_name
-        ]
-        .filter(Boolean)
-        .join(" ");
+        )
+    ){
 
-        if(fullName){
-            nameInput.value = fullName;
-        }
+        nameInput.value =
+            [
+                user.first_name,
+                user.last_name
+            ]
+            .filter(Boolean)
+            .join(" ");
+
     }
 
-    console.log("Telegram user loaded:", {
-        id: user.id,
-        username: user.username,
-        first_name: user.first_name,
-        last_name: user.last_name
-    });
 }
 
 
-/* =========================
+/* =========================================================
    VALIDATION
-========================= */
+========================================================= */
 
 function showCheckoutError(
     message
@@ -2150,9 +4170,9 @@ function clearCheckoutError(){
 }
 
 
-/* =========================
+/* =========================================================
    PLACE ORDER
-========================= */
+========================================================= */
 
 async function placeOrder(){
 
@@ -2250,16 +4270,16 @@ async function placeOrder(){
     }
 
 
-    let total = 0;
+    const originalTotal =
+        getCartSubtotal();
 
 
-    cart.forEach(item => {
+    const discount =
+        getPromoDiscount();
 
-        total +=
-            item.price *
-            item.quantity;
 
-    });
+    const finalTotal =
+        getCartTotal();
 
 
     const telegramUser =
@@ -2331,34 +4351,75 @@ async function placeOrder(){
 
 
         items:
-            cart.map(item => ({
+            cart.map(
+                item => ({
 
-                name:
-                    item.name,
+                    name:
+                        item.name,
 
-                price:
-                    item.price,
+                    price:
+                        Number(
+                            item.price || 0
+                        ),
 
-                color:
-                    item.color ||
-                    null,
+                    color:
+                        item.color ||
+                        null,
 
-                size:
-                    item.size ||
-                    null,
+                    size:
+                        item.size ||
+                        null,
 
-                quantity:
-                    item.quantity,
+                    quantity:
+                        Number(
+                            item.quantity || 1
+                        ),
 
-                subtotal:
-                    item.price *
-                    item.quantity
+                    subtotal:
+                        Number(
+                            item.price || 0
+                        ) *
+                        Number(
+                            item.quantity || 1
+                        ),
 
-            })),
+                    drop:
+                        item.drop ||
+                        null
+
+                })
+            ),
+
+
+        original_total:
+            originalTotal,
+
+
+        promo_code:
+            activePromo
+                ? activePromo.code
+                : null,
+
+
+        promo_type:
+            activePromo
+                ? activePromo.type
+                : null,
+
+
+        promo_percent:
+            activePromo
+                ? activePromo.percent
+                : 0,
+
+
+        discount:
+            discount,
 
 
         total:
-            total,
+            finalTotal,
+
 
         currency:
             "RUB"
@@ -2370,7 +4431,10 @@ async function placeOrder(){
         JSON.stringify(order);
 
 
-    if(orderData.length > 4096){
+    if(
+        orderData.length >
+        4096
+    ){
 
         showCheckoutError(
             "Заказ слишком большой. Уменьшите количество товаров."
@@ -2444,6 +4508,7 @@ async function placeOrder(){
 
 
             showCheckoutError(
+                result.error ||
                 "Не удалось отправить заказ. Попробуйте ещё раз."
             );
 
@@ -2497,9 +4562,9 @@ async function placeOrder(){
 }
 
 
-/* =========================
+/* =========================================================
    SUCCESS
-========================= */
+========================================================= */
 
 function showSuccessScreen(
     orderId
@@ -2525,17 +4590,16 @@ function showSuccessScreen(
     document
         .getElementById(
             "successOrderNumber"
-        )
-        .innerText =
+        ).innerText =
         "Номер заказа: " +
         orderId;
 
 }
 
 
-/* =========================
+/* =========================================================
    FINISH
-========================= */
+========================================================= */
 
 function finishCheckout(){
 
@@ -2593,8 +4657,23 @@ function finishCheckout(){
 
     cart = [];
 
+    activePromo = null;
+
+
+    saveCart();
 
     updateCartCount();
+
+
+    document.getElementById(
+        "promoInput"
+    ).value = "";
+
+
+    setPromoMessage(
+        "",
+        false
+    );
 
 
     document.getElementById(
@@ -2614,9 +4693,9 @@ function finishCheckout(){
 }
 
 
-/* =========================
+/* =========================================================
    CLOSE CHECKOUT
-========================= */
+========================================================= */
 
 function closeCheckout(){
 
@@ -2631,9 +4710,9 @@ function closeCheckout(){
 }
 
 
-/* =========================
+/* =========================================================
    CLOSE PRODUCT
-========================= */
+========================================================= */
 
 function closeModal(){
 
@@ -2648,16 +4727,17 @@ function closeModal(){
 }
 
 
-/* =========================
+/* =========================================================
    ESC
-========================= */
+========================================================= */
 
 document.addEventListener(
     "keydown",
-    function(event){
+    event => {
 
         if(
-            event.key === "Escape"
+            event.key ===
+            "Escape"
         ){
 
             closeModal();
@@ -2672,9 +4752,46 @@ document.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
+   MODAL BACKDROP CLOSE
+========================================================= */
+
+document.querySelectorAll(
+    ".modal"
+).forEach(
+    modal => {
+
+        modal.addEventListener(
+            "click",
+            event => {
+
+                if(
+                    event.target ===
+                    modal
+                ){
+
+                    modal.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
    INIT
-========================= */
+========================================================= */
+
+loadCart();
+
+renderCatalog();
+
+updateCartCount();
 
 fillTelegramUser();
 
