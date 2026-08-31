@@ -492,7 +492,7 @@ body::after{
     display:none;
     background:rgba(0,0,0,.97);
     z-index:500;
-    touch-action:none;
+    overflow:hidden;
 }
 
 .fullscreen-gallery.active{
@@ -522,7 +522,7 @@ body::after{
     justify-content:center;
     border:1px solid rgba(255,255,255,.15);
     border-radius:50%;
-    background:rgba(0,0,0,.4);
+    background:rgba(0,0,0,.42);
     color:#fff;
     font-size:24px;
     cursor:pointer;
@@ -541,32 +541,53 @@ body::after{
     position:absolute;
     inset:0;
     display:flex;
-    overflow:hidden;
-    touch-action:none;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+    touch-action:pan-x;
+}
+
+.fullscreen-track::-webkit-scrollbar{
+    display:none;
 }
 
 .fullscreen-slide{
     position:relative;
     flex:0 0 100%;
-    width:100%;
+    width:100vw;
     height:100%;
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    touch-action:none;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    touch-action:pan-x;
 }
 
 .fullscreen-slide img{
+    display:block;
     max-width:100%;
     max-height:100%;
     width:auto;
     height:auto;
     object-fit:contain;
-    transform:translate3d(0,0,0) scale(1);
-    will-change:transform;
     user-select:none;
     -webkit-user-drag:none;
+    will-change:transform;
+    transform:translate3d(0,0,0) scale(1);
+    touch-action:pan-x pan-y;
+}
+
+.fullscreen-slide.zoomed{
+    touch-action:none;
+}
+
+.fullscreen-slide.zoomed img{
     touch-action:none;
 }
 
@@ -2020,183 +2041,361 @@ let fullscreenIndex = 0;
 let fullscreenScale = 1;
 let fullscreenX = 0;
 let fullscreenY = 0;
+let fullscreenStartScale = 1;
+let fullscreenStartDistance = 0;
 let fullscreenStartX = 0;
 let fullscreenStartY = 0;
 let fullscreenStartXPosition = 0;
 let fullscreenStartYPosition = 0;
-let fullscreenStartDistance = 0;
-let fullscreenStartScale = 1;
-let fullscreenSwipeDistance = 0;
-let fullscreenWasPinching = false;
+let fullscreenPinching = false;
+let fullscreenDraggingImage = false;
 
-function openFullscreenGallery(images,startIndex){
-    fullscreenImages = [...images];
-    fullscreenIndex = startIndex;
-    resetFullscreenZoom(false);
+const fullscreenGallery =
+    document.getElementById("fullscreenGallery");
 
-    const track = document.getElementById("fullscreenTrack");
-    track.innerHTML = "";
+const fullscreenTrack =
+    document.getElementById("fullscreenTrack");
 
-    fullscreenImages.forEach(image => {
-        const slide = document.createElement("div");
-        slide.className = "fullscreen-slide";
-
-        const img = document.createElement("img");
-        img.src = image;
-        img.alt = "LNC COLLECTION";
-        img.draggable = false;
-
-        slide.appendChild(img);
-        track.appendChild(slide);
-    });
-
-    document.getElementById("fullscreenGallery").classList.add("active");
-    document.body.style.overflow = "hidden";
-
-    updateFullscreenPosition(false);
-    updateFullscreenCounter();
-}
-
-function closeFullscreenGallery(){
-    document.getElementById("fullscreenGallery").classList.remove("active");
-    document.body.style.overflow = "";
-}
-
-function resetFullscreenZoom(animate=true){
-    fullscreenScale = 1;
-    fullscreenX = 0;
-    fullscreenY = 0;
-    updateFullscreenPosition(animate);
-}
-
-function updateFullscreenPosition(animate=true){
-    const track = document.getElementById("fullscreenTrack");
-    const slides = [...track.children];
-    const baseX = -fullscreenIndex * window.innerWidth;
-
-    track.style.transition = animate
-        ? "transform .32s cubic-bezier(.2,.7,.2,1)"
-        : "none";
-
-    track.style.transform = `translate3d(${baseX}px,0,0)`;
-
-    slides.forEach((slide,index) => {
-        const img = slide.querySelector("img");
-        if(!img) return;
-
-        if(index === fullscreenIndex){
-            img.style.transition = animate
-                ? "transform .22s cubic-bezier(.2,.7,.2,1)"
-                : "none";
-
-            img.style.transform = `translate3d(${fullscreenX}px,${fullscreenY}px,0) scale(${fullscreenScale})`;
-        }else{
-            img.style.transition = "none";
-            img.style.transform = "translate3d(0,0,0) scale(1)";
-        }
-    });
-}
-
-function updateFullscreenCounter(){
-    document.getElementById("fullscreenCounter").innerText =
-        `${fullscreenIndex + 1} / ${fullscreenImages.length}`;
-}
-
-function goToFullscreenSlide(index){
-    if(index < 0 || index >= fullscreenImages.length){
-        return;
-    }
-
-    fullscreenIndex = index;
-    fullscreenScale = 1;
-    fullscreenX = 0;
-    fullscreenY = 0;
-    updateFullscreenCounter();
-    updateFullscreenPosition(true);
-
-    if(tg) tg.HapticFeedback?.impactOccurred("light");
-}
-
-const fullscreenTrack = document.getElementById("fullscreenTrack");
-
-fullscreenTrack.addEventListener("touchstart",event => {
-    if(event.touches.length === 2){
-        fullscreenWasPinching = true;
-        fullscreenStartDistance = touchDistance(event.touches[0],event.touches[1]);
-        fullscreenStartScale = fullscreenScale;
-        return;
-    }
-
-    if(event.touches.length === 1){
-        fullscreenStartX = event.touches[0].clientX;
-        fullscreenStartY = event.touches[0].clientY;
-        fullscreenStartXPosition = fullscreenX;
-        fullscreenStartYPosition = fullscreenY;
-        fullscreenSwipeDistance = 0;
-    }
-},{passive:false});
-
-fullscreenTrack.addEventListener("touchmove",event => {
-    if(event.touches.length === 2){
-        event.preventDefault();
-
-        const currentDistance = touchDistance(event.touches[0],event.touches[1]);
-        if(!fullscreenStartDistance) return;
-
-        fullscreenScale = Math.min(
-            4,
-            Math.max(1,fullscreenStartScale * (currentDistance / fullscreenStartDistance))
-        );
-
-        updateFullscreenPosition(false);
-        return;
-    }
-
-    if(event.touches.length === 1){
-        const dx = event.touches[0].clientX - fullscreenStartX;
-        const dy = event.touches[0].clientY - fullscreenStartY;
-        fullscreenSwipeDistance = dx;
-
-        if(fullscreenScale > 1){
-            event.preventDefault();
-            fullscreenX = fullscreenStartXPosition + dx;
-            fullscreenY = fullscreenStartYPosition + dy;
-            updateFullscreenPosition(false);
-        }
-    }
-},{passive:false});
-
-fullscreenTrack.addEventListener("touchend",() => {
-    if(fullscreenWasPinching){
-        fullscreenWasPinching = false;
-        return;
-    }
-
-    if(fullscreenScale > 1) return;
-
-    const threshold = 55;
-
-    if(fullscreenSwipeDistance < -threshold){
-        goToFullscreenSlide(fullscreenIndex + 1);
-    }else if(fullscreenSwipeDistance > threshold){
-        goToFullscreenSlide(fullscreenIndex - 1);
-    }
-},{passive:true});
-
-fullscreenTrack.addEventListener("dblclick",() => {
-    if(fullscreenScale === 1){
-        fullscreenScale = 2;
-        updateFullscreenPosition(true);
-    }else{
-        resetFullscreenZoom(true);
-    }
-});
+const fullscreenCounter =
+    document.getElementById("fullscreenCounter");
 
 function touchDistance(a,b){
     const dx = a.clientX - b.clientX;
     const dy = a.clientY - b.clientY;
     return Math.sqrt(dx * dx + dy * dy);
 }
+
+function getFullscreenSlides(){
+    return [...fullscreenTrack.children];
+}
+
+function getActiveFullscreenImage(){
+    const slide =
+        getFullscreenSlides()[fullscreenIndex];
+
+    return slide
+        ? slide.querySelector("img")
+        : null;
+}
+
+function openFullscreenGallery(images,startIndex){
+
+    fullscreenImages = [...images];
+    fullscreenIndex = Math.max(0,Math.min(startIndex,fullscreenImages.length - 1));
+
+    fullscreenTrack.innerHTML = "";
+
+    fullscreenImages.forEach((image,index) => {
+
+        const slide =
+            document.createElement("div");
+
+        slide.className =
+            "fullscreen-slide";
+
+        const img =
+            document.createElement("img");
+
+        img.src = image;
+        img.alt = `LNC COLLECTION — фото ${index + 1}`;
+        img.draggable = false;
+        img.loading = "eager";
+        img.decoding = "async";
+
+        slide.appendChild(img);
+        fullscreenTrack.appendChild(slide);
+
+    });
+
+    fullscreenGallery.classList.add("active");
+    document.body.style.overflow = "hidden";
+
+    resetFullscreenZoom(false);
+
+    requestAnimationFrame(() => {
+        fullscreenTrack.scrollLeft =
+            fullscreenIndex * fullscreenTrack.clientWidth;
+
+        updateFullscreenCounter();
+    });
+}
+
+function closeFullscreenGallery(){
+
+    fullscreenGallery.classList.remove("active");
+    document.body.style.overflow = "";
+
+    resetFullscreenZoom(false);
+}
+
+function resetFullscreenZoom(animate = true){
+
+    fullscreenScale = 1;
+    fullscreenX = 0;
+    fullscreenY = 0;
+
+    const image = getActiveFullscreenImage();
+
+    if(image){
+        image.style.transition =
+            animate
+                ? "transform .2s ease"
+                : "none";
+
+        image.style.transform =
+            "translate3d(0,0,0) scale(1)";
+
+        const slide = image.parentElement;
+
+        if(slide){
+            slide.classList.remove("zoomed");
+        }
+    }
+}
+
+function applyFullscreenTransform(animate = false){
+
+    const image = getActiveFullscreenImage();
+
+    if(!image){
+        return;
+    }
+
+    image.style.transition =
+        animate
+            ? "transform .22s cubic-bezier(.2,.7,.2,1)"
+            : "none";
+
+    image.style.transform =
+        `translate3d(${fullscreenX}px,${fullscreenY}px,0) scale(${fullscreenScale})`;
+
+    const slide = image.parentElement;
+
+    if(slide){
+        slide.classList.toggle(
+            "zoomed",
+            fullscreenScale > 1.01
+        );
+    }
+}
+
+function goToFullscreenSlide(index){
+
+    if(
+        index < 0 ||
+        index >= fullscreenImages.length
+    ){
+        return;
+    }
+
+    fullscreenIndex = index;
+
+    resetFullscreenZoom(false);
+
+    fullscreenTrack.scrollTo({
+        left:
+            fullscreenIndex *
+            fullscreenTrack.clientWidth,
+        behavior:
+            "smooth"
+    });
+
+    updateFullscreenCounter();
+
+    if(tg){
+        tg.HapticFeedback?.impactOccurred("light");
+    }
+}
+
+function updateFullscreenCounter(){
+
+    fullscreenCounter.innerText =
+        `${fullscreenIndex + 1} / ${fullscreenImages.length}`;
+}
+
+fullscreenTrack.addEventListener("scroll",() => {
+
+    const width =
+        fullscreenTrack.clientWidth;
+
+    if(!width){
+        return;
+    }
+
+    const newIndex =
+        Math.round(
+            fullscreenTrack.scrollLeft / width
+        );
+
+    if(newIndex !== fullscreenIndex){
+        fullscreenIndex = newIndex;
+        fullscreenScale = 1;
+        fullscreenX = 0;
+        fullscreenY = 0;
+        updateFullscreenCounter();
+    }
+
+});
+
+fullscreenTrack.addEventListener("touchstart",event => {
+
+    if(event.touches.length === 2){
+
+        fullscreenPinching = true;
+        fullscreenDraggingImage = false;
+
+        fullscreenStartDistance =
+            touchDistance(
+                event.touches[0],
+                event.touches[1]
+            );
+
+        fullscreenStartScale =
+            fullscreenScale;
+
+        return;
+    }
+
+    if(event.touches.length === 1){
+
+        fullscreenStartX =
+            event.touches[0].clientX;
+
+        fullscreenStartY =
+            event.touches[0].clientY;
+
+        fullscreenStartXPosition =
+            fullscreenX;
+
+        fullscreenStartYPosition =
+            fullscreenY;
+
+        fullscreenDraggingImage =
+            fullscreenScale > 1.01;
+
+    }
+
+},{passive:true});
+
+fullscreenTrack.addEventListener("touchmove",event => {
+
+    if(event.touches.length === 2){
+
+        event.preventDefault();
+
+        if(!fullscreenStartDistance){
+            return;
+        }
+
+        const currentDistance =
+            touchDistance(
+                event.touches[0],
+                event.touches[1]
+            );
+
+        fullscreenScale =
+            Math.min(4,Math.max(1,
+                fullscreenStartScale *
+                (currentDistance / fullscreenStartDistance)
+            ));
+
+        applyFullscreenTransform(false);
+
+        return;
+    }
+
+    if(
+        event.touches.length === 1 &&
+        fullscreenDraggingImage &&
+        fullscreenScale > 1.01
+    ){
+
+        event.preventDefault();
+
+        const dx =
+            event.touches[0].clientX -
+            fullscreenStartX;
+
+        const dy =
+            event.touches[0].clientY -
+            fullscreenStartY;
+
+        fullscreenX =
+            fullscreenStartXPosition + dx;
+
+        fullscreenY =
+            fullscreenStartYPosition + dy;
+
+        applyFullscreenTransform(false);
+    }
+
+},{passive:false});
+
+fullscreenTrack.addEventListener("touchend",() => {
+
+    if(fullscreenPinching){
+
+        fullscreenPinching = false;
+        fullscreenDraggingImage = false;
+
+        if(fullscreenScale < 1.05){
+            resetFullscreenZoom(true);
+        }
+
+        return;
+    }
+
+    fullscreenDraggingImage = false;
+
+});
+
+fullscreenTrack.addEventListener("dblclick",event => {
+
+    const slide =
+        event.target.closest(".fullscreen-slide");
+
+    if(!slide){
+        return;
+    }
+
+    const image =
+        slide.querySelector("img");
+
+    if(!image){
+        return;
+    }
+
+    if(fullscreenScale <= 1.01){
+
+        fullscreenScale = 2;
+
+    }else{
+
+        fullscreenScale = 1;
+        fullscreenX = 0;
+        fullscreenY = 0;
+
+    }
+
+    applyFullscreenTransform(true);
+});
+
+document.getElementById("fullscreenClose")
+    .addEventListener("click",closeFullscreenGallery);
+
+window.addEventListener("resize",() => {
+
+    if(!fullscreenGallery.classList.contains("active")){
+        return;
+    }
+
+    fullscreenTrack.scrollLeft =
+        fullscreenIndex *
+        fullscreenTrack.clientWidth;
+
+    applyFullscreenTransform(false);
+
+});
 
 /* =========================================================
    QUANTITY
