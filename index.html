@@ -208,6 +208,7 @@ body::after{
 }
 
 .product-card{
+    position:relative;
     background:rgba(13,13,13,.95);
     border:1px solid #202020;
     overflow:hidden;
@@ -257,6 +258,124 @@ body::after{
 
 .product-info{
     padding:12px;
+}
+
+.drop2-badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:3;
+    padding:6px 8px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:7px;
+    background:rgba(0,0,0,.62);
+    color:#ddd;
+    font-size:9px;
+    line-height:1.2;
+    letter-spacing:.4px;
+    backdrop-filter:blur(8px);
+    pointer-events:none;
+}
+
+.delivery-note{
+    margin-top:24px;
+    color:#777;
+    font-size:11px;
+    line-height:1.5;
+    text-align:center;
+    letter-spacing:.2px;
+}
+
+.product-accordion{
+    margin-top:20px;
+    border-top:1px solid #222;
+}
+
+.accordion-item{
+    border-bottom:1px solid #222;
+}
+
+.accordion-button{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:15px 0;
+    border:none;
+    background:none;
+    color:#fff;
+    font-size:12px;
+    text-align:left;
+    cursor:pointer;
+}
+
+.accordion-arrow{
+    color:#777;
+    font-size:16px;
+    line-height:1;
+    transition:transform .25s ease,color .2s ease;
+}
+
+.accordion-item.open .accordion-arrow{
+    transform:rotate(180deg);
+    color:#fff;
+}
+
+.accordion-content{
+    display:none;
+    padding:0 0 15px;
+    color:#888;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.accordion-item.open .accordion-content{
+    display:block;
+    animation:riseIn .22s ease both;
+}
+
+.care-list{
+    margin:0;
+    padding-left:17px;
+}
+
+.care-list li{
+    margin-bottom:5px;
+}
+
+.site-footer{
+    padding:0 20px 28px;
+    text-align:center;
+}
+
+.site-footer-text{
+    max-width:520px;
+    margin:0 auto;
+    color:#666;
+    font-size:11px;
+    line-height:1.7;
+}
+
+.support-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:18px;
+    padding:9px 13px;
+    border:1px solid #2d2d2d;
+    border-radius:8px;
+    color:#888;
+    background:#0b0b0b;
+    text-decoration:none;
+    font-size:10px;
+    letter-spacing:1px;
+    transition:color .2s ease,border-color .2s ease,background .2s ease;
+}
+
+.support-link:hover{
+    color:#fff;
+    border-color:#444;
+    background:#111;
 }
 
 .product-name{
@@ -1187,6 +1306,7 @@ body::after{
     <div class="products">
 
         <article class="product-card" data-product-id="black-tshirt">
+            <div class="drop2-badge">Светоотражающий принт</div>
             <div class="product-card-media">
                 <img
                     src="LNC/Black%20T-Shirt/1.png"
@@ -1204,6 +1324,7 @@ body::after{
         </article>
 
         <article class="product-card" data-product-id="black-zip-hoodie">
+            <div class="drop2-badge">Светоотражающий принт</div>
             <div class="product-card-media">
                 <img
                     src="LNC/Black%20Zip%20Hoodie/1.png"
@@ -1216,7 +1337,7 @@ body::after{
                     Black Zip Hoodie<br>
                     <span class="product-subtitle">Create your Legacy</span>
                 </div>
-                <div class="product-price">4 500 ₽</div>
+                <div class="product-price">5 000 ₽</div>
             </div>
         </article>
 
@@ -1309,6 +1430,11 @@ body::after{
     </div>
 </section>
 
+<footer class="site-footer">
+    <div class="site-footer-text">LNC - Love Never Changes - это уличный бренд одежды, созданный в Санкт-Петербурге, где современная городская культура встречается с качеством и вниманием к деталям</div>
+    <a class="support-link" href="https://t.me/love_never_managers" target="_blank" rel="noopener noreferrer">ПОДДЕРЖКА</a>
+</footer>
+
 </div>
 
 <!-- =======================================================
@@ -1343,6 +1469,23 @@ body::after{
 
         <div id="modalDescription" class="product-description"></div>
 
+        <div class="product-accordion" id="productAccordion" style="display:none;">
+            <div class="accordion-item">
+                <button type="button" class="accordion-button" data-accordion="composition">
+                    <span>Состав</span>
+                    <span class="accordion-arrow">⌄</span>
+                </button>
+                <div class="accordion-content" id="compositionContent"></div>
+            </div>
+            <div class="accordion-item">
+                <button type="button" class="accordion-button" data-accordion="care">
+                    <span>Уход</span>
+                    <span class="accordion-arrow">⌄</span>
+                </button>
+                <div class="accordion-content" id="careContent"></div>
+            </div>
+        </div>
+
         <div class="option-title" id="colorTitle">Цвет</div>
         <div class="options" id="colors"></div>
 
@@ -1356,6 +1499,8 @@ body::after{
             <span id="quantity">1</span>
             <button type="button" id="quantityPlus">+</button>
         </div>
+
+        <div class="delivery-note">Доставим за 12 рабочих дней</div>
 
         <button class="add-button" type="button" id="addToCartButton">
             ДОБАВИТЬ В КОРЗИНУ
@@ -1589,7 +1734,9 @@ const PRODUCTS = {
             "LNC/Black%20T-Shirt/2.png",
             "LNC/Black%20T-Shirt/3.png"
         ],
-        description: "Чёрный силуэт без попытки понравиться всем. Эта вещь про характер, который не требует объяснений — ты просто надеваешь её и продолжаешь создавать своё Legacy."
+        description: "Чёрный силуэт без попытки понравиться всем. Эта вещь про характер, который не требует объяснений — ты просто надеваешь её и продолжаешь создавать своё Legacy.",
+        composition: 'Плотность 240 г/м², ткань — интерлок, 100% хлопок. Плотный материал хорошо держит форму, приятен к телу и рассчитан на повседневную носку.',
+        care: ["Стирать вывернутой наизнанку.", "Рекомендуемая температура стирки — до 30 °C.", "Использовать деликатный режим стирки.", "Не использовать отбеливатели и агрессивные средства.", "Не использовать сушильную машину.", "Сушить естественным способом.", "Не гладить непосредственно по DTF-принту.", "Гладить только с изнаночной стороны.", "Не использовать высокую температуру при глажке.", "Избегать сильного трения и механического воздействия на принт."]
     },
 
     "black-zip-hoodie": {
@@ -1606,7 +1753,9 @@ const PRODUCTS = {
             "LNC/Black%20Zip%20Hoodie/2.png",
             "LNC/Black%20Zip%20Hoodie/3.png"
         ],
-        description: "Худи для тех моментов, когда внешний шум уже не имеет значения. Чёрный цвет, тяжёлый визуальный образ и ощущение вещи, которую хочется носить как часть собственного характера."
+        description: "Худи для тех моментов, когда внешний шум уже не имеет значения. Чёрный цвет, тяжёлый визуальный образ и ощущение вещи, которую хочется носить как часть собственного характера.",
+        composition: 'Плотность 345 г/м², 42% хлопка и 53% полиэстера. Плотная структура рассчитана на комфорт, износостойкость и сохранение формы изделия.',
+        care: ["Стирать вывернутым наизнанку.", "Рекомендуемая температура стирки — до 30 °C.", "Использовать деликатный режим стирки.", "Не использовать отбеливатели и агрессивные средства.", "Не использовать сушильную машину.", "Сушить естественным способом, избегая высокой температуры.", "Не гладить непосредственно по принту.", "Гладить только с изнаночной стороны.", "Не использовать высокую температуру при глажке.", "Избегать сильного трения по принту.", "Не подвергать светоотражающий слой нагреву и интенсивному механическому воздействию.", "Для сохранения светоотражающего эффекта соблюдать щадящий уход за принтом."]
     },
 
     "ash-white": {
@@ -1623,7 +1772,9 @@ const PRODUCTS = {
             "LNC/Ash%20White/%282%29.png",
             "LNC/Ash%20White/%283%29.png"
         ],
-        description: "Спокойная снаружи, но далеко не обычная внутри. Ash White создана для тех образов, где не нужно поднимать голос, чтобы оставить после себя впечатление."
+        description: "Спокойная снаружи, но далеко не обычная внутри. Ash White создана для тех образов, где не нужно поднимать голос, чтобы оставить после себя впечатление.",
+        composition: 'Плотность 240 г/м², ткань — интерлок, 100% хлопок. Плотный материал хорошо держит форму, приятен к телу и рассчитан на повседневную носку.',
+        care: ["Стирать вывернутой наизнанку.", "Рекомендуемая температура стирки — до 30 °C.", "Использовать деликатный режим стирки.", "Не использовать отбеливатели и агрессивные средства.", "Не использовать сушильную машину.", "Сушить естественным способом.", "Не гладить непосредственно по DTF-принту.", "Гладить только с изнаночной стороны.", "Не использовать высокую температуру при глажке.", "Избегать сильного трения и механического воздействия на принт."]
     },
 
     "royal-blue": {
@@ -1640,7 +1791,9 @@ const PRODUCTS = {
             "LNC/Royal%20Blue/2.png",
             "LNC/Royal%20Blue/3.png"
         ],
-        description: "Цвет, который невозможно спрятать среди остальных. Royal Blue построена вокруг одной идеи: иногда достаточно одной детали, чтобы весь образ начал говорить за тебя."
+        description: "Цвет, который невозможно спрятать среди остальных. Royal Blue построена вокруг одной идеи: иногда достаточно одной детали, чтобы весь образ начал говорить за тебя.",
+        composition: 'Плотность 240 г/м², ткань — интерлок, 100% хлопок. Плотный материал хорошо держит форму, приятен к телу и рассчитан на повседневную носку.',
+        care: ["Стирать вывернутой наизнанку.", "Рекомендуемая температура стирки — до 30 °C.", "Использовать деликатный режим стирки.", "Не использовать отбеливатели и агрессивные средства.", "Не использовать сушильную машину.", "Сушить естественным способом.", "Не гладить непосредственно по DTF-принту.", "Гладить только с изнаночной стороны.", "Не использовать высокую температуру при глажке.", "Избегать сильного трения и механического воздействия на принт."]
     },
 
     "midnight-monochrome": {
@@ -1657,7 +1810,9 @@ const PRODUCTS = {
             "LNC/Midnight%20Monochrome/2.png",
             "LNC/Midnight%20Monochrome/3.png"
         ],
-        description: "Тёмная эстетика без лишнего давления. Midnight Monochrome ощущается как ночь в городе — сдержанная, холодная и уверенная в себе."
+        description: "Тёмная эстетика без лишнего давления. Midnight Monochrome ощущается как ночь в городе — сдержанная, холодная и уверенная в себе.",
+        composition: 'Плотность 240 г/м², ткань — интерлок, 100% хлопок. Плотный материал хорошо держит форму, приятен к телу и рассчитан на повседневную носку.',
+        care: ["Стирать вывернутой наизнанку.", "Рекомендуемая температура стирки — до 30 °C.", "Использовать деликатный режим стирки.", "Не использовать отбеливатели и агрессивные средства.", "Не использовать сушильную машину.", "Сушить естественным способом.", "Не гладить непосредственно по DTF-принту.", "Гладить только с изнаночной стороны.", "Не использовать высокую температуру при глажке.", "Избегать сильного трения и механического воздействия на принт."]
     },
 
     "book-love-never": {
@@ -1697,7 +1852,7 @@ const PROMO_CODES = {
     },
     "legacy": {
         code: "Legacy",
-        type: "ALL",
+        type: "DROP02",
         percent: 10
     }
 };
@@ -1754,7 +1909,7 @@ function getPromoDiscount(){
         return Math.round(discount);
     }
 
-    if(activePromo.type === "ALL"){
+    if(activePromo.type === "DROP02"){
         return Math.round(getCartSubtotal() * activePromo.percent / 100);
     }
 
@@ -1907,6 +2062,22 @@ function openProduct(productId){
     document.getElementById("modalPrice").innerText = formatPrice(product.price);
     document.getElementById("quantity").innerText = "1";
     document.getElementById("modalDescription").innerText = product.description;
+
+    const accordion = document.getElementById("productAccordion");
+    const compositionContent = document.getElementById("compositionContent");
+    const careContent = document.getElementById("careContent");
+    const isClothing = Array.isArray(product.care) && product.composition;
+
+    accordion.style.display = isClothing ? "block" : "none";
+    accordion.querySelectorAll(".accordion-item").forEach(item => item.classList.remove("open"));
+
+    if(isClothing){
+        compositionContent.innerText = product.composition;
+        careContent.innerHTML = `<ul class="care-list">${product.care.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+    }else{
+        compositionContent.innerHTML = "";
+        careContent.innerHTML = "";
+    }
 
     renderProductGallery(product);
     renderOptions("colors",product.colors,selectedColor);
@@ -2481,6 +2652,16 @@ function applyPromoCode(){
         }
     }
 
+    if(promo.type === "DROP02"){
+        const hasDrop02 = cart.some(item => item.drop === "DROP 02");
+        if(!hasDrop02){
+            activePromo = null;
+            updateCartTotals();
+            setPromoMessage("Legacy доступен только для товаров Drop 02.",false);
+            return;
+        }
+    }
+
     activePromo = {
         code: promo.code,
         type: promo.type,
@@ -2493,7 +2674,7 @@ function applyPromoCode(){
 
     if(promo.type === "DROP01"){
         message += " на товары DROP 01.";
-    }else{
+    }else if(promo.type === "DROP02"){
         message += " на всю корзину.";
     }
 
@@ -2508,6 +2689,14 @@ function updatePromoMessage(){
     if(activePromo.type === "DROP01"){
         const hasDrop01 = cart.some(item => item.drop === "DROP 01");
         if(!hasDrop01){
+            activePromo = null;
+            setPromoMessage("",false);
+        }
+    }
+
+    if(activePromo.type === "DROP02"){
+        const hasDrop02 = cart.some(item => item.drop === "DROP 02");
+        if(!hasDrop02){
             activePromo = null;
             setPromoMessage("",false);
         }
@@ -2799,6 +2988,13 @@ document.getElementById("promoButton").addEventListener("click",applyPromoCode);
 document.getElementById("checkoutButton").addEventListener("click",checkout);
 document.getElementById("placeOrderButton").addEventListener("click",placeOrder);
 document.getElementById("finishCheckoutButton").addEventListener("click",finishCheckout);
+
+document.querySelectorAll("[data-accordion]").forEach(button => {
+    button.addEventListener("click",() => {
+        const item = button.closest(".accordion-item");
+        if(item) item.classList.toggle("open");
+    });
+});
 
 document.querySelectorAll(".modal").forEach(modal => {
     modal.addEventListener("click",event => {
