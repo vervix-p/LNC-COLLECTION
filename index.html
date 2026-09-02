@@ -1766,7 +1766,7 @@ const PRODUCTS = {
         name: "Black Zip Hoodie — Create your Legacy",
         displayName: "Black Zip Hoodie",
         subtitle: "Create your Legacy",
-        price: 4500,
+        price: 5000,
         colors: ["Black"],
         sizes: ["XS","S","M","L","XL","2XL"],
         drop: "DROP 02",
@@ -2679,7 +2679,7 @@ function applyPromoCode(){
         if(!hasDrop02){
             activePromo = null;
             updateCartTotals();
-            setPromoMessage("Промокод Legacy действует при наличии в корзине хотя бы одного товара Drop 02.",false);
+            setPromoMessage("Legacy доступен только для товаров Drop 02.",false);
             return;
         }
     }
